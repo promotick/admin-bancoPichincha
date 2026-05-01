@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal de inicio de sesión de Motiva Soluciones.">
+  <title>Login - Motiva Soluciones</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="./css/global.css">
+
+  <!-- Tailwind Config -->
+  <script src="./js/tailwind-config.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-[#F8F9FA] min-h-screen antialiased">
+
+  <!-- Header Navbar -->
+  <header
+    class="fixed top-0 left-0 right-0 flex items-center justify-between px-4 md:px-6 h-[64px] bg-[#FFFFFF] border-b border-[#DEE2E6] z-[1030]">
+    <div class="flex items-center gap-3 md:gap-8">
+      <!-- Menú móvil -->
+      <button id="mobileMenuBtn"
+        class="md:hidden flex items-center justify-center w-10 h-10 -ml-2 text-[#495057] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150"
+        aria-label="Menú">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <!-- Logos -->
+      <div class="flex items-center gap-4 md:gap-8">
+        <img src="./images/motiva-logo.png" alt="Motiva Soluciones"
+          class="hidden sm:block h-[32px] w-auto object-contain">
+        <img src="./images/pichincha-logo.png" alt="Banco Pichincha"
+          class="hidden sm:block h-[40px] w-auto object-contain">
+        <img src="./images/motiva-logo.png" alt="Motiva Soluciones"
+          class="block sm:hidden h-[24px] w-auto object-contain">
+        <img src="./images/pichincha-logo.png" alt="Banco Pichincha"
+          class="block sm:hidden h-[28px] w-auto object-contain">
+      </div>
+    </div>
+
+    <!-- User Dropdown Component -->
+    <div class="relative" data-dropdown="user-menu">
+      <button aria-label="Menú de usuario" aria-expanded="false" data-dropdown-toggle="user-menu"
+        class="w-[44px] h-[44px] rounded-full bg-[#00AEB8] text-[#FFFFFF] border-2 border-[#00AEB8] hover:brightness-95 flex items-center justify-center font-semibold text-[14px] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#00AEB8]/50">
+        UD
+      </button>
+
+      <!-- Dropdown Menu Box -->
+      <div data-dropdown-menu="user-menu"
+        class="absolute right-0 mt-2 w-64 bg-[#FFFFFF] rounded-[12px] shadow-lg border border-[#dee2e6] opacity-0 invisible transition-all duration-150 transform translate-y-[-10px] z-[1000]">
+        <!-- Info del usuario -->
+        <div class="p-[16px] border-b border-[#dee2e6] flex items-center gap-3">
+          <div
+            class="w-[40px] h-[40px] rounded-full bg-[#00AEB8] text-[#FFFFFF] flex items-center justify-center font-semibold text-[14px] shrink-0">
+            UD
+          </div>
+          <div class="overflow-hidden">
+            <p class="text-[14px] font-semibold text-[#212529] truncate">Usuario Demo
+            </p>
+            <p class="text-[12px] text-[#495057] truncate">usuario@empresa.com</p>
+          </div>
+        </div>
+        <!-- Acciones -->
+        <div class="p-[8px]">
+          <a href="index.html"
+            class="w-full flex items-center gap-2 p-[12px] text-[14px] text-[#212529] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150 text-left">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+            <span>Cerrar Sesión</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div id="sidebarOverlay"
+    class="fixed inset-0 bg-[#212529]/50 z-[1020] hidden md:hidden transition-opacity duration-300 opacity-0"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar"
+    class="fixed md:left-0 -left-full transition-all duration-300 ease-in-out md:translate-x-0 w-[256px] bg-[#FFFFFF] border-r border-[#DEE2E6] top-[64px] bottom-0 overflow-y-auto py-[16px] z-[1050] md:z-0 custom-scrollbar">
+    <!-- Close button for mobile -->
+    <div class="md:hidden flex justify-end px-4 mb-4">
+      <button id="closeSidebarBtn" aria-label="Cerrar menú"
+        class="w-[32px] h-[32px] flex items-center justify-center rounded-[8px] text-[#495057] transition-all duration-150 hover:bg-[#F1F3F5]">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+      <!-- Vista de usuario -->
+      <div class="mb-[16px]">
+        <div class="px-[24px] mb-[8px]">
+          <span class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6C757D]">Vista de usuario</span>
+        </div>
+        <ul class="list-none m-0 p-0">
+          <li class="mb-[4px]">
+            <a href="inicio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="house" class="w-[18px] h-[18px]"></i>
+              <span>Inicio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="portafolio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="store" class="w-[18px] h-[18px]"></i>
+              <span>Portafolio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="status.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="activity" class="w-[18px] h-[18px]"></i>
+              <span>Status</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="capacitaciones.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="graduation-cap" class="w-[18px] h-[18px]"></i>
+              <span>Capacitaciones</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="material-pop.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="package" class="w-[18px] h-[18px]"></i>
+              <span>Material POP</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="medios.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="folder-archive" class="w-[18px] h-[18px]"></i>
+              <span>Medios</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Administración -->
+      <div class="mb-[16px]">
+        <div class="px-[24px] mb-[8px] mt-[8px]">
+          <span class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6C757D]">Administración</span>
+        </div>
+        <div class="h-[1px] bg-[#DEE2E6] mx-[24px] mb-[8px]"></div>
+        <ul class="list-none m-0 p-0">
+          <li class="mb-[4px]">
+            <a href="admin-portafolio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="database" class="w-[18px] h-[18px]"></i>
+              <span>Admin Portafolio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="admin-status.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="clipboard-list" class="w-[18px] h-[18px]"></i>
+              <span>Admin Status</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="medios-admin.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#00AEB8] bg-[#e6f7f8] text-[14px] font-semibold transition-all duration-150 border-l-[3px] border-[#00AEB8]">
+              <i data-lucide="folder-pen" class="w-[18px] h-[18px]"></i>
+              <span>Medios Admin</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="gestion-valores.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="list-checks" class="w-[18px] h-[18px]"></i>
+              <span>Gestión de Valores</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="usuarios.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="users" class="w-[18px] h-[18px]"></i>
+              <span>Usuarios</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="configuracion.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="settings" class="w-[18px] h-[18px]"></i>
+              <span>Configuración</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="pt-[64px] md:ml-[256px] min-h-screen">
+    <!-- Contenido Principal -->
+    <div class="p-[24px]">
+      <div class="min-h-[400px] flex items-center justify-center">
+        <h2 class="text-[24px] font-bold text-[#6C757D]">Sección: Medios Admin</h2>
+      </div>
+    </div>
+  </main>
+
+  <!-- Main JS -->
+  <script src="./js/main.js"></script>
+</body>
+
+</html>

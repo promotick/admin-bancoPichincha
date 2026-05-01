@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal de inicio de sesión de Motiva Soluciones.">
+  <title>Status - Motiva Soluciones</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="./css/global.css">
+
+  <!-- Tailwind Config -->
+  <script src="./js/tailwind-config.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-[#F8F9FA] min-h-screen antialiased">
+
+  <!-- Header Navbar -->
+  <header
+    class="fixed top-0 left-0 right-0 flex items-center justify-between px-4 md:px-6 h-[64px] bg-[#FFFFFF] border-b border-[#DEE2E6] z-[1030]">
+    <div class="flex items-center gap-3 md:gap-8">
+      <!-- Menú móvil -->
+      <button id="mobileMenuBtn"
+        class="md:hidden flex items-center justify-center w-10 h-10 -ml-2 text-[#495057] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150"
+        aria-label="Menú">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <!-- Logos -->
+      <div class="flex items-center gap-4 md:gap-8">
+        <img src="./images/motiva-logo.png" alt="Motiva Soluciones"
+          class="hidden sm:block h-[32px] w-auto object-contain">
+        <img src="./images/pichincha-logo.png" alt="Banco Pichincha"
+          class="hidden sm:block h-[40px] w-auto object-contain">
+        <img src="./images/motiva-logo.png" alt="Motiva Soluciones"
+          class="block sm:hidden h-[24px] w-auto object-contain">
+        <img src="./images/pichincha-logo.png" alt="Banco Pichincha"
+          class="block sm:hidden h-[28px] w-auto object-contain">
+      </div>
+    </div>
+
+    <!-- User Dropdown Component -->
+    <div class="relative" data-dropdown="user-menu">
+      <button aria-label="Menú de usuario" aria-expanded="false" data-dropdown-toggle="user-menu"
+        class="w-[44px] h-[44px] rounded-full bg-[#00AEB8] text-[#FFFFFF] border-2 border-[#00AEB8] hover:brightness-95 flex items-center justify-center font-semibold text-[14px] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#00AEB8]/50">
+        UD
+      </button>
+
+      <!-- Dropdown Menu Box -->
+      <div data-dropdown-menu="user-menu"
+        class="absolute right-0 mt-2 w-64 bg-[#FFFFFF] rounded-[12px] shadow-lg border border-[#dee2e6] opacity-0 invisible transition-all duration-150 transform translate-y-[-10px] z-[1000]">
+        <!-- Info del usuario -->
+        <div class="p-[16px] border-b border-[#dee2e6] flex items-center gap-3">
+          <div
+            class="w-[40px] h-[40px] rounded-full bg-[#00AEB8] text-[#FFFFFF] flex items-center justify-center font-semibold text-[14px] shrink-0">
+            UD
+          </div>
+          <div class="overflow-hidden">
+            <p class="text-[14px] font-semibold text-[#212529] truncate">Usuario Demo
+            </p>
+            <p class="text-[12px] text-[#495057] truncate">usuario@empresa.com</p>
+          </div>
+        </div>
+        <!-- Acciones -->
+        <div class="p-[8px]">
+          <a href="index.html"
+            class="w-full flex items-center gap-2 p-[12px] text-[14px] text-[#212529] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150 text-left">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+            <span>Cerrar Sesión</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div id="sidebarOverlay"
+    class="fixed inset-0 bg-[#212529]/50 z-[1020] hidden md:hidden transition-opacity duration-300 opacity-0"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar"
+    class="fixed md:left-0 -left-full transition-all duration-300 ease-in-out md:translate-x-0 w-[256px] bg-[#FFFFFF] border-r border-[#DEE2E6] top-[64px] bottom-0 overflow-y-auto py-[16px] z-[1050] md:z-0 custom-scrollbar">
+    <!-- Close button for mobile -->
+    <div class="md:hidden flex justify-end px-4 mb-4">
+      <button id="closeSidebarBtn" aria-label="Cerrar menú"
+        class="w-[32px] h-[32px] flex items-center justify-center rounded-[8px] text-[#495057] transition-all duration-150 hover:bg-[#F1F3F5]">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+      <!-- Vista de usuario -->
+      <div class="mb-[16px]">
+        <div class="px-[24px] mb-[8px]">
+          <span class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6C757D]">Vista de usuario</span>
+        </div>
+        <ul class="list-none m-0 p-0">
+          <li class="mb-[4px]">
+            <a href="inicio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="house" class="w-[18px] h-[18px]"></i>
+              <span>Inicio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="portafolio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="store" class="w-[18px] h-[18px]"></i>
+              <span>Portafolio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="status.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#00AEB8] bg-[#e6f7f8] text-[14px] font-semibold transition-all duration-150 border-l-[3px] border-[#00AEB8]">
+              <i data-lucide="activity" class="w-[18px] h-[18px]"></i>
+              <span>Status</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="capacitaciones.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="graduation-cap" class="w-[18px] h-[18px]"></i>
+              <span>Capacitaciones</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="material-pop.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="package" class="w-[18px] h-[18px]"></i>
+              <span>Material POP</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="medios.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="folder-archive" class="w-[18px] h-[18px]"></i>
+              <span>Medios</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Administración -->
+      <div class="mb-[16px]">
+        <div class="px-[24px] mb-[8px] mt-[8px]">
+          <span class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6C757D]">Administración</span>
+        </div>
+        <div class="h-[1px] bg-[#DEE2E6] mx-[24px] mb-[8px]"></div>
+        <ul class="list-none m-0 p-0">
+          <li class="mb-[4px]">
+            <a href="admin-portafolio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="database" class="w-[18px] h-[18px]"></i>
+              <span>Admin Portafolio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="admin-status.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="clipboard-list" class="w-[18px] h-[18px]"></i>
+              <span>Admin Status</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="medios-admin.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="folder-pen" class="w-[18px] h-[18px]"></i>
+              <span>Medios Admin</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="gestion-valores.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="list-checks" class="w-[18px] h-[18px]"></i>
+              <span>Gestión de Valores</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="usuarios.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="users" class="w-[18px] h-[18px]"></i>
+              <span>Usuarios</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="configuracion.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="settings" class="w-[18px] h-[18px]"></i>
+              <span>Configuración</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="pt-[64px] md:ml-[256px] min-h-screen">
+    <!-- Contenido Principal -->
+    <div class="p-4 md:p-[24px]">
+      <!-- Header de la sección -->
+      <div class="mb-[24px]">
+        <h1 class="text-[28px] font-bold text-[#212529] mb-[8px]">Status</h1>
+        <p class="text-[14px] text-[#495057]">Seguimiento y estado de establecimientos, beneficios y aprobaciones</p>
+      </div>
+
+      <!-- Barra de búsqueda y acciones -->
+      <div class="flex flex-col lg:flex-row gap-[16px] items-stretch lg:items-center justify-between mb-[24px]">
+        <!-- Buscador -->
+        <div class="flex-1">
+          <div class="relative block w-full">
+            <div
+              class="absolute left-[12px] top-1/2 -translate-y-1/2 text-[#ADB5BD] pointer-events-none flex items-center justify-center">
+              <i data-lucide="search" class="w-[20px] h-[20px]"></i>
+            </div>
+            <input type="text" placeholder="Buscar por código, nombre, RUC..."
+              class="h-[44px] pl-[40px] pr-[16px] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#212529] bg-[#FFFFFF] outline-none focus:border-[#00AEB8] focus:ring-1 focus:ring-[#00AEB8] transition-all w-full">
+          </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="flex gap-[12px] w-full lg:w-auto flex-wrap">
+          <!-- Botón Mis Solicitudes (con toggle JS) -->
+          <div class="flex-1 lg:flex-initial">
+            <button id="btnMisSolicitudes"
+              class="flex items-center justify-center gap-[6px] px-[16px] py-[10px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] font-medium text-[#495057] transition-all duration-200 w-full lg:w-auto hover:bg-[#F8F9FA] hover:border-[#6C757D]">
+              <i data-lucide="star" id="iconMisSolicitudes" class="w-[16px] h-[16px] text-[#9CA3AF]"></i>
+              <span id="textMisSolicitudes" class="whitespace-nowrap">Mis Solicitudes</span>
+              <span id="badgeMisSolicitudes"
+                class="bg-[#F1F3F5] text-[#495057] px-[7px] py-[1px] rounded-[10px] text-[12px] font-bold min-w-[20px] text-center">8</span>
+            </button>
+          </div>
+
+          <!-- Botón Filtros -->
+          <div class="flex-1 lg:flex-initial">
+            <button data-modal-target="modal-filtros"
+              class="flex items-center justify-center gap-[8px] px-[16px] h-[44px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] font-semibold text-[#495057] transition-all duration-200 w-full lg:w-auto hover:bg-[#F8F9FA] hover:border-[#6C757D]">
+              <i data-lucide="funnel" class="w-[16px] h-[16px]"></i>
+              <span>Filtros</span>
+            </button>
+          </div>
+
+          <!-- Botón Descargar (Dropdown) -->
+          <div class="flex-1 lg:flex-initial">
+            <div class="relative w-full lg:w-auto" data-dropdown="download-menu">
+              <button data-dropdown-toggle="download-menu"
+                class="flex items-center justify-center gap-[8px] px-[16px] h-[44px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] font-semibold text-[#495057] transition-all duration-200 w-full hover:bg-[#F8F9FA] hover:border-[#6C757D]">
+                <i data-lucide="download" class="w-[16px] h-[16px]"></i>
+                <span>Descargar</span>
+              </button>
+
+              <!-- Dropdown Menu -->
+              <div data-dropdown-menu="download-menu"
+                class="absolute right-0 mt-2 w-[200px] bg-[#FFFFFF] rounded-[12px] shadow-lg border border-[#DEE2E6] opacity-0 invisible transition-all duration-150 transform translate-y-[-10px] z-[1000] p-[8px]">
+                <a href="#"
+                  class="flex items-center gap-[8px] p-[12px] text-[14px] text-[#212529] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150">
+                  <i data-lucide="file-spreadsheet" class="w-[16px] h-[16px] text-[#10B981]"></i>
+                  <span>Descargar Excel</span>
+                </a>
+                <a href="#"
+                  class="flex items-center gap-[8px] p-[12px] text-[14px] text-[#212529] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150">
+                  <i data-lucide="file-text" class="w-[16px] h-[16px] text-[#EF4444]"></i>
+                  <span>Descargar PDF</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Resultados (adicional inferior) -->
+      <div id="resultsBar"
+        class="mb-[16px] px-[16px] py-[12px] bg-[#e6f7f8] border-l-[4px] border-[#00AEB8] rounded-[8px] text-[14px] text-[#495057] transition-all duration-300 hidden">
+        Se encontraron <strong class="text-[#212529] font-bold">8</strong> resultados
+      </div>
+
+      <!-- Vista Mobile (Cards) -->
+      <div class="block md:hidden mb-[24px]">
+        <div class="bg-[#FFFFFF] border border-[#DEE2E6] rounded-[12px] p-[16px] mb-[16px] relative">
+          <div class="mb-[16px]">
+            <div class="flex justify-between items-start mb-[8px]">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-semibold mb-[4px]">sd</h3>
+                <p class="text-[14px] font-semibold mb-[4px]">asd</p>
+                <p class="text-[12px] text-[#6C757D]">sd</p>
+              </div>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8D7DA] text-[#DC3545]"></span>
+            </div>
+            <div class="flex gap-[8px] mb-[12px]">
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]">Prioridad
+              </span>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#212529]"></span>
+            </div>
+          </div>
+          <div class="grid gap-[12px]">
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Categoría</label>
+                <span
+                  class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Gastronomía</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Ejecución</label>
+                <p class="text-[14px] font-medium"></p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Beneficio</label>
+              <p class="text-[14px] text-[#6C757D] italic">Sin beneficio negociado</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Términos y Condiciones</label>
+              <p class="text-[14px] text-[#6C757D] italic leading-[1.5]">Sin términos definidos</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Cobertura</label>
+              <div class="flex flex-wrap gap-[4px]">
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Observaciones</label>
+              <p class="text-[14px] text-[#495057]"></p>
+            </div>
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Material POP</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[#FFFFFF] border border-[#DEE2E6] rounded-[12px] p-[16px] mb-[16px] relative">
+          <div class="mb-[16px]">
+            <div class="flex justify-between items-start mb-[8px]">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-semibold mb-[4px]">PIZZA HUT</h3>
+                <p class="text-[14px] font-semibold mb-[4px]">EST-001</p>
+                <p class="text-[12px] text-[#6C757D]">1792932297001</p>
+              </div>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+            </div>
+            <div class="flex gap-[8px] mb-[12px]">
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#e6f7f8] text-[#00AEB8]">Prioridad
+                1</span>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#212529]">100%</span>
+            </div>
+          </div>
+          <div class="grid gap-[12px]">
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Categoría</label>
+                <span
+                  class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Ejecución</label>
+                <p class="text-[14px] font-medium">Renovación</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Beneficio</label>
+              <p class="text-[14px] text-[#495057] leading-normal">35% de descuento. Precio especial en combo de pizza
+                mediana de 2 ingredientes a $14,99 PVP: $24,99</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Términos y Condiciones</label>
+              <p class="text-[14px] text-[#495057] leading-[1.5]">Aplica en los locales a nivel nacional, no aplica
+                sobre promoción, aplica restricciones</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Cobertura</label>
+              <div class="flex flex-wrap gap-[4px]">
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Cuenca</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Riobamba</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Portoviejo</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Observaciones</label>
+              <p class="text-[14px] text-[#495057]">Renovado</p>
+            </div>
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Material POP</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border border-[#DEE2E6] rounded-[12px] p-[16px] mb-[16px] relative">
+          <div class="mb-[16px]">
+            <div class="flex justify-between items-start mb-[8px]">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-semibold mb-[4px]">TEXAS CHICKEN</h3>
+                <p class="text-[14px] font-semibold mb-[4px]">EST-002</p>
+                <p class="text-[12px] text-[#6C757D]">1792997372001</p>
+              </div>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+            </div>
+            <div class="flex gap-[8px] mb-[12px]">
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#e6f7f8] text-[#00AEB8]">Prioridad
+                1</span>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#212529]">100%</span>
+            </div>
+          </div>
+          <div class="grid gap-[12px]">
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Categoría</label>
+                <span
+                  class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Ejecución</label>
+                <p class="text-[14px] font-medium">Renovación</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Beneficio</label>
+              <p class="text-[14px] text-[#495057] leading-normal">22% de descuento en el combo medio pollo + 1/4 de
+                pollo, 2 consomés, una ensalada y arroz.Precio especial: $10.50 (Precio regular: $13.50)</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Términos y Condiciones</label>
+              <p class="text-[14px] text-[#495057] leading-[1.5]">No aplica promoción sobre promoción, aplica únicamente
+                en los locales, no aplica a domicilio.</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Cobertura</label>
+              <div class="flex flex-wrap gap-[4px]">
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Observaciones</label>
+              <p class="text-[14px] text-[#495057]">Renovado</p>
+            </div>
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Material POP</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border border-[#DEE2E6] rounded-[12px] p-[16px] mb-[16px] relative">
+          <div class="mb-[16px]">
+            <div class="flex justify-between items-start mb-[8px]">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-semibold mb-[4px]">MACDONALS</h3>
+                <p class="text-[14px] font-semibold mb-[4px]">EST-003</p>
+                <p class="text-[12px] text-[#6C757D]">1791308832001</p>
+              </div>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+            </div>
+            <div class="flex gap-[8px] mb-[12px]">
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#e6f7f8] text-[#00AEB8]">Prioridad
+                1</span>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#212529]">80%</span>
+            </div>
+          </div>
+          <div class="grid gap-[12px]">
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Categoría</label>
+                <span
+                  class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Ejecución</label>
+                <p class="text-[14px] font-medium">Renovación</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Beneficio</label>
+              <p class="text-[14px] text-[#495057] leading-normal">15% de descuento en la app en todo el menú</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Términos y Condiciones</label>
+              <p class="text-[14px] text-[#495057] leading-[1.5]">Aplica para compras realizadas por McDonald's App
+                (Pide y Retira y Delivery) usando el código PICHINCHAMCD. Vigente hasta el 31 de enero de 2026.
+                Válido 1 vez por usuario, no aplican promociones ni combos Insaciables.</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Cobertura</label>
+              <div class="flex flex-wrap gap-[4px]">
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Cuenca</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Machala</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Observaciones</label>
+              <p class="text-[14px] text-[#495057]">Renovado</p>
+            </div>
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Material POP</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border-2 border-[#F59E0B] rounded-[12px] p-[16px] mb-[16px] relative">
+          <div
+            class="absolute top-0 left-[16px] bg-[#F59E0B] text-white text-[9px] font-bold uppercase tracking-[0.5px] px-[8px] py-[2px] rounded-b-[4px]">
+            Solicitado por ti</div>
+          <div class="mb-[16px]">
+            <div class="flex justify-between items-start mb-[8px]">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-semibold mb-[4px]">AMERICAN DELI</h3>
+                <p class="text-[14px] font-semibold mb-[4px]">EST-004</p>
+                <p class="text-[12px] text-[#6C757D]">1792072018001</p>
+              </div>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+            </div>
+            <div class="flex gap-[8px] mb-[12px]">
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#e6f7f8] text-[#00AEB8]">Prioridad
+                1</span>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#212529]">100%</span>
+            </div>
+          </div>
+          <div class="grid gap-[12px]">
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Categoría</label>
+                <span
+                  class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Ejecución</label>
+                <p class="text-[14px] font-medium">Renovación</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Beneficio</label>
+              <p class="text-[14px] text-[#495057] leading-normal">40% de descuento en Bowl Pollo Champiñones PVP
+                normal: 7,99 $- Promo: $4,75</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Términos y Condiciones</label>
+              <p class="text-[14px] text-[#495057] leading-[1.5]">Aplica solo en patios de comida, aplica restricciones
+              </p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Cobertura</label>
+              <div class="flex flex-wrap gap-[4px]">
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ibarra</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ambato</span>
+                <span class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Santo
+                  Domingo</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Manta</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Observaciones</label>
+              <p class="text-[14px] text-[#495057]">Renovado</p>
+            </div>
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Material POP</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border-2 border-[#F59E0B] rounded-[12px] p-[16px] mb-[16px] relative">
+          <div
+            class="absolute top-0 left-[16px] bg-[#F59E0B] text-white text-[9px] font-bold uppercase tracking-[0.5px] px-[8px] py-[2px] rounded-b-[4px]">
+            Solicitado por ti</div>
+          <div class="mb-[16px]">
+            <div class="flex justify-between items-start mb-[8px]">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-semibold mb-[4px]">JUAN VALDEZ</h3>
+                <p class="text-[14px] font-semibold mb-[4px]">EST-005</p>
+                <p class="text-[12px] text-[#6C757D]">1792141486001</p>
+              </div>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+            </div>
+            <div class="flex gap-[8px] mb-[12px]">
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#e6f7f8] text-[#00AEB8]">Prioridad
+                1</span>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#212529]">100%</span>
+            </div>
+          </div>
+          <div class="grid gap-[12px]">
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Categoría</label>
+                <span
+                  class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Ejecución</label>
+                <p class="text-[14px] font-medium">Renovación</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Beneficio</label>
+              <p class="text-[14px] text-[#495057] leading-normal">23% de descuento/ Combo porción torta vasca + iced
+                latte frío 12 oz por $4,99. Precio regular: $6,50</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Términos y Condiciones</label>
+              <p class="text-[14px] text-[#495057] leading-[1.5]">Aplica en la app Juan Valdez con código: PICHINCHAJV
+              </p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Cobertura</label>
+              <div class="flex flex-wrap gap-[4px]">
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ambato</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Baños</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Riobamba</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ibarra</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Cuenca</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Loja</span>
+                <span class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Santo
+                  Domingo</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Manta</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Portoviejo</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Milagro</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Libertad</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Playas</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Machala</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Daule</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Observaciones</label>
+              <p class="text-[14px] text-[#495057]">Renovado</p>
+            </div>
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Material POP</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border-2 border-[#F59E0B] rounded-[12px] p-[16px] mb-[16px] relative">
+          <div
+            class="absolute top-0 left-[16px] bg-[#F59E0B] text-white text-[9px] font-bold uppercase tracking-[0.5px] px-[8px] py-[2px] rounded-b-[4px]">
+            Solicitado por ti</div>
+          <div class="mb-[16px]">
+            <div class="flex justify-between items-start mb-[8px]">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-semibold mb-[4px]">TABLITA DEL TÁRTARO</h3>
+                <p class="text-[14px] font-semibold mb-[4px]">EST-006</p>
+                <p class="text-[12px] text-[#6C757D]">1791952359001</p>
+              </div>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+            </div>
+            <div class="flex gap-[8px] mb-[12px]">
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#e6f7f8] text-[#00AEB8]">Prioridad
+                1</span>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#212529]">100%</span>
+            </div>
+          </div>
+          <div class="grid gap-[12px]">
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Categoría</label>
+                <span
+                  class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Ejecución</label>
+                <p class="text-[14px] font-medium">Renovación</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Beneficio</label>
+              <p class="text-[14px] text-[#495057] leading-normal">30% Filete mediano de pollo + gaseosa personal a
+                $5.99 PVP $8.49</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Términos y Condiciones</label>
+              <p class="text-[14px] text-[#495057] leading-[1.5]">Aplica en restaurantes, no es válido a domicilio.</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Cobertura</label>
+              <div class="flex flex-wrap gap-[4px]">
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Observaciones</label>
+              <p class="text-[14px] text-[#495057]">Renovado</p>
+            </div>
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Material POP</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border-2 border-[#F59E0B] rounded-[12px] p-[16px] mb-[16px] relative">
+          <div
+            class="absolute top-0 left-[16px] bg-[#F59E0B] text-white text-[9px] font-bold uppercase tracking-[0.5px] px-[8px] py-[2px] rounded-b-[4px]">
+            Solicitado por ti</div>
+          <div class="mb-[16px]">
+            <div class="flex justify-between items-start mb-[8px]">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-semibold mb-[4px]">CHEF BOSS</h3>
+                <p class="text-[14px] font-semibold mb-[4px]">EST-008</p>
+                <p class="text-[12px] text-[#6C757D]">090224811101</p>
+              </div>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+            </div>
+            <div class="flex gap-[8px] mb-[12px]">
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]">Prioridad
+                2</span>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#212529]">100%</span>
+            </div>
+          </div>
+          <div class="grid gap-[12px]">
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Categoría</label>
+                <span
+                  class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Ejecución</label>
+                <p class="text-[14px] font-medium">Renovación</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Beneficio</label>
+              <p class="text-[14px] text-[#495057] leading-normal">20% de descuento Chicken Baby(contiene moro clásico,
+                ensalada de col, 1/4 de pollo ahumado con cobertura crispy PVP: $9 PROMO:$7,20) Texas Mix(Proteínas
+                ahumadas Brisket, costillas St Louis, chorizo, pulled pork, guarnición colelaw y pan focaccia PVP:$17
+                Promo:$13.60) </p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Términos y Condiciones</label>
+              <p class="text-[14px] text-[#495057] leading-[1.5]">Aplica en consumo en el local, no aplica para llevar o
+                delivery. </p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Cobertura</label>
+              <div class="flex flex-wrap gap-[4px]">
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Samborondón</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Observaciones</label>
+              <p class="text-[14px] text-[#495057]">Renovado</p>
+            </div>
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Material POP</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border border-[#DEE2E6] rounded-[12px] p-[16px] mb-[16px] relative">
+          <div class="mb-[16px]">
+            <div class="flex justify-between items-start mb-[8px]">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-semibold mb-[4px]">CH FARINA</h3>
+                <p class="text-[14px] font-semibold mb-[4px]">EST-009</p>
+                <p class="text-[12px] text-[#6C757D]">1790527085001</p>
+              </div>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+            </div>
+            <div class="flex gap-[8px] mb-[12px]">
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]">Prioridad
+                2</span>
+              <span
+                class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#212529]">100%</span>
+            </div>
+          </div>
+          <div class="grid gap-[12px]">
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Categoría</label>
+                <span
+                  class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Ejecución</label>
+                <p class="text-[14px] font-medium">Renovación</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Beneficio</label>
+              <p class="text-[14px] text-[#495057] leading-normal">35% de descuento en 1 pizza mediana de 2 ingredientes
+                solo embutidos + 1 ensaladda tradicional + 1 botella de 1 litro de fuze tea. PVP Normal: $25,54 PVP
+                Promoción: $16,54</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Términos y Condiciones</label>
+              <p class="text-[14px] text-[#495057] leading-[1.5]">No aplica promoción sobre promoción, aplica
+                restricciones.</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Cobertura</label>
+              <div class="flex flex-wrap gap-[4px]">
+                <span class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito
+                  Condado</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quicentro
+                  Sur</span>
+                <span class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">El
+                  Bosque</span>
+                <span class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">El
+                  Portal</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Gaspar de
+                  Villarroel</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Villaflora</span>
+                <span
+                  class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Urbanización
+                  El Condado</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-[4px]">Observaciones</label>
+              <p class="text-[14px] text-[#495057]">Renovado</p>
+            </div>
+            <div class="grid grid-cols-2 gap-[12px]">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Material POP</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-[4px]">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#F8F9FA] text-[#495057]"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden md:block">
+        <div class="bg-[#FFFFFF] rounded-[16px] overflow-hidden shadow-sm border border-[#E9ECEF] mb-[24px]">
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="bg-[#F1F3F5] border-b-2 border-[#E9ECEF]">
+                  <th class="p-[16px] text-left text-[14px] font-bold text-[#212529]">
+                    Código</th>
+                  <th class="p-[16px] text-left text-[14px] font-bold text-[#212529]">
+                    Nombre / RUC</th>
+                  <th class="p-[16px] text-left text-[14px] font-bold text-[#212529]">
+                    Categoría</th>
+                  <th class="p-[16px] text-center text-[14px] font-bold text-[#212529]">
+                    Prioridad</th>
+                  <th class="p-[16px] text-left text-[14px] font-bold text-[#212529]">
+                    Ejecución</th>
+                  <th class="p-[16px] text-center text-[14px] font-bold text-[#212529]">
+                    Aprobación</th>
+                  <th class="p-[16px] text-center text-[14px] font-bold text-[#212529]">
+                    Porcentaje</th>
+                  <th class="p-[16px] text-left text-[14px] font-bold text-[#212529]">
+                    Beneficio</th>
+                  <th class="p-[16px] text-left text-[14px] font-bold text-[#212529]">
+                    Términos y Condiciones</th>
+                  <th class="p-[16px] text-left text-[14px] font-bold text-[#212529]">
+                    Cobertura</th>
+                  <th class="p-[16px] text-left text-[14px] font-bold text-[#212529]">
+                    Observaciones</th>
+                  <th class="p-[16px] text-center text-[14px] font-bold text-[#212529]">
+                    Material POP</th>
+                  <th class="p-[16px] text-center text-[14px] font-bold text-[#212529]">
+                    Capacitación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Fila 1: sd -->
+                <tr class="transition-colors duration-[150ms] bg-transparent hover:bg-[#F8F9FA]">
+                  <td class="p-[16px] text-[14px] text-[#212529] border-b border-[#E9ECEF] font-semibold">
+                    EST-000</td>
+                  <td class="p-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">
+                    <div>
+                      <div class="font-medium mb-[4px]">sd</div>
+                      <div>asd</div>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <span
+                      class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Gastronomía</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">-</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#FFF3CD] text-[#FFC107]">Pendiente</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] font-bold text-[14px]">-
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] text-[#6C757D] italic text-[14px]">
+                    Sin
+                    beneficio negociado</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] text-[#6C757D] italic text-[14px]">
+                    Sin
+                    términos definidos</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] min-w-[200px]">
+                    <div class="flex flex-wrap gap-[4px]">
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">-</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                </tr>
+                <!-- Fila 2: PIZZA HUT -->
+                <tr class="transition-colors duration-[150ms] bg-transparent hover:bg-[#F8F9FA]">
+                  <td class="p-[16px] text-[14px] text-[#212529] border-b border-[#E9ECEF] font-semibold">
+                    EST-001</td>
+                  <td class="p-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">
+                    <div>
+                      <div class="font-medium mb-[4px]">PIZZA HUT</div>
+                      <div>1792932297001</div>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <span
+                      class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center justify-center w-[24px] h-[24px] bg-[#e6f7f8] text-[#00AEB8] rounded-full text-[12px] font-bold">1</span>
+                  </td>
+                  <td class="text-[14px] p-[16px] border-b border-[#E9ECEF]">Renovación</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] font-bold text-[14px]">
+                    100%
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[300px] text-[14px]">35% de
+                    descuento. Precio especial en combo de pizza mediana de 2 ingredientes a $14,99 PVP: $24,99</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[350px] text-[14px]">Aplica en
+                    los
+                    locales a nivel nacional, no aplica sobre promoción, aplica restricciones</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <div class="flex flex-wrap gap-[4px]">
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Cuenca</span>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] text-[14px]">Renovado</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                </tr>
+                <!-- Fila 3: TEXAS CHICKEN -->
+                <tr class="transition-colors duration-[150ms] bg-transparent hover:bg-[#F8F9FA]">
+                  <td class="p-[16px] text-[14px] text-[#212529] border-b border-[#E9ECEF] font-semibold">
+                    EST-002</td>
+                  <td class="p-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">
+                    <div>
+                      <div class="font-medium mb-[4px]">TEXAS CHICKEN</div>
+                      <div>1792997372001</div>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <span
+                      class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center justify-center w-[24px] h-[24px] bg-[#e6f7f8] text-[#00AEB8] rounded-full text-[12px] font-bold">1</span>
+                  </td>
+                  <td class="text-[14px] p-[16px] border-b border-[#E9ECEF]">Renovación</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] font-bold text-[14px]">
+                    100%
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[300px] text-[14px]">22% de
+                    descuento en el combo medio pollo + 1/4 de pollo...</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[350px] text-[14px]">No aplica
+                    promoción sobre promoción, aplica únicamente en los locales.</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <div class="flex flex-wrap gap-[4px]">
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] text-[14px]">Renovado</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                </tr>
+                <!-- Fila 4: MACDONALS -->
+                <tr class="transition-colors duration-[150ms] bg-transparent hover:bg-[#F8F9FA]">
+                  <td class="p-[16px] text-[14px] text-[#212529] border-b border-[#E9ECEF] font-semibold">
+                    EST-003</td>
+                  <td class="p-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">
+                    <div>
+                      <div class="font-medium mb-[4px]">MACDONALS</div>
+                      <div>1791308832001</div>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <span
+                      class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center justify-center w-[24px] h-[24px] bg-[#e6f7f8] text-[#00AEB8] rounded-full text-[12px] font-bold">1</span>
+                  </td>
+                  <td class="text-[14px] p-[16px] border-b border-[#E9ECEF]">Renovación</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] font-bold text-[14px]">80%
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[300px] text-[14px]">15% de
+                    descuento en la app en todo el menú</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[350px] text-[14px]">Aplica para
+                    compras realizadas por McDonald's App.</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <div class="flex flex-wrap gap-[4px]">
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] text-[14px]">Renovado</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                </tr>
+                <!-- Fila 5: AMERICAN DELI -->
+                <tr class="transition-colors duration-[150ms] bg-transparent hover:bg-[#F8F9FA]">
+                  <td class="p-[16px] text-[14px] text-[#212529] border-b border-[#E9ECEF] font-semibold">
+                    EST-004</td>
+                  <td class="p-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">
+                    <div>
+                      <div class="font-medium mb-[4px]">AMERICAN DELI</div>
+                      <div class="mb-[3px]">
+                        <span
+                          class="inline-flex items-center gap-[3px] px-[7px] py-[1px] bg-[#f59e0b1a] border border-[#f59e0b4d] rounded-[10px] text-[10px] font-bold text-[#D97606]">
+                          <i data-lucide="star" class="w-[9px] h-[9px] fill-[#F59E0B] stroke-[#F59E0B]"></i>
+                          Solicitado por ti
+                        </span>
+                      </div>
+                      <div>1792072018001</div>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <span
+                      class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center justify-center w-[24px] h-[24px] bg-[#e6f7f8] text-[#00AEB8] rounded-full text-[12px] font-bold">1</span>
+                  </td>
+                  <td class="text-[14px] p-[16px] border-b border-[#E9ECEF]">Renovación</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] font-bold text-[14px]">
+                    100%
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[300px] text-[14px]">40% de
+                    descuento en Bowl Pollo Champiñones PVP normal: 7,99 $- Promo: $4,75</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[350px] text-[14px]">Aplica solo
+                    en
+                    patios de comida, aplica restricciones</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <div class="flex flex-wrap gap-[4px]">
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ibarra</span>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] text-[14px]">Renovado</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                </tr>
+                <!-- Fila 6: JUAN VALDEZ -->
+                <tr class="transition-colors duration-[150ms] bg-transparent hover:bg-[#F8F9FA]">
+                  <td class="p-[16px] text-[14px] text-[#212529] border-b border-[#E9ECEF] font-semibold">
+                    EST-005</td>
+                  <td class="p-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">
+                    <div>
+                      <div class="font-medium mb-[4px]">JUAN VALDEZ</div>
+                      <div class="mb-[3px]">
+                        <span
+                          class="inline-flex items-center gap-[3px] px-[7px] py-[1px] bg-[#f59e0b1a] border border-[#f59e0b4d] rounded-[10px] text-[10px] font-bold text-[#D97606]">
+                          <i data-lucide="star" class="w-[9px] h-[9px] fill-[#F59E0B] stroke-[#F59E0B]"></i>
+                          Solicitado por ti
+                        </span>
+                      </div>
+                      <div>1792141486001</div>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <span
+                      class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center justify-center w-[24px] h-[24px] bg-[#e6f7f8] text-[#00AEB8] rounded-full text-[12px] font-bold">1</span>
+                  </td>
+                  <td class="text-[14px] p-[16px] border-b border-[#E9ECEF]">Renovación</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] font-bold text-[14px]">
+                    100%
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[300px] text-[14px]">23% de
+                    descuento/ Combo torta vasca...</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[350px] text-[14px]">Aplica en
+                    la
+                    app Juan Valdez con código: PICHINCHAJV</td>
+                  <td class="p-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF] min-width-[200px]">
+                    <div>
+                      <div class="flex flex-wrap gap-[4px]">
+                        <span
+                          class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                        <span
+                          class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ambato</span>
+                        <span
+                          class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Baños</span>
+                        <span
+                          class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Riobamba</span>
+                        <span
+                          class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ibarra</span>
+                        <span
+                          class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Cuenca</span>
+
+                        <!-- Ciudades ocultas -->
+                        <span
+                          class="hidden-badge hidden px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Loja</span>
+                        <span
+                          class="hidden-badge hidden px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Santo
+                          Domingo</span>
+                        <span
+                          class="hidden-badge hidden px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Manta</span>
+                        <span
+                          class="hidden-badge hidden px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Portoviejo</span>
+                        <span
+                          class="hidden-badge hidden px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
+                        <span
+                          class="hidden-badge hidden px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Milagro</span>
+                        <span
+                          class="hidden-badge hidden px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Libertad</span>
+                        <span
+                          class="hidden-badge hidden px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Playas</span>
+                        <span
+                          class="hidden-badge hidden px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Machala</span>
+                        <span
+                          class="hidden-badge hidden px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Daule</span>
+
+                        <button
+                          class="toggle-badges-btn inline-flex items-center gap-[4px] py-[4px] px-[8px] bg-[#E6F7F8] text-[#00AEB8] rounded-[4px] text-[12px] font-bold border border-[#00AEB8] transition-colors hover:bg-[#00AEB8] hover:text-[#FFFFFF]"
+                          data-count="10">
+                          <span class="btn-text">+10</span>
+                          <i data-lucide="chevron-down" class="w-[12px] h-[12px] transition-transform duration-300"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] text-[14px]">Renovado</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                </tr>
+                <!-- Fila 7: TABLITA DEL TÁRTARO -->
+                <tr class="transition-colors duration-[150ms] bg-transparent hover:bg-[#F8F9FA]">
+                  <td class="p-[16px] text-[14px] text-[#212529] border-b border-[#E9ECEF] font-semibold">
+                    EST-006</td>
+                  <td class="p-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">
+                    <div>
+                      <div class="font-medium mb-[4px]">TABLITA DEL TÁRTARO</div>
+                      <div class="mb-[3px]">
+                        <span
+                          class="inline-flex items-center gap-[3px] px-[7px] py-[1px] bg-[#f59e0b1a] border border-[#f59e0b4d] rounded-[10px] text-[10px] font-bold text-[#D97606]">
+                          <i data-lucide="star" class="w-[9px] h-[9px] fill-[#F59E0B] stroke-[#F59E0B]"></i>
+                          Solicitado por ti
+                        </span>
+                      </div>
+                      <div>1791952359001</div>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <span
+                      class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center justify-center w-[24px] h-[24px] bg-[#e6f7f8] text-[#00AEB8] rounded-full text-[12px] font-bold">1</span>
+                  </td>
+                  <td class="text-[14px] p-[16px] border-b border-[#E9ECEF]">Renovación</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] font-bold text-[14px]">100%
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[300px] text-[14px]">30% Filete
+                    mediano de pollo...</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[350px] text-[14px]">Aplica en
+                    restaurantes, no es válido a domicilio.</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <div class="flex flex-wrap gap-[4px]">
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] text-[14px]">Renovado</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                </tr>
+                <!-- Fila 9: CHEF BOSS -->
+                <tr class="transition-colors duration-[150ms] bg-transparent hover:bg-[#F8F9FA]">
+                  <td class="p-[16px] text-[14px] text-[#212529] border-b border-[#E9ECEF] font-semibold">
+                    EST-008</td>
+                  <td class="p-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">
+                    <div>
+                      <div class="font-medium mb-[4px]">CHEF BOSS</div>
+                      <div class="mb-[3px]">
+                        <span
+                          class="inline-flex items-center gap-[3px] px-[7px] py-[1px] bg-[#f59e0b1a] border border-[#f59e0b4d] rounded-[10px] text-[10px] font-bold text-[#D97606]">
+                          <i data-lucide="star" class="w-[9px] h-[9px] fill-[#F59E0B] stroke-[#F59E0B]"></i>
+                          Solicitado por ti
+                        </span>
+                      </div>
+                      <div>090224811101</div>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <span
+                      class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center justify-center w-[24px] h-[24px] bg-[#e6f7f8] text-[#00AEB8] rounded-full text-[12px] font-bold">2</span>
+                  </td>
+                  <td class="text-[14px] p-[16px] border-b border-[#E9ECEF]">Renovación</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] font-bold text-[14px]">100%
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[300px] text-[14px]">20% de
+                    descuento Chicken Baby...</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[350px] text-[14px]">Aplica en
+                    consumo en el local.</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <div class="flex flex-wrap gap-[4px]">
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Samborondón</span>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] text-[14px]">Renovado</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                </tr>
+                <!-- Fila 10: CH FARINA -->
+                <tr class="transition-colors duration-[150ms] bg-transparent hover:bg-[#F8F9FA]">
+                  <td class="p-[16px] text-[14px] text-[#212529] border-b border-[#E9ECEF] font-semibold">
+                    EST-009</td>
+                  <td class="p-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">
+                    <div>
+                      <div class="font-medium mb-[4px]">CH FARINA</div>
+                      <div>1790527085001</div>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <span
+                      class="inline-block px-[12px] py-[4px] bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-semibold">Restaurante</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center justify-center w-[24px] h-[24px] bg-[#e6f7f8] text-[#00AEB8] rounded-full text-[12px] font-bold">2</span>
+                  </td>
+                  <td class="text-[14px] p-[16px] border-b border-[#E9ECEF]">Renovación</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">
+                    <span
+                      class="inline-flex items-center px-[12px] py-[4px] rounded-full text-[12px] font-semibold bg-[#D4EDDA] text-[#28A745]">Aprobado</span>
+                  </td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] font-bold text-[14px]">100%
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[300px] text-[14px]">35% de
+                    descuento in 1 pizza mediana de 2 ingredientes...</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] max-w-[350px] text-[14px]">No aplica
+                    promoción sobre promoción, aplica restricciones.</td>
+                  <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <div class="flex flex-wrap gap-[4px]">
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                      <span
+                        class="inline-block px-[8px] py-[4px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Machala</span>
+                    </div>
+                  </td>
+                  <td class="p-[16px] border-b border-[#E9ECEF] text-[14px]">Renovado</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                  <td class="p-[16px] text-center border-b border-[#E9ECEF] text-[14px]">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Paginación -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-[16px] w-full pt-[8px]">
+          <div class="flex items-center w-full sm:w-auto justify-center sm:justify-start">
+            <p class="text-[14px] text-[#495057] m-0 whitespace-nowrap">Mostrando 1-10 de
+              46</p>
+          </div>
+
+          <div class="flex items-center gap-[12px] justify-center w-full sm:w-auto">
+            <button aria-label="Página anterior" disabled
+              class="flex items-center justify-center w-[36px] h-[36px] border border-[#DEE2E6] rounded-[8px] text-[#495057] bg-[#FFFFFF] opacity-50 cursor-not-allowed transition-all">
+              <i data-lucide="chevron-left" class="w-[16px] h-[16px]"></i>
+            </button>
+
+            <form class="flex items-center gap-[8px]" onsubmit="return false;">
+              <span class="text-[14px] text-[#495057] whitespace-nowrap">Página</span>
+              <input type="number" min="1" max="5" value="1"
+                class="h-[36px] w-[60px] px-[8px] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#212529] bg-[#FFFFFF] text-center outline-none focus:border-[#00AEB8] transition-all">
+              <span class="text-[14px] text-[#495057] whitespace-nowrap">de 5</span>
+            </form>
+
+            <button aria-label="Página siguiente"
+              class="flex items-center justify-center w-[36px] h-[36px] border border-[#DEE2E6] rounded-[8px] text-[#495057] bg-[#FFFFFF] hover:bg-[#F8F9FA] transition-all">
+              <i data-lucide="chevron-right" class="w-[16px] h-[16px]"></i>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-[8px] justify-center sm:justify-end w-full sm:w-auto">
+            <span class="text-[14px] text-[#495057] whitespace-nowrap">Mostrar:</span>
+            <select
+              class="h-[36px] w-[70px] px-[8px] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#212529] bg-[#FFFFFF] outline-none focus:border-[#00AEB8] transition-all cursor-pointer">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      // Lógica específica para Status (Toggle Mis Solicitudes)
+      document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('btnMisSolicitudes');
+        const badge = document.getElementById('badgeMisSolicitudes');
+        const resultsBar = document.getElementById('resultsBar');
+
+        let isActive = false;
+
+        btn.addEventListener('click', () => {
+          isActive = !isActive;
+
+          // Buscar el ícono dentro del botón dinámicamente porque Lucide reemplaza el <i> por un <svg>
+          const currentIcon = btn.querySelector('svg') || btn.querySelector('i');
+
+          if (isActive) {
+            // Estado Activo (Borde amarillo/naranja claro)
+            btn.className = "flex items-center justify-center gap-[6px] px-[16px] py-[10px] bg-[#F59E0B]/10 border-[2px] border-[#F59E0B] rounded-[8px] text-[14px] font-bold text-[#D97706] transition-all duration-200 w-full lg:w-auto";
+            if (currentIcon) {
+              currentIcon.setAttribute('class', 'lucide lucide-star w-[16px] h-[16px] text-[#F59E0B]');
+              currentIcon.style.fill = "#F59E0B";
+            }
+            badge.className = "bg-[#F59E0B] text-[#FFFFFF] px-[7px] py-[1px] rounded-[10px] text-[12px] font-bold min-w-[20px] text-center";
+            resultsBar.classList.remove('hidden');
+          } else {
+            // Estado por defecto
+            btn.className = "flex items-center justify-center gap-[6px] px-[16px] py-[10px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] font-medium text-[#495057] transition-all duration-200 w-full lg:w-auto hover:bg-[#F8F9FA] hover:border-[#6C757D]";
+            if (currentIcon) {
+              currentIcon.setAttribute('class', 'lucide lucide-star w-[16px] h-[16px] text-[#9CA3AF]');
+              currentIcon.style.fill = "none";
+            }
+            badge.className = "bg-[#F1F3F5] text-[#495057] px-[7px] py-[1px] rounded-[10px] text-[12px] font-bold min-w-[20px] text-center";
+            resultsBar.classList.add('hidden');
+          }
+        });
+      });
+    </script>
+
+    <!-- Modal de Filtros -->
+    <div id="modal-filtros" tabindex="-1" aria-hidden="true"
+      class="fixed inset-0 z-[9999] hidden flex justify-end bg-[#212529]/50 opacity-0 transition-opacity duration-300">
+
+      <!-- Modal Content (Slide in from right) -->
+      <div
+        class="relative w-full max-w-[400px] h-full bg-[#FFFFFF] shadow-xl flex flex-col transform translate-x-full transition-transform duration-300"
+        id="filtros-panel">
+
+        <!-- Modal Header -->
+        <div class="flex items-center justify-between p-[24px] border-b border-[#DEE2E6]">
+          <h3 class="text-[18px] font-bold text-[#212529] m-0">Filtros</h3>
+          <button data-modal-hide="modal-filtros" type="button"
+            class="text-[#6C757D] hover:text-[#212529] rounded-[8px] p-[8px] inline-flex justify-center items-center hover:bg-[#F8F9FA] transition-colors">
+            <i data-lucide="x" class="w-[20px] h-[20px]"></i>
+            <span class="sr-only">Cerrar modal</span>
+          </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="flex-1 overflow-y-auto p-[24px]">
+
+          <!-- Filtro Categoría -->
+          <div class="mb-[24px]">
+            <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Categoría</label>
+            <div class="custom-multi-select relative" data-max-visible="2" data-placeholder="Seleccionar categorías...">
+              <button type="button"
+                class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+                <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                  <span class="text-[#495057]">Seleccionar categorías...</span>
+                </div>
+                <i data-lucide="chevron-down"
+                  class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+              </button>
+
+              <div
+                class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="Entretenimiento" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Entretenimiento</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="Gastronomía" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Gastronomía</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="Restaurante" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Restaurante</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="Salud" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Salud</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="Tecnología" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Tecnología</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filtro Cobertura -->
+          <div class="mb-[24px]">
+            <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Cobertura (Ciudades)</label>
+            <div class="custom-multi-select relative" data-max-visible="2" data-placeholder="Seleccionar ciudades...">
+              <button type="button"
+                class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+                <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                  <span class="text-[#495057]">Seleccionar ciudades...</span>
+                </div>
+                <i data-lucide="chevron-down"
+                  class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+              </button>
+
+              <div
+                class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="Quito" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Quito</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="Guayaquil" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Guayaquil</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="Cuenca" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Cuenca</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="Ambato" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Ambato</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filtro Prioridad -->
+          <div class="mb-[24px]">
+            <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Prioridad</label>
+            <div class="custom-multi-select relative" data-max-visible="2" data-placeholder="Seleccionar prioridad...">
+              <button type="button"
+                class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+                <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                  <span class="text-[#495057]">Seleccionar prioridad...</span>
+                </div>
+                <i data-lucide="chevron-down"
+                  class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+              </button>
+
+              <div
+                class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="1" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">1</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="2" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">2</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filtro Ejecución -->
+          <div class="mb-[24px]">
+            <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Ejecución</label>
+            <div class="custom-multi-select relative" data-max-visible="2" data-placeholder="Seleccionar ejecución...">
+              <button type="button"
+                class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+                <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                  <span class="text-[#495057]">Seleccionar ejecución...</span>
+                </div>
+                <i data-lucide="chevron-down"
+                  class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+              </button>
+
+              <div
+                class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="gestion_beneficio" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Gestión beneficio</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="renovacion" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Renovación</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filtro Aprobación -->
+          <div class="mb-[24px]">
+            <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Aprobación</label>
+            <div class="custom-multi-select relative" data-max-visible="2" data-placeholder="Seleccionar aprobación...">
+              <button type="button"
+                class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+                <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                  <span class="text-[#495057]">Seleccionar aprobación...</span>
+                </div>
+                <i data-lucide="chevron-down"
+                  class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+              </button>
+
+              <div
+                class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="aprobado" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Aprobado</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filtro Porcentaje -->
+          <div class="mb-[24px]">
+            <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Porcentaje</label>
+            <div class="custom-multi-select relative" data-max-visible="2" data-placeholder="Seleccionar porcentaje...">
+              <button type="button"
+                class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+                <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                  <span class="text-[#495057]">Seleccionar porcentaje...</span>
+                </div>
+                <i data-lucide="chevron-down"
+                  class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+              </button>
+
+              <div
+                class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="100%" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">100%</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="80%" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">80%</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="70%" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">70%</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="gratis" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Gratis</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filtro Material POP -->
+          <div class="mb-[24px]">
+            <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Material POP</label>
+            <div class="custom-multi-select relative" data-max-visible="2"
+              data-placeholder="Seleccionar material POP...">
+              <button type="button"
+                class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+                <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                  <span class="text-[#495057]">Seleccionar material POP...</span>
+                </div>
+                <i data-lucide="chevron-down"
+                  class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+              </button>
+
+              <div
+                class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="opcion_1" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Opcion 1</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filtro Capacitación -->
+          <div class="mb-[24px]">
+            <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Capacitación</label>
+            <div class="custom-multi-select relative" data-max-visible="2"
+              data-placeholder="Seleccionar capacitación...">
+              <button type="button"
+                class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+                <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                  <span class="text-[#495057]">Seleccionar capacitación...</span>
+                </div>
+                <i data-lucide="chevron-down"
+                  class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+              </button>
+
+              <div
+                class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="opcion_1" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Opcion 1</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filtro Observaciones -->
+          <div class="mb-[24px]">
+            <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Observaciones</label>
+            <div class="custom-multi-select relative" data-max-visible="2"
+              data-placeholder="Seleccionar observaciones...">
+              <button type="button"
+                class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+                <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                  <span class="text-[#495057]">Seleccionar observaciones...</span>
+                </div>
+                <i data-lucide="chevron-down"
+                  class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+              </button>
+
+              <div
+                class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="con_beneficio" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Con beneficio</span>
+                </label>
+                <label
+                  class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                  <input type="checkbox" value="renovado" class="hidden peer">
+                  <div
+                    class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                    <i data-lucide="check"
+                      class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                  </div>
+                  <span class="flex-1 text-[14px]">Renovado</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="flex gap-[12px] p-[24px] border-t border-[#DEE2E6]">
+          <button data-modal-hide="modal-filtros" type="button"
+            class="flex-1 px-[16px] h-[44px] bg-transparent border border-[#DEE2E6] rounded-[8px] text-[14px] font-semibold text-[#495057] transition-all duration-200 hover:bg-[#F8F9FA]">
+            Limpiar
+          </button>
+          <button data-modal-hide="modal-filtros" type="button"
+            class="flex-1 px-[16px] h-[44px] bg-[#00AEB8] text-[#FFFFFF] border border-[#00AEB8] rounded-[8px] text-[14px] font-semibold transition-all duration-200 hover:bg-[#008f96]">
+            Aplicar
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Main JS -->
+  <script src="./js/main.js"></script>
+</body>
+
+</html>

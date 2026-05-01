@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal de inicio de sesión de Motiva Soluciones.">
+  <title>Login - Motiva Soluciones</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="./css/global.css">
+
+  <!-- Tailwind Config -->
+  <script src="./js/tailwind-config.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-[#F8F9FA] min-h-screen antialiased">
+
+  <!-- Header Navbar -->
+  <header
+    class="fixed top-0 left-0 right-0 flex items-center justify-between px-4 md:px-6 h-[64px] bg-[#FFFFFF] border-b border-[#DEE2E6] z-[1030]">
+    <div class="flex items-center gap-3 md:gap-8">
+      <!-- Menú móvil -->
+      <button id="mobileMenuBtn"
+        class="md:hidden flex items-center justify-center w-10 h-10 -ml-2 text-[#495057] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150"
+        aria-label="Menú">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <!-- Logos -->
+      <div class="flex items-center gap-4 md:gap-8">
+        <img src="./images/motiva-logo.png" alt="Motiva Soluciones"
+          class="hidden sm:block h-[32px] w-auto object-contain">
+        <img src="./images/pichincha-logo.png" alt="Banco Pichincha"
+          class="hidden sm:block h-[40px] w-auto object-contain">
+        <img src="./images/motiva-logo.png" alt="Motiva Soluciones"
+          class="block sm:hidden h-[24px] w-auto object-contain">
+        <img src="./images/pichincha-logo.png" alt="Banco Pichincha"
+          class="block sm:hidden h-[28px] w-auto object-contain">
+      </div>
+    </div>
+
+    <!-- User Dropdown Component -->
+    <div class="relative" data-dropdown="user-menu">
+      <button aria-label="Menú de usuario" aria-expanded="false" data-dropdown-toggle="user-menu"
+        class="w-[44px] h-[44px] rounded-full bg-[#00AEB8] text-[#FFFFFF] border-2 border-[#00AEB8] hover:brightness-95 flex items-center justify-center font-semibold text-[14px] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#00AEB8]/50">
+        UD
+      </button>
+
+      <!-- Dropdown Menu Box -->
+      <div data-dropdown-menu="user-menu"
+        class="absolute right-0 mt-2 w-64 bg-[#FFFFFF] rounded-[12px] shadow-lg border border-[#dee2e6] opacity-0 invisible transition-all duration-150 transform translate-y-[-10px] z-[1000]">
+        <!-- Info del usuario -->
+        <div class="p-[16px] border-b border-[#dee2e6] flex items-center gap-3">
+          <div
+            class="w-[40px] h-[40px] rounded-full bg-[#00AEB8] text-[#FFFFFF] flex items-center justify-center font-semibold text-[14px] shrink-0">
+            UD
+          </div>
+          <div class="overflow-hidden">
+            <p class="text-[14px] font-semibold text-[#212529] truncate">Usuario Demo
+            </p>
+            <p class="text-[12px] text-[#495057] truncate">usuario@empresa.com</p>
+          </div>
+        </div>
+        <!-- Acciones -->
+        <div class="p-[8px]">
+          <a href="index.html"
+            class="w-full flex items-center gap-2 p-[12px] text-[14px] text-[#212529] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150 text-left">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+            <span>Cerrar Sesión</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div id="sidebarOverlay"
+    class="fixed inset-0 bg-[#212529]/50 z-[1020] hidden md:hidden transition-opacity duration-300 opacity-0"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar"
+    class="fixed md:left-0 -left-full transition-all duration-300 ease-in-out md:translate-x-0 w-[256px] bg-[#FFFFFF] border-r border-[#DEE2E6] top-[64px] bottom-0 overflow-y-auto py-[16px] z-[1050] md:z-0 custom-scrollbar">
+    <!-- Close button for mobile -->
+    <div class="md:hidden flex justify-end px-4 mb-4">
+      <button id="closeSidebarBtn" aria-label="Cerrar menú"
+        class="w-[32px] h-[32px] flex items-center justify-center rounded-[8px] text-[#495057] transition-all duration-150 hover:bg-[#F1F3F5]">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+      <!-- Vista de usuario -->
+      <div class="mb-[16px]">
+        <div class="px-[24px] mb-[8px]">
+          <span class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6C757D]">Vista de usuario</span>
+        </div>
+        <ul class="list-none m-0 p-0">
+          <li class="mb-[4px]">
+            <a href="inicio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#00AEB8] bg-[#e6f7f8] text-[14px] font-semibold transition-all duration-150 border-l-[3px] border-[#00AEB8]">
+              <i data-lucide="house" class="w-[18px] h-[18px]"></i>
+              <span>Inicio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="portafolio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="store" class="w-[18px] h-[18px]"></i>
+              <span>Portafolio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="status.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="activity" class="w-[18px] h-[18px]"></i>
+              <span>Status</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="capacitaciones.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="graduation-cap" class="w-[18px] h-[18px]"></i>
+              <span>Capacitaciones</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="material-pop.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="package" class="w-[18px] h-[18px]"></i>
+              <span>Material POP</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="medios.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="folder-archive" class="w-[18px] h-[18px]"></i>
+              <span>Medios</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Administración -->
+      <div class="mb-[16px]">
+        <div class="px-[24px] mb-[8px] mt-[8px]">
+          <span class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6C757D]">Administración</span>
+        </div>
+        <div class="h-[1px] bg-[#DEE2E6] mx-[24px] mb-[8px]"></div>
+        <ul class="list-none m-0 p-0">
+          <li class="mb-[4px]">
+            <a href="admin-portafolio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="database" class="w-[18px] h-[18px]"></i>
+              <span>Admin Portafolio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="admin-status.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="clipboard-list" class="w-[18px] h-[18px]"></i>
+              <span>Admin Status</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="medios-admin.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="folder-pen" class="w-[18px] h-[18px]"></i>
+              <span>Medios Admin</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="gestion-valores.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="list-checks" class="w-[18px] h-[18px]"></i>
+              <span>Gestión de Valores</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="usuarios.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="users" class="w-[18px] h-[18px]"></i>
+              <span>Usuarios</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="configuracion.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="settings" class="w-[18px] h-[18px]"></i>
+              <span>Configuración</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="pt-[64px] md:ml-[256px] min-h-screen">
+    <!-- Contenido Principal -->
+    <div class="p-[24px]">
+      <!-- Banner de Bienvenida -->
+      <div
+        class="bg-gradient-to-br from-[#00AEB8] to-[#0097A0] rounded-[12px] p-[32px] mb-[24px] text-white relative overflow-hidden">
+        <!-- Círculos decorativos -->
+        <div class="absolute -top-[20%] -right-[5%] w-[200px] h-[200px] rounded-full bg-[rgba(255,255,255,0.08)]"></div>
+        <div class="absolute -bottom-[30%] right-[10%] w-[150px] h-[150px] rounded-full bg-[rgba(255,255,255,0.05)]">
+        </div>
+
+        <div class="relative z-10">
+          <h1 class="text-[32px] font-bold mb-[8px] text-white">Bienvenido a Motiva</h1>
+          <p class="text-[16px] opacity-90 mb-[20px] max-w-[600px] leading-[1.6] text-[rgba(255,255,255,0.9)]">
+            Plataforma de gestión de beneficios y descuentos corporativos. Visualiza tu portafolio de establecimientos y
+            el estado de negociaciones.</p>
+        </div>
+      </div>
+
+      <!-- Tarjetas de Estadísticas -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-[16px] mb-[24px]">
+        <!-- Tarjeta 1 -->
+        <div class="bg-[#FFFFFF] rounded-[12px] p-[20px] border border-[#DEE2E6] shadow-sm">
+          <div class="flex items-center gap-[12px] mb-[12px]">
+            <div class="w-[40px] h-[40px] rounded-[8px] bg-[#E6F7F8] flex items-center justify-center">
+              <i data-lucide="store" class="w-5 h-5 text-[#00AEB8]"></i>
+            </div>
+          </div>
+          <p class="text-[28px] font-bold text-[#212529] mb-[2px]">46</p>
+          <p class="text-[12px] text-[#6C757D] font-medium">Total Establecimientos</p>
+        </div>
+
+        <!-- Tarjeta 2 -->
+        <div class="bg-[#FFFFFF] rounded-[12px] p-[20px] border border-[#DEE2E6] shadow-sm">
+          <div class="flex items-center gap-[12px] mb-[12px]">
+            <div class="w-[40px] h-[40px] rounded-[8px] bg-[#ECFDF5] flex items-center justify-center">
+              <i data-lucide="circle-check" class="w-5 h-5 text-[#10B981]"></i>
+            </div>
+          </div>
+          <p class="text-[28px] font-bold text-[#212529] mb-[2px]">41</p>
+          <p class="text-[12px] text-[#6C757D] font-medium">Aprobados</p>
+        </div>
+
+        <!-- Tarjeta 3 -->
+        <div class="bg-[#FFFFFF] rounded-[12px] p-[20px] border border-[#DEE2E6] shadow-sm">
+          <div class="flex items-center gap-[12px] mb-[12px]">
+            <div class="w-[40px] h-[40px] rounded-[8px] bg-[#EEF2FF] flex items-center justify-center">
+              <i data-lucide="activity" class="w-5 h-5 text-[#6366F1]"></i>
+            </div>
+          </div>
+          <p class="text-[28px] font-bold text-[#212529] mb-[2px]">0</p>
+          <p class="text-[12px] text-[#6C757D] font-medium">Activos</p>
+        </div>
+
+        <!-- Tarjeta 4 -->
+        <div class="bg-[#FFFFFF] rounded-[12px] p-[20px] border border-[#DEE2E6] shadow-sm">
+          <div class="flex items-center gap-[12px] mb-[12px]">
+            <div class="w-[40px] h-[40px] rounded-[8px] bg-[#FFFBEB] flex items-center justify-center">
+              <i data-lucide="trending-up" class="w-5 h-5 text-[#F59E0B]"></i>
+            </div>
+          </div>
+          <p class="text-[28px] font-bold text-[#212529] mb-[2px]">0</p>
+          <p class="text-[12px] text-[#6C757D] font-medium">Capacitados</p>
+        </div>
+      </div>
+
+      <!-- Gráficos Estadísticos -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-[16px] mb-[24px]">
+
+        <!-- Gráfico 1: Distribución por Prioridad -->
+        <div class="bg-[#FFFFFF] rounded-[12px] p-[16px] border border-[#DEE2E6] shadow-sm flex flex-col">
+          <h3 class="text-[16px] font-bold text-[#212529] mb-[12px]">Distribución por Prioridad</h3>
+          <div class="relative w-full flex-1 min-h-[240px] flex items-center justify-center">
+            <canvas id="chartPriority"></canvas>
+          </div>
+        </div>
+
+        <!-- Gráfico 2: Distribución por Tipo de Ejecución -->
+        <div class="bg-[#FFFFFF] rounded-[12px] p-[16px] border border-[#DEE2E6] shadow-sm flex flex-col">
+          <h3 class="text-[16px] font-bold text-[#212529] mb-[12px]">Distribución por Tipo de Ejecución</h3>
+          <div class="relative w-full flex-1 min-h-[240px] flex items-center justify-center">
+            <canvas id="chartExecution"></canvas>
+          </div>
+        </div>
+
+        <!-- Gráfico 3: Estado de Aprobación -->
+        <div class="bg-[#FFFFFF] rounded-[12px] p-[16px] border border-[#DEE2E6] shadow-sm flex flex-col">
+          <h3 class="text-[16px] font-bold text-[#212529] mb-[12px]">Estado de Aprobación</h3>
+          <div class="relative w-full flex-1 min-h-[240px] flex items-center justify-center">
+            <canvas id="chartApproval"></canvas>
+          </div>
+        </div>
+
+        <!-- Gráfico 4: Distribución por Porcentaje -->
+        <div class="bg-[#FFFFFF] rounded-[12px] p-[16px] border border-[#DEE2E6] shadow-sm flex flex-col">
+          <h3 class="text-[16px] font-bold text-[#212529] mb-[12px]">Distribución por Porcentaje</h3>
+          <div class="relative w-full flex-1 min-h-[240px] flex items-center justify-center">
+            <canvas id="chartPercentage"></canvas>
+          </div>
+        </div>
+
+        <!-- Gráfico 5: Proporción por Categoría (Full width) -->
+        <div
+          class="col-span-1 lg:col-span-2 bg-[#FFFFFF] rounded-[12px] p-[16px] border border-[#DEE2E6] shadow-sm flex flex-col">
+          <h3 class="text-[16px] font-bold text-[#212529] mb-[12px]">Proporción de Establecimientos por Categoría</h3>
+          <div class="relative w-full flex-1 min-h-[280px] flex items-center justify-center">
+            <canvas id="chartCategory"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Main JS -->
+  <script src="./js/main.js"></script>
+</body>
+
+</html>

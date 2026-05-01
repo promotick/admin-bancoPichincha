@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal de inicio de sesión de Motiva Soluciones.">
+  <title>Login - Motiva Soluciones</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="./css/global.css">
+
+  <!-- Tailwind Config -->
+  <script src="./js/tailwind-config.js"></script>
+</head>
+
+<body class="bg-[#f8f9fa] min-h-screen flex items-center justify-center p-4 antialiased">
+
+  <!-- Login Container -->
+  <main
+    class="w-full max-w-md bg-white py-6 px-5 rounded-[16px] shadow-[0_10px_15px_-3px_#0000001a,0_4px_6px_-2px_#0000000d] border border-[#dee2e6]">
+
+    <!-- Logos -->
+    <header class="flex justify-center items-center gap-6 mb-8">
+      <img src="./images/motiva-logo.png" alt="Motiva Soluciones" class="h-8 w-auto object-contain">
+      <img src="./images/pichincha-logo.png" alt="Banco Pichincha" class="h-10 w-auto object-contain">
+    </header>
+
+    <!-- Welcome Text -->
+    <div class="text-center mb-8">
+      <h1 class="text-2xl font-bold text-[#212529] mb-2">Bienvenido</h1>
+      <p class="text-[#495057]">Ingresa tus credenciales para continuar</p>
+    </div>
+
+    <!-- Form -->
+    <form id="loginForm" class="space-y-6">
+      <!-- Username Input -->
+      <div>
+        <label for="username" class="block text-sm font-semibold text-[#212529] mb-2">Usuario</label>
+        <div class="relative group">
+          <i data-lucide="user"
+            class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 transition-colors"></i>
+          <input id="username" name="username" type="text" placeholder="Ingresa tu usuario" required
+            class="h-[47px] w-full pl-10 pr-4 py-2.5 border border-[#dee2e6] rounded-lg text-sm text-[#212529] outline-none focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand transition-colors bg-white">
+        </div>
+      </div>
+
+      <!-- Password Input -->
+      <div>
+        <label for="password" class="block text-sm font-semibold text-[#212529] mb-2">Contraseña</label>
+        <div class="relative group">
+          <i data-lucide="lock"
+            class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 transition-colors"></i>
+          <input id="password" name="password" type="password" placeholder="Ingresa tu contraseña" required
+            class="h-[47px] w-full pl-10 pr-4 py-2.5 border border-[#dee2e6] rounded-lg text-sm text-[#212529] outline-none focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand transition-colors bg-white">
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit"
+        class="w-full bg-brand hover:brightness-95 text-white font-bold h-[56px] flex items-center justify-center rounded-[8px] shadow-brand/20 hover:shadow-brand/30 transition-all active:scale-[0.98] mt-2">
+        <span>Iniciar Sesión</span>
+      </button>
+    </form>
+
+  </main>
+
+  <!-- Main JS -->
+  <script src="./js/main.js"></script>
+</body>
+
+</html>

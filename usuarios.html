@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal de inicio de sesión de Motiva Soluciones.">
+  <title>Login - Motiva Soluciones</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="./css/global.css">
+
+  <!-- Tailwind Config -->
+  <script src="./js/tailwind-config.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-[#F8F9FA] min-h-screen antialiased">
+
+  <!-- Header Navbar -->
+  <header
+    class="fixed top-0 left-0 right-0 flex items-center justify-between px-4 md:px-6 h-[64px] bg-[#FFFFFF] border-b border-[#DEE2E6] z-[1030]">
+    <div class="flex items-center gap-3 md:gap-8">
+      <!-- Menú móvil -->
+      <button id="mobileMenuBtn"
+        class="md:hidden flex items-center justify-center w-10 h-10 -ml-2 text-[#495057] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150"
+        aria-label="Menú">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <!-- Logos -->
+      <div class="flex items-center gap-4 md:gap-8">
+        <img src="./images/motiva-logo.png" alt="Motiva Soluciones"
+          class="hidden sm:block h-[32px] w-auto object-contain">
+        <img src="./images/pichincha-logo.png" alt="Banco Pichincha"
+          class="hidden sm:block h-[40px] w-auto object-contain">
+        <img src="./images/motiva-logo.png" alt="Motiva Soluciones"
+          class="block sm:hidden h-[24px] w-auto object-contain">
+        <img src="./images/pichincha-logo.png" alt="Banco Pichincha"
+          class="block sm:hidden h-[28px] w-auto object-contain">
+      </div>
+    </div>
+
+    <!-- User Dropdown Component -->
+    <div class="relative" data-dropdown="user-menu">
+      <button aria-label="Menú de usuario" aria-expanded="false" data-dropdown-toggle="user-menu"
+        class="w-[44px] h-[44px] rounded-full bg-[#00AEB8] text-[#FFFFFF] border-2 border-[#00AEB8] hover:brightness-95 flex items-center justify-center font-semibold text-[14px] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#00AEB8]/50">
+        UD
+      </button>
+
+      <!-- Dropdown Menu Box -->
+      <div data-dropdown-menu="user-menu"
+        class="absolute right-0 mt-2 w-64 bg-[#FFFFFF] rounded-[12px] shadow-lg border border-[#dee2e6] opacity-0 invisible transition-all duration-150 transform translate-y-[-10px] z-[1000]">
+        <!-- Info del usuario -->
+        <div class="p-[16px] border-b border-[#dee2e6] flex items-center gap-3">
+          <div
+            class="w-[40px] h-[40px] rounded-full bg-[#00AEB8] text-[#FFFFFF] flex items-center justify-center font-semibold text-[14px] shrink-0">
+            UD
+          </div>
+          <div class="overflow-hidden">
+            <p class="text-[14px] font-semibold text-[#212529] truncate">Usuario Demo
+            </p>
+            <p class="text-[12px] text-[#495057] truncate">usuario@empresa.com</p>
+          </div>
+        </div>
+        <!-- Acciones -->
+        <div class="p-[8px]">
+          <a href="index.html"
+            class="w-full flex items-center gap-2 p-[12px] text-[14px] text-[#212529] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150 text-left">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+            <span>Cerrar Sesión</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div id="sidebarOverlay"
+    class="fixed inset-0 bg-[#212529]/50 z-[1020] hidden md:hidden transition-opacity duration-300 opacity-0"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar"
+    class="fixed md:left-0 -left-full transition-all duration-300 ease-in-out md:translate-x-0 w-[256px] bg-[#FFFFFF] border-r border-[#DEE2E6] top-[64px] bottom-0 overflow-y-auto py-[16px] z-[1050] md:z-0 custom-scrollbar">
+    <!-- Close button for mobile -->
+    <div class="md:hidden flex justify-end px-4 mb-4">
+      <button id="closeSidebarBtn" aria-label="Cerrar menú"
+        class="w-[32px] h-[32px] flex items-center justify-center rounded-[8px] text-[#495057] transition-all duration-150 hover:bg-[#F1F3F5]">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+      <!-- Vista de usuario -->
+      <div class="mb-[16px]">
+        <div class="px-[24px] mb-[8px]">
+          <span class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6C757D]">Vista de usuario</span>
+        </div>
+        <ul class="list-none m-0 p-0">
+          <li class="mb-[4px]">
+            <a href="inicio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="house" class="w-[18px] h-[18px]"></i>
+              <span>Inicio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="portafolio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="store" class="w-[18px] h-[18px]"></i>
+              <span>Portafolio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="status.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="activity" class="w-[18px] h-[18px]"></i>
+              <span>Status</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="capacitaciones.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="graduation-cap" class="w-[18px] h-[18px]"></i>
+              <span>Capacitaciones</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="material-pop.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="package" class="w-[18px] h-[18px]"></i>
+              <span>Material POP</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="medios.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="folder-archive" class="w-[18px] h-[18px]"></i>
+              <span>Medios</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Administración -->
+      <div class="mb-[16px]">
+        <div class="px-[24px] mb-[8px] mt-[8px]">
+          <span class="text-[11px] font-bold uppercase tracking-[0.08em] text-[#6C757D]">Administración</span>
+        </div>
+        <div class="h-[1px] bg-[#DEE2E6] mx-[24px] mb-[8px]"></div>
+        <ul class="list-none m-0 p-0">
+          <li class="mb-[4px]">
+            <a href="admin-portafolio.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="database" class="w-[18px] h-[18px]"></i>
+              <span>Admin Portafolio</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="admin-status.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="clipboard-list" class="w-[18px] h-[18px]"></i>
+              <span>Admin Status</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="medios-admin.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="folder-pen" class="w-[18px] h-[18px]"></i>
+              <span>Medios Admin</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="gestion-valores.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="list-checks" class="w-[18px] h-[18px]"></i>
+              <span>Gestión de Valores</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="usuarios.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#00AEB8] bg-[#e6f7f8] text-[14px] font-semibold transition-all duration-150 border-l-[3px] border-[#00AEB8]">
+              <i data-lucide="users" class="w-[18px] h-[18px]"></i>
+              <span>Usuarios</span>
+            </a>
+          </li>
+          <li class="mb-[4px]">
+            <a href="configuracion.html"
+              class="flex items-center gap-[12px] h-[44px] px-[24px] text-[#495057] bg-transparent text-[14px] font-normal transition-all duration-150 border-l-[3px] border-transparent hover:bg-[#F1F3F5] hover:text-[#212529]">
+              <i data-lucide="settings" class="w-[18px] h-[18px]"></i>
+              <span>Configuración</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="pt-[64px] md:ml-[256px] min-h-screen">
+    <!-- Contenido Principal -->
+    <div class="p-4 md:p-[24px]">
+      <div class="md:p-6 max-w-[1000px] mx-auto">
+
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <div>
+            <h1 class="text-[28px] font-bold text-[#212529] mb-2 flex items-center gap-3">
+              <i data-lucide="users" class="w-7 h-7 text-[#00AEB8]"></i>
+              Usuarios
+            </h1>
+            <p class="text-[14px] text-[#495057]">Gestiona los accesos de usuarios a la plataforma</p>
+          </div>
+          <button type="button" data-modal-target="modal-nuevo-usuario"
+            class="inline-flex items-center gap-2 px-5 py-3 bg-[#00AEB8] text-white rounded-[8px] text-[14px] font-semibold cursor-pointer whitespace-nowrap hover:bg-[#009aa3] transition-colors duration-150 flex-shrink-0">
+            <i data-lucide="plus" class="w-[18px] h-[18px]"></i>
+            Nuevo Usuario
+          </button>
+        </div>
+
+        <!-- Buscador -->
+        <div class="relative mb-4 max-w-[400px]">
+          <i data-lucide="search"
+            class="absolute left-3 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#6C757D] pointer-events-none"></i>
+          <input type="text" placeholder="Buscar por nombre o email..."
+            class="w-full h-[42px] pl-10 pr-4 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none bg-white focus:border-[#00AEB8] transition-colors duration-150">
+        </div>
+
+        <!-- Leyenda de roles -->
+        <div class="flex gap-4 mb-4 text-[13px] text-[#495057] flex-wrap">
+          <div class="flex items-center gap-2">
+            <i data-lucide="shield" class="w-[14px] h-[14px] text-[#6366F1]"></i>
+            <span><strong>Administrador:</strong> Acceso completo</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="eye" class="w-[14px] h-[14px] text-[#00AEB8]"></i>
+            <span><strong>Cliente:</strong> Solo vista de usuario</span>
+          </div>
+        </div>
+
+        <!-- Lista de usuarios -->
+        <div class="flex flex-col gap-3">
+
+          <!-- Usuario: Admin Motiva -->
+          <div
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-5 py-4 bg-white rounded-[12px] border border-[#DEE2E6] shadow-sm hover:shadow-md transition-shadow duration-150">
+            <div class="flex items-center gap-4">
+              <div class="w-11 h-11 rounded-full bg-[#EEF2FF] flex items-center justify-center flex-shrink-0">
+                <i data-lucide="shield" class="w-5 h-5 text-[#6366F1]"></i>
+              </div>
+              <div>
+                <p class="text-[15px] font-semibold text-[#212529] mb-[2px]">Admin Motiva</p>
+                <p class="text-[13px] text-[#6C757D]">admin@motiva.ec</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 flex-wrap">
+              <span
+                class="px-3 py-1 rounded-full text-[12px] font-semibold bg-[#EEF2FF] text-[#6366F1]">Administrador</span>
+              <button type="button" title="Clic para cambiar estado"
+                class="btn-toggle-estado px-3 py-1 rounded-full text-[12px] font-semibold bg-[#ECFDF5] text-[#10B981] border-none cursor-pointer transition-all duration-150">
+                Activo
+              </button>
+              <span class="text-[12px] text-[#6C757D] whitespace-nowrap">Último acceso: 2026-03-05</span>
+              <div class="flex gap-2">
+                <button type="button" title="Editar" data-modal-target="modal-editar-usuario"
+                  class="w-8 h-8 flex items-center justify-center bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] cursor-pointer border-none hover:bg-[#00AEB8] hover:text-white transition-colors duration-150">
+                  <i data-lucide="pen" class="w-[14px] h-[14px]"></i>
+                </button>
+                <button type="button" title="Eliminar" data-modal-target="modal-eliminar-usuario"
+                  class="w-8 h-8 flex items-center justify-center bg-[#FEE2E2] text-[#EF4444] rounded-[8px] cursor-pointer border-none hover:bg-[#EF4444] hover:text-white transition-colors duration-150">
+                  <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Usuario: Banco Pichincha -->
+          <div
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-5 py-4 bg-white rounded-[12px] border border-[#DEE2E6] shadow-sm hover:shadow-md transition-shadow duration-150">
+            <div class="flex items-center gap-4">
+              <div class="w-11 h-11 rounded-full bg-[#E6F9FA] flex items-center justify-center flex-shrink-0">
+                <i data-lucide="eye" class="w-5 h-5 text-[#00AEB8]"></i>
+              </div>
+              <div>
+                <p class="text-[15px] font-semibold text-[#212529] mb-[2px]">Banco Pichincha</p>
+                <p class="text-[13px] text-[#6C757D]">beneficios@pichincha.com</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="px-3 py-1 rounded-full text-[12px] font-semibold bg-[#E6F9FA] text-[#00AEB8]">Cliente</span>
+              <button type="button" title="Clic para cambiar estado"
+                class="btn-toggle-estado px-3 py-1 rounded-full text-[12px] font-semibold bg-[#ECFDF5] text-[#10B981] border-none cursor-pointer transition-all duration-150">
+                Activo
+              </button>
+              <span class="text-[12px] text-[#6C757D] whitespace-nowrap">Último acceso: 2026-03-04</span>
+              <div class="flex gap-2">
+                <button type="button" title="Editar" data-modal-target="modal-editar-usuario"
+                  class="w-8 h-8 flex items-center justify-center bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] cursor-pointer border-none hover:bg-[#00AEB8] hover:text-white transition-colors duration-150">
+                  <i data-lucide="pen" class="w-[14px] h-[14px]"></i>
+                </button>
+                <button type="button" title="Eliminar" data-modal-target="modal-eliminar-usuario"
+                  class="w-8 h-8 flex items-center justify-center bg-[#FEE2E2] text-[#EF4444] rounded-[8px] cursor-pointer border-none hover:bg-[#EF4444] hover:text-white transition-colors duration-150">
+                  <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Nuevo Usuario -->
+    <div id="modal-nuevo-usuario" tabindex="-1" aria-hidden="true"
+      class="fixed inset-0 z-[9999] hidden flex items-center justify-center overflow-y-auto bg-[#212529]/50 opacity-0 transition-opacity duration-300 p-4">
+      <div id="modal-nuevo-usuario-panel"
+        class="relative w-full max-w-[480px] bg-white rounded-[12px] shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col max-h-full my-auto">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center px-6 py-5 border-b border-[#DEE2E6]">
+          <h2 class="text-[18px] font-bold text-[#212529] m-0">Nuevo Usuario</h2>
+          <button type="button" data-modal-hide="modal-nuevo-usuario"
+            class="w-8 h-8 flex items-center justify-center bg-transparent border-none rounded-[8px] cursor-pointer text-[#495057] hover:bg-[#F8F9FA] transition-colors duration-150">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="px-6 py-6 flex flex-col gap-4 overflow-y-auto flex-1 min-h-0">
+
+          <!-- Nombre -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Nombre *</label>
+            <input type="text" placeholder="Nombre completo"
+              class="w-full h-[42px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none bg-white focus:border-[#00AEB8] transition-colors duration-150">
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Email *</label>
+            <input type="email" placeholder="usuario@ejemplo.com"
+              class="w-full h-[42px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none bg-white focus:border-[#00AEB8] transition-colors duration-150">
+          </div>
+
+          <!-- Contraseña -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Contraseña *</label>
+            <div class="relative">
+              <input id="input-password-usuario" type="password" placeholder="Mínimo 8 caracteres"
+                class="w-full h-[42px] pl-3 pr-10 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none bg-white focus:border-[#00AEB8] transition-colors duration-150">
+              <button type="button" id="btn-toggle-password"
+                class="absolute right-2 top-1/2 -translate-y-1/2 p-1 flex items-center justify-center bg-transparent border-none cursor-pointer rounded-[4px] text-[#6C757D] hover:text-[#212529] transition-colors duration-150">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+              </button>
+            </div>
+            <p class="text-[12px] text-[#6C757D] mt-1">Mínimo 8 caracteres</p>
+          </div>
+
+          <!-- Rol -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Rol</label>
+            <select
+              class="w-full h-[42px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none bg-white cursor-pointer focus:border-[#00AEB8] transition-colors duration-150">
+              <option value="Administrador">Administrador - Acceso completo</option>
+              <option value="Cliente">Cliente - Solo vista de usuario</option>
+            </select>
+          </div>
+
+          <!-- Estado -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Estado</label>
+            <select
+              class="w-full h-[42px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none bg-white cursor-pointer focus:border-[#00AEB8] transition-colors duration-150">
+              <option value="Activo">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="flex justify-end gap-3 px-6 py-4 border-t border-[#DEE2E6]">
+          <button type="button" data-modal-hide="modal-nuevo-usuario"
+            class="px-5 py-2 bg-white text-[#495057] border border-[#DEE2E6] rounded-[8px] text-[14px] font-semibold cursor-pointer hover:bg-[#F8F9FA] transition-colors duration-150">
+            Cancelar
+          </button>
+          <button type="button"
+            class="inline-flex items-center gap-2 px-5 py-2 bg-[#00AEB8] text-white border-none rounded-[8px] text-[14px] font-semibold cursor-pointer hover:bg-[#009aa3] transition-colors duration-150">
+            <i data-lucide="save" class="w-4 h-4"></i>
+            Guardar
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Modal: Editar Usuario -->
+    <div id="modal-editar-usuario" tabindex="-1" aria-hidden="true"
+      class="fixed inset-0 z-[9999] hidden flex items-center justify-center overflow-y-auto bg-[#212529]/50 opacity-0 transition-opacity duration-300 p-4">
+      <div id="modal-editar-usuario-panel"
+        class="relative w-full max-w-[480px] bg-white rounded-[12px] shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col max-h-full my-auto">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center px-6 py-5 border-b border-[#DEE2E6]">
+          <h2 class="text-[18px] font-bold text-[#212529] m-0">Editar Usuario</h2>
+          <button type="button" data-modal-hide="modal-editar-usuario"
+            class="w-8 h-8 flex items-center justify-center bg-transparent border-none rounded-[8px] cursor-pointer text-[#495057] hover:bg-[#F8F9FA] transition-colors duration-150">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="px-6 py-6 flex flex-col gap-4 overflow-y-auto flex-1 min-h-0">
+
+          <!-- Nombre -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Nombre *</label>
+            <input type="text" placeholder="Nombre completo" value="Admin Motiva"
+              class="w-full h-[42px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none bg-white focus:border-[#00AEB8] transition-colors duration-150">
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Email *</label>
+            <input type="email" placeholder="usuario@ejemplo.com" value="admin@motiva.ec"
+              class="w-full h-[42px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none bg-white focus:border-[#00AEB8] transition-colors duration-150">
+          </div>
+
+          <!-- Contraseña -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Contraseña</label>
+            <div class="relative">
+              <input id="input-password-editar" type="password" placeholder="Dejar vacío para no cambiar"
+                class="w-full h-[42px] pl-3 pr-10 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none bg-white focus:border-[#00AEB8] transition-colors duration-150">
+              <button type="button" id="btn-toggle-password-editar"
+                class="absolute right-2 top-1/2 -translate-y-1/2 p-1 flex items-center justify-center bg-transparent border-none cursor-pointer rounded-[4px] text-[#6C757D] hover:text-[#212529] transition-colors duration-150">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+              </button>
+            </div>
+            <p class="text-[12px] text-[#6C757D] mt-1 flex items-center gap-1">
+              <i data-lucide="key-round" class="w-3 h-3"></i>
+              Solo completa si deseas cambiar la contraseña actual
+            </p>
+          </div>
+
+          <!-- Rol -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Rol</label>
+            <select
+              class="w-full h-[42px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none bg-white cursor-pointer focus:border-[#00AEB8] transition-colors duration-150">
+              <option value="Administrador" selected>Administrador - Acceso completo</option>
+              <option value="Cliente">Cliente - Solo vista de usuario</option>
+            </select>
+          </div>
+
+          <!-- Estado -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Estado</label>
+            <select
+              class="w-full h-[42px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none bg-white cursor-pointer focus:border-[#00AEB8] transition-colors duration-150">
+              <option value="Activo" selected>Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="flex justify-end gap-3 px-6 py-4 border-t border-[#DEE2E6]">
+          <button type="button" data-modal-hide="modal-editar-usuario"
+            class="px-5 py-2 bg-white text-[#495057] border border-[#DEE2E6] rounded-[8px] text-[14px] font-semibold cursor-pointer hover:bg-[#F8F9FA] transition-colors duration-150">
+            Cancelar
+          </button>
+          <button type="button"
+            class="inline-flex items-center gap-2 px-5 py-2 bg-[#00AEB8] text-white border-none rounded-[8px] text-[14px] font-semibold cursor-pointer hover:bg-[#009aa3] transition-colors duration-150">
+            <i data-lucide="save" class="w-4 h-4"></i>
+            Actualizar
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Modal: Eliminar Usuario -->
+    <div id="modal-eliminar-usuario" tabindex="-1" aria-hidden="true"
+      class="fixed inset-0 z-[9999] hidden flex items-center justify-center bg-[#212529]/50 opacity-0 transition-opacity duration-300 p-4">
+      <div id="modal-eliminar-usuario-panel"
+        class="relative w-full max-w-[400px] bg-white rounded-[16px] p-[28px] shadow-2xl transform scale-95 transition-transform duration-300 m-4 text-center">
+
+        <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="trash-2" class="w-6 h-6 text-red-500"></i>
+        </div>
+
+        <h3 class="text-[16px] font-bold text-[#212529] mb-[6px]">Eliminar Usuario</h3>
+        <p class="text-[14px] text-[#6C757D] m-0 mb-5">
+          ¿Estás seguro de que deseas eliminar a este usuario? Esta acción no se puede deshacer.
+        </p>
+
+        <div class="flex gap-[10px]">
+          <button type="button" data-modal-hide="modal-eliminar-usuario"
+            class="flex-1 py-[10px] border border-[#DEE2E6] rounded-[8px] bg-white text-[14px] font-medium text-[#495057] cursor-pointer hover:bg-[#F8F9FA] transition-colors">
+            Cancelar
+          </button>
+          <button type="button" id="btn-confirmar-eliminar"
+            class="flex-1 py-[10px] border-none rounded-[8px] bg-red-500 text-white text-[14px] font-semibold cursor-pointer hover:bg-red-600 transition-colors">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Main JS -->
+  <script src="./js/main.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // ── Toggle estado Activo / Inactivo ──
+      document.querySelectorAll('.btn-toggle-estado').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const isActivo = btn.textContent.trim() === 'Activo';
+          if (isActivo) {
+            btn.textContent = 'Inactivo';
+            btn.classList.remove('bg-[#ECFDF5]', 'text-[#10B981]');
+            btn.classList.add('bg-[#fee2e2]', 'text-[#ef4444]');
+          } else {
+            btn.textContent = 'Activo';
+            btn.classList.remove('bg-[#fee2e2]', 'text-[#ef4444]');
+            btn.classList.add('bg-[#ECFDF5]', 'text-[#10B981]');
+          }
+        });
+      });
+
+      // ── Toggle mostrar/ocultar contraseña ──
+      const inputPwd = document.getElementById('input-password-usuario');
+      const btnTogglePwd = document.getElementById('btn-toggle-password');
+      if (btnTogglePwd && inputPwd) {
+        let pwdVisible = false;
+        btnTogglePwd.addEventListener('click', () => {
+          pwdVisible = !pwdVisible;
+          inputPwd.type = pwdVisible ? 'text' : 'password';
+          const icon = btnTogglePwd.querySelector('i');
+          if (icon) {
+            icon.setAttribute('data-lucide', pwdVisible ? 'eye-off' : 'eye');
+            lucide.createIcons({ root: btnTogglePwd });
+          }
+        });
+      }
+
+      // ── Toggle mostrar/ocultar contraseña (Editar) ──
+      const inputPwdEdit = document.getElementById('input-password-editar');
+      const btnTogglePwdEdit = document.getElementById('btn-toggle-password-editar');
+      if (btnTogglePwdEdit && inputPwdEdit) {
+        let pwdVisibleEdit = false;
+        btnTogglePwdEdit.addEventListener('click', () => {
+          pwdVisibleEdit = !pwdVisibleEdit;
+          inputPwdEdit.type = pwdVisibleEdit ? 'text' : 'password';
+          const icon = btnTogglePwdEdit.querySelector('i');
+          if (icon) {
+            icon.setAttribute('data-lucide', pwdVisibleEdit ? 'eye-off' : 'eye');
+            lucide.createIcons({ root: btnTogglePwdEdit });
+          }
+        });
+      }
+
+      // ── Confirmación de Eliminación (Toast) ──
+      const btnConfirmarEliminar = document.getElementById('btn-confirmar-eliminar');
+      if (btnConfirmarEliminar) {
+        btnConfirmarEliminar.addEventListener('click', () => {
+          const modal = document.getElementById('modal-eliminar-usuario');
+          if (modal && typeof App !== 'undefined') {
+            const closeBtn = modal.querySelector('[data-modal-hide="modal-eliminar-usuario"]');
+            if (closeBtn) closeBtn.click();
+            App.showToast('Usuario eliminado', 'El acceso del usuario ha sido removido correctamente.', 'info');
+          }
+        });
+      }
+
+    });
+  </script>
+
+</body>
+
+</html>
