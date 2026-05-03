@@ -1,233 +1,46 @@
-@import "tailwindcss";
-
-/* ============================================
-   TAILWIND V4 CONFIGURATION
-   ============================================ */
-
-@theme {
-  /* Colores del Sistema */
-  --color-primary: #00AEB8;
-  --color-primary-hover: #009aa3;
-  --color-primary-light: #e6f7f8;
-  --color-primary-dark: #008a92;
-
-  --color-bg-primary: #FFFFFF;
-  --color-bg-secondary: #F8F9FA;
-  --color-bg-tertiary: #F1F3F5;
-  --color-border: #DEE2E6;
-  --color-border-light: #E9ECEF;
-
-  --color-text-primary: #212529;
-  --color-text-secondary: #495057;
-  --color-text-tertiary: #6C757D;
-  --color-text-light: #ADB5BD;
-  --color-text-inverse: #FFFFFF;
-
-  --color-success: #28A745;
-  --color-success-light: #D4EDDA;
-  --color-warning: #FFC107;
-  --color-warning-light: #FFF3CD;
-  --color-error: #DC3545;
-  --color-error-light: #F8D7DA;
-  --color-info: #17A2B8;
-  --color-info-light: #D1ECF1;
-
-  /* Tipografía */
-  --font-sans: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-
-  --font-size-xs: 0.75rem;
-  /* 12px */
-  --font-size-sm: 0.875rem;
-  /* 14px */
-  --font-size-base: 1rem;
-  /* 16px */
-  --font-size-lg: 1.125rem;
-  /* 18px */
-  --font-size-xl: 1.25rem;
-  /* 20px */
-  --font-size-2xl: 1.5rem;
-  /* 24px */
-  --font-size-3xl: 1.875rem;
-  /* 30px */
-
-  /* Espaciado */
-  --spacing-1: 4px;
-  --spacing-2: 8px;
-  --spacing-3: 12px;
-  --spacing-4: 16px;
-  --spacing-5: 20px;
-  --spacing-6: 24px;
-  --spacing-7: 28px;
-  --spacing-8: 32px;
-  --spacing-10: 40px;
-  --spacing-12: 48px;
-  --spacing-16: 64px;
-
-  /* Radios */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-full: 9999px;
-
-  /* Sombras */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-:root {
-  /* Alias para compatibilidad con código existente si es necesario */
-  --color-primary: var(--color-primary);
-  --font-family-primary: var(--font-sans);
-}
-
-/* ============================================
-   ANIMACIONES PARA CAPACITACIONES Y MATERIAL POP
-   ============================================ */
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes expandHeight {
-  from {
-    opacity: 0;
-    max-height: 0;
-  }
-
-  to {
-    opacity: 1;
-    max-height: 1000px;
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.3s ease forwards;
-}
-
-.slide-in-left {
-  animation: slideInLeft 0.25s ease forwards;
-}
-
-.expand-height {
-  animation: expandHeight 0.3s ease forwards;
-}
-
 /* ============================================
    RESET Y BASE
    ============================================ */
+
+/* Importar la fuente Lato */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: var(--font-family-primary);
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-secondary);
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #212529;
+  background-color: #F8F9FA;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Importar la fuente Lato */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
-
-/* ============================================
-   TIPOGRAFÍA
-   ============================================ */
-
-h1 {
-  font-size: var(--font-size-3xl);
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--color-text-primary);
+h1, h2, h3, h4 {
+  color: #212529;
   margin: 0;
+  font-weight: 700;
 }
 
-h2 {
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  line-height: 1.3;
-  color: var(--color-text-primary);
-  margin: 0;
-}
-
-h3 {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  line-height: 1.4;
-  color: var(--color-text-primary);
-  margin: 0;
-}
-
-h4 {
-  font-size: var(--font-size-lg);
-  font-weight: 700;
-  line-height: 1.4;
-  color: var(--color-text-primary);
-  margin: 0;
-}
+h1 { font-size: 1.875rem; line-height: 1.2; }
+h2 { font-size: 1.5rem; line-height: 1.3; }
+h3 { font-size: 1.25rem; line-height: 1.4; }
+h4 { font-size: 1.125rem; line-height: 1.4; }
 
 p {
-  font-size: var(--font-size-base);
+  font-size: 1rem;
   line-height: 1.5;
-  color: var(--color-text-secondary);
+  color: #495057;
   margin: 0;
-}
-
-/* ============================================
-   UTILIDADES
-   ============================================ */
-
-.text-primary {
-  color: var(--color-primary);
-}
-
-.text-secondary {
-  color: var(--color-text-secondary);
-}
-
-.text-tertiary {
-  color: var(--color-text-tertiary);
-}
-
-.bg-primary {
-  background-color: var(--color-primary);
-}
-
-.bg-secondary {
-  background-color: var(--color-bg-secondary);
 }
 
 /* ============================================
    CUSTOM SCROLLBAR
    ============================================ */
 
-/* Scrollbar personalizado para WebKit (Chrome, Safari, Edge) */
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -248,21 +61,15 @@ p {
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-/* Scrollbar para Firefox */
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
 }
 
-/* Mobile: Ocultar scrollbar pero mantener funcionalidad */
 @media (max-width: 768px) {
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
     height: 4px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -277,13 +84,12 @@ p {
   right: 0;
   max-height: 280px;
   overflow-y: auto;
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  background-color: #FFFFFF;
+  border: 1px solid #DEE2E6;
+  border-radius: 8px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   z-index: 100;
   margin-top: 4px;
-  background: white;
 }
 
 .search-results.hidden {
@@ -297,11 +103,10 @@ p {
   padding: 12px 16px;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid var(--color-border-light, #f1f3f5);
+  border-bottom: 1px solid #E9ECEF;
   border-left: 3px solid transparent;
   cursor: pointer;
   text-align: left;
-  font-family: var(--font-family-primary);
   transition: all 0.2s ease;
 }
 
@@ -310,7 +115,7 @@ p {
 }
 
 .search-result-item:hover {
-  background-color: var(--color-bg-secondary);
+  background-color: #F8F9FA;
 }
 
 .search-result-item.is-solicitado {
@@ -324,7 +129,7 @@ p {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--color-text-primary);
+  color: #212529;
 }
 
 .search-result-item .item-badge {
@@ -343,7 +148,7 @@ p {
 
 .search-result-item .item-details {
   font-size: 12px;
-  color: var(--color-text-tertiary);
+  color: #6C757D;
   margin-top: 4px;
   display: flex;
   gap: 8px;
@@ -353,9 +158,9 @@ p {
 
 .search-result-item .item-tag {
   padding: 2px 8px;
-  background-color: var(--color-bg-tertiary);
+  background-color: #F1F3F5;
   border-radius: 6px;
   font-size: 11px;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: #495057;
 }
