@@ -208,9 +208,739 @@
   <!-- Main content -->
   <main class="pt-[64px] md:ml-[256px] min-h-screen">
     <!-- Contenido Principal -->
-    <div class="p-[24px]">
-      <div class="min-h-[400px] flex items-center justify-center">
-        <h2 class="text-[24px] font-bold text-[#6C757D]">Sección: Gestión de Valores</h2>
+    <div class="p-4 md:p-[24px]">
+      <div class="md:p-6 max-w-[1000px] mx-auto">
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <div>
+            <h1 class="text-[28px] font-bold text-[#212529] mb-2 flex items-center gap-3">
+              <i data-lucide="list-checks" class="w-7 h-7 text-[#00AEB8]"></i>
+              Gestión de Valores
+            </h1>
+            <p class="text-[14px] text-[#495057]">Administra los catálogos de valores que se usan en toda la plataforma
+            </p>
+          </div>
+          <button type="button" data-modal-target="modal-nuevo-usuario"
+            class="inline-flex items-center gap-2 px-5 py-3 bg-[#00AEB8] text-white rounded-[8px] text-[14px] font-semibold cursor-pointer whitespace-nowrap hover:bg-[#009aa3] transition-colors duration-150 flex-shrink-0">
+            <i data-lucide="save" class="w-[18px] h-[18px]"></i>
+            Guardar Todos los Cambios
+          </button>
+        </div>
+
+        <!-- Info Box -->
+        <div
+          class="p-4 bg-[#eff6ff] border border-[#bfdbfe] rounded-[8px] mb-6 text-[14px] text-[#1e40af] leading-[1.6]">
+          Estos valores alimentan los selectores y filtros en los módulos de Admin Status, Admin Portafolio, Status y
+          Reportes. Al modificar un catálogo y guardar, los cambios se reflejarán en toda la plataforma.
+        </div>
+
+        <!-- Accordion Group -->
+        <div class="flex flex-col gap-4">
+
+          <!-- Ejecución -->
+          <div class="bg-white rounded-[12px] border border-[#DEE2E6] shadow-sm overflow-hidden">
+            <button
+              class="flex items-center justify-between w-full px-5 py-4 bg-white hover:bg-[#F8F9FA] transition-colors duration-150 text-left accordion-toggle"
+              data-accordion-target="content-ejecucion">
+              <div class="flex items-center gap-3">
+                <i data-lucide="chevron-right"
+                  class="w-[18px] h-[18px] text-[#6C757D] transition-transform duration-200"></i>
+                <div>
+                  <h3 class="text-[16px] font-bold text-[#212529]">Ejecución</h3>
+                  <p class="text-[13px] text-[#6C757D] mt-[2px]">Estados del proceso de negociación con el
+                    establecimiento</p>
+                </div>
+              </div>
+              <span
+                class="inline-flex items-center justify-center min-w-[28px] h-[28px] px-2 rounded-full bg-[#e6f7f8] text-[#00AEB8] text-[13px] font-bold">8</span>
+            </button>
+            <div id="content-ejecucion" class="hidden p-5 border-t border-[#DEE2E6]">
+              <div class="flex flex-col gap-2 mb-4">
+                <!-- Items list -->
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Renovación"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Negociación"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Seleccionado"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="En aprobación beneficio"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="En documentación"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Activo"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="No está interesado"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="sss"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- Add new -->
+              <div class="flex gap-2">
+                <input placeholder="Agregar nuevo valor a Ejecución..."
+                  class="flex-1 h-[38px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] transition-colors">
+                <button disabled
+                  class="flex items-center gap-1 px-4 h-[38px] bg-[#F1F3F5] text-[#6C757D] rounded-[8px] text-[13px] font-semibold cursor-not-allowed">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aprobación -->
+          <div class="bg-white rounded-[12px] border border-[#DEE2E6] shadow-sm overflow-hidden">
+            <button
+              class="flex items-center justify-between w-full px-5 py-4 bg-white hover:bg-[#F8F9FA] transition-colors duration-150 text-left accordion-toggle"
+              data-accordion-target="content-aprobacion">
+              <div class="flex items-center gap-3">
+                <i data-lucide="chevron-right"
+                  class="w-[18px] h-[18px] text-[#6C757D] transition-transform duration-200"></i>
+                <div>
+                  <h3 class="text-[16px] font-bold text-[#212529]">Aprobación</h3>
+                  <p class="text-[13px] text-[#6C757D] mt-[2px]">Estado de aprobación del establecimiento</p>
+                </div>
+              </div>
+              <span
+                class="inline-flex items-center justify-center min-w-[28px] h-[28px] px-2 rounded-full bg-[#e6f7f8] text-[#00AEB8] text-[13px] font-bold">2</span>
+            </button>
+            <div id="content-aprobacion" class="hidden p-5 border-t border-[#DEE2E6]">
+              <div class="flex flex-col gap-2 mb-4">
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Aprobado"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Negado"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <input placeholder="Agregar nuevo valor a Aprobación..."
+                  class="flex-1 h-[38px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] transition-colors">
+                <button disabled
+                  class="flex items-center gap-1 px-4 h-[38px] bg-[#F1F3F5] text-[#6C757D] rounded-[8px] text-[13px] font-semibold cursor-not-allowed">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Porcentaje -->
+          <div class="bg-white rounded-[12px] border border-[#DEE2E6] shadow-sm overflow-hidden">
+            <button
+              class="flex items-center justify-between w-full px-5 py-4 bg-white hover:bg-[#F8F9FA] transition-colors duration-150 text-left accordion-toggle"
+              data-accordion-target="content-porcentaje">
+              <div class="flex items-center gap-3">
+                <i data-lucide="chevron-right"
+                  class="w-[18px] h-[18px] text-[#6C757D] transition-transform duration-200"></i>
+                <div>
+                  <h3 class="text-[16px] font-bold text-[#212529]">Porcentaje</h3>
+                  <p class="text-[13px] text-[#6C757D] mt-[2px]">Porcentaje de descuento negociado</p>
+                </div>
+              </div>
+              <span
+                class="inline-flex items-center justify-center min-w-[28px] h-[28px] px-2 rounded-full bg-[#e6f7f8] text-[#00AEB8] text-[13px] font-bold">5</span>
+            </button>
+            <div id="content-porcentaje" class="hidden p-5 border-t border-[#DEE2E6]">
+              <div class="flex flex-col gap-2 mb-4">
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="100%"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="80%"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="70%"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="50%"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Gratis"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <input placeholder="Agregar nuevo valor a Porcentaje..."
+                  class="flex-1 h-[38px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] transition-colors">
+                <button disabled
+                  class="flex items-center gap-1 px-4 h-[38px] bg-[#F1F3F5] text-[#6C757D] rounded-[8px] text-[13px] font-semibold cursor-not-allowed">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Material POP -->
+          <div class="bg-white rounded-[12px] border border-[#DEE2E6] shadow-sm overflow-hidden">
+            <button
+              class="flex items-center justify-between w-full px-5 py-4 bg-white hover:bg-[#F8F9FA] transition-colors duration-150 text-left accordion-toggle"
+              data-accordion-target="content-pop">
+              <div class="flex items-center gap-3">
+                <i data-lucide="chevron-right"
+                  class="w-[18px] h-[18px] text-[#6C757D] transition-transform duration-200"></i>
+                <div>
+                  <h3 class="text-[16px] font-bold text-[#212529]">Material POP</h3>
+                  <p class="text-[13px] text-[#6C757D] mt-[2px]">Estado de entrega del material punto de venta</p>
+                </div>
+              </div>
+              <span
+                class="inline-flex items-center justify-center min-w-[28px] h-[28px] px-2 rounded-full bg-[#e6f7f8] text-[#00AEB8] text-[13px] font-bold">3</span>
+            </button>
+            <div id="content-pop" class="hidden p-5 border-t border-[#DEE2E6]">
+              <div class="flex flex-col gap-2 mb-4">
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Entregado"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="En Gestión"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="No Aplica"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <input placeholder="Agregar nuevo valor a Material POP..."
+                  class="flex-1 h-[38px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] transition-colors">
+                <button disabled
+                  class="flex items-center gap-1 px-4 h-[38px] bg-[#F1F3F5] text-[#6C757D] rounded-[8px] text-[13px] font-semibold cursor-not-allowed">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Capacitación -->
+          <div class="bg-white rounded-[12px] border border-[#DEE2E6] shadow-sm overflow-hidden">
+            <button
+              class="flex items-center justify-between w-full px-5 py-4 bg-white hover:bg-[#F8F9FA] transition-colors duration-150 text-left accordion-toggle"
+              data-accordion-target="content-capacitacion">
+              <div class="flex items-center gap-3">
+                <i data-lucide="chevron-right"
+                  class="w-[18px] h-[18px] text-[#6C757D] transition-transform duration-200"></i>
+                <div>
+                  <h3 class="text-[16px] font-bold text-[#212529]">Capacitación</h3>
+                  <p class="text-[13px] text-[#6C757D] mt-[2px]">Estado de capacitación del establecimiento</p>
+                </div>
+              </div>
+              <span
+                class="inline-flex items-center justify-center min-w-[28px] h-[28px] px-2 rounded-full bg-[#e6f7f8] text-[#00AEB8] text-[13px] font-bold">2</span>
+            </button>
+            <div id="content-capacitacion" class="hidden p-5 border-t border-[#DEE2E6]">
+              <div class="flex flex-col gap-2 mb-4">
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Capacitado"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="En Gestión"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <input placeholder="Agregar nuevo valor a Capacitación..."
+                  class="flex-1 h-[38px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] transition-colors">
+                <button disabled
+                  class="flex items-center gap-1 px-4 h-[38px] bg-[#F1F3F5] text-[#6C757D] rounded-[8px] text-[13px] font-semibold cursor-not-allowed">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categorías -->
+          <div class="bg-white rounded-[12px] border border-[#DEE2E6] shadow-sm overflow-hidden">
+            <button
+              class="flex items-center justify-between w-full px-5 py-4 bg-white hover:bg-[#F8F9FA] transition-colors duration-150 text-left accordion-toggle"
+              data-accordion-target="content-categorias">
+              <div class="flex items-center gap-3">
+                <i data-lucide="chevron-right"
+                  class="w-[18px] h-[18px] text-[#6C757D] transition-transform duration-200"></i>
+                <div>
+                  <h3 class="text-[16px] font-bold text-[#212529]">Categorías</h3>
+                  <p class="text-[13px] text-[#6C757D] mt-[2px]">Categorías de clasificación de establecimientos</p>
+                </div>
+              </div>
+              <span
+                class="inline-flex items-center justify-center min-w-[28px] h-[28px] px-2 rounded-full bg-[#e6f7f8] text-[#00AEB8] text-[13px] font-bold">8</span>
+            </button>
+            <div id="content-categorias" class="hidden p-5 border-t border-[#DEE2E6]">
+              <div class="flex flex-col gap-2 mb-4">
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Gastronomía"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Salud"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Entretenimiento"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Educación"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Belleza y Cuidado Personal"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Tecnología"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Hogar"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Deportes"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <input placeholder="Agregar nuevo valor a Categorías..."
+                  class="flex-1 h-[38px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] transition-colors">
+                <button disabled
+                  class="flex items-center gap-1 px-4 h-[38px] bg-[#F1F3F5] text-[#6C757D] rounded-[8px] text-[13px] font-semibold cursor-not-allowed">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prioridades -->
+          <div class="bg-white rounded-[12px] border border-[#DEE2E6] shadow-sm overflow-hidden">
+            <button
+              class="flex items-center justify-between w-full px-5 py-4 bg-white hover:bg-[#F8F9FA] transition-colors duration-150 text-left accordion-toggle"
+              data-accordion-target="content-prioridades">
+              <div class="flex items-center gap-3">
+                <i data-lucide="chevron-right"
+                  class="w-[18px] h-[18px] text-[#6C757D] transition-transform duration-200"></i>
+                <div>
+                  <h3 class="text-[16px] font-bold text-[#212529]">Prioridades</h3>
+                  <p class="text-[13px] text-[#6C757D] mt-[2px]">Niveles de prioridad para establecimientos</p>
+                </div>
+              </div>
+              <span
+                class="inline-flex items-center justify-center min-w-[28px] h-[28px] px-2 rounded-full bg-[#e6f7f8] text-[#00AEB8] text-[13px] font-bold">3</span>
+            </button>
+            <div id="content-prioridades" class="hidden p-5 border-t border-[#DEE2E6]">
+              <div class="flex flex-col gap-2 mb-4">
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="1"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="2"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="3"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <input placeholder="Agregar nuevo valor a Prioridades..."
+                  class="flex-1 h-[38px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] transition-colors">
+                <button disabled
+                  class="flex items-center gap-1 px-4 h-[38px] bg-[#F1F3F5] text-[#6C757D] rounded-[8px] text-[13px] font-semibold cursor-not-allowed">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ciudades / Cobertura -->
+          <div class="bg-white rounded-[12px] border border-[#DEE2E6] shadow-sm overflow-hidden">
+            <button
+              class="flex items-center justify-between w-full px-5 py-4 bg-white hover:bg-[#F8F9FA] transition-colors duration-150 text-left accordion-toggle"
+              data-accordion-target="content-ciudades">
+              <div class="flex items-center gap-3">
+                <i data-lucide="chevron-right"
+                  class="w-[18px] h-[18px] text-[#6C757D] transition-transform duration-200"></i>
+                <div>
+                  <h3 class="text-[16px] font-bold text-[#212529]">Ciudades / Cobertura</h3>
+                  <p class="text-[13px] text-[#6C757D] mt-[2px]">Ciudades disponibles para cobertura de establecimientos
+                  </p>
+                </div>
+              </div>
+              <span
+                class="inline-flex items-center justify-center min-w-[28px] h-[28px] px-2 rounded-full bg-[#e6f7f8] text-[#00AEB8] text-[13px] font-bold">19</span>
+            </button>
+            <div id="content-ciudades" class="hidden p-5 border-t border-[#DEE2E6]">
+              <div class="flex flex-col gap-2 mb-4">
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Quito"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Guayaquil"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Cuenca"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Ambato"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Loja"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Manta"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Riobamba"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Ibarra"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Machala"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Santo Domingo"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Esmeraldas"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Portoviejo"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Latacunga"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Tulcán"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Babahoyo"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Salinas"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Tena"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Puyo"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+                <div class="flex items-center gap-3 px-3 py-2 bg-[#F8F9FA] rounded-[8px] border border-[#DEE2E6]">
+                  <i data-lucide="grip-vertical" class="w-[14px] h-[14px] text-[#6C757D] opacity-50 shrink-0"></i>
+                  <input value="Nacional"
+                    class="flex-1 h-[34px] px-3 text-[14px] border-transparent rounded-[4px] outline-none bg-transparent transition-all focus:bg-white focus:border-[#DEE2E6]">
+                  <button title="Eliminar valor"
+                    class="w-7 h-7 flex items-center justify-center text-[#6C757D] rounded-[4px] transition-colors hover:text-[#ef4444] hover:bg-[#fee2e2] cursor-pointer">
+                    <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <input placeholder="Agregar nuevo valor a Ciudades / Cobertura..."
+                  class="flex-1 h-[38px] px-3 text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] transition-colors">
+                <button disabled
+                  class="flex items-center gap-1 px-4 h-[38px] bg-[#F1F3F5] text-[#6C757D] rounded-[8px] text-[13px] font-semibold cursor-not-allowed">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
   </main>

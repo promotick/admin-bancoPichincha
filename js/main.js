@@ -34,6 +34,9 @@ const App = {
     this.initMultiSelects();
     this.initToasts();
     this.initBadgeToggles();
+    this.initAccordionGroup();
+    this.initMisSolicitudesToggle();
+    this.initSearchDropdowns();
   },
 
   /**
@@ -387,6 +390,11 @@ const App = {
             modalContent.classList.remove('scale-95');
             modalContent.classList.add('scale-100');
           }
+          
+          // Refresh Lucide icons inside the modal
+          if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+          }
         }
       });
     };
@@ -581,6 +589,64 @@ const App = {
     });
   },
 
+  /**
+   * @section UI Genérica
+   * @component Toggle Mis Solicitudes
+   * Maneja el estado activo/inactivo del botón "Mis Solicitudes" y la visibilidad de la barra de resultados.
+   */
+  initMisSolicitudesToggle() {
+    const btnMisSolicitudes = document.getElementById('btnMisSolicitudes');
+    const iconStar = document.getElementById('iconMisSolicitudes');
+    const badge = document.getElementById('badgeMisSolicitudes');
+    const resultsBar = document.getElementById('resultsBar');
+
+    if (!btnMisSolicitudes) return;
+
+    btnMisSolicitudes.addEventListener('click', () => {
+      const isCurrentlyActive = btnMisSolicitudes.getAttribute('data-active') === 'true';
+
+      if (!isCurrentlyActive) {
+        // Activar
+        btnMisSolicitudes.setAttribute('data-active', 'true');
+        btnMisSolicitudes.classList.remove('bg-[#FFFFFF]', 'border-[#DEE2E6]', 'text-[#495057]', 'font-medium');
+        btnMisSolicitudes.classList.add('bg-[#FFFBEB]', 'border-[#F59E0B]', 'text-[#B45309]', 'font-bold', 'border-[2px]');
+        
+        if (iconStar) {
+          iconStar.classList.remove('text-[#9CA3AF]');
+          iconStar.classList.add('text-[#F59E0B]', 'fill-[#F59E0B]');
+        }
+
+        if (badge) {
+          badge.classList.remove('bg-[#F1F3F5]', 'text-[#495057]');
+          badge.classList.add('bg-[#F59E0B]', 'text-white');
+        }
+
+        if (resultsBar) {
+          resultsBar.classList.remove('hidden');
+        }
+      } else {
+        // Desactivar
+        btnMisSolicitudes.setAttribute('data-active', 'false');
+        btnMisSolicitudes.classList.add('bg-[#FFFFFF]', 'border-[#DEE2E6]', 'text-[#495057]', 'font-medium');
+        btnMisSolicitudes.classList.remove('bg-[#FFFBEB]', 'border-[#F59E0B]', 'text-[#B45309]', 'font-bold', 'border-[2px]');
+
+        if (iconStar) {
+          iconStar.classList.add('text-[#9CA3AF]');
+          iconStar.classList.remove('text-[#F59E0B]', 'fill-[#F59E0B]');
+        }
+
+        if (badge) {
+          badge.classList.add('bg-[#F1F3F5]', 'text-[#495057]');
+          badge.classList.remove('bg-[#F59E0B]', 'text-white');
+        }
+
+        if (resultsBar) {
+          resultsBar.classList.add('hidden');
+        }
+      }
+    });
+  },
+
   initMultiSelects() {
     const multiSelects = document.querySelectorAll('.custom-multi-select');
 
@@ -717,6 +783,125 @@ const App = {
   },
 
   /**
+   * @section UI Genérica
+   * @component Search Dropdowns
+   * Lógica para mostrar y ocultar resultados de búsqueda en inputs específicos.
+   */
+  initSearchDropdowns() {
+    // Delegación de eventos para mostrar/ocultar y selección
+    document.addEventListener('click', (e) => {
+      const searchInput = e.target.closest('.search-input');
+      const optionBtn = e.target.closest('.search-result-item');
+      const searchContainer = e.target.closest('.relative.group');
+      const changeBtn = e.target.closest('.card-btn-change');
+
+      // 1. Mostrar dropdown al hacer clic en el input
+      if (searchInput) {
+        const dropdown = searchContainer?.querySelector('.search-results');
+        if (dropdown) dropdown.classList.remove('hidden');
+      } 
+      // 2. Manejar selección de opción
+      else if (optionBtn) {
+        const section = optionBtn.closest('.search-section');
+        const searchUI = section.querySelector('.relative.group');
+        const selectedUI = section.querySelector('.selected-establishment-card');
+        
+        // Extraer datos del item seleccionado
+        const titleContainer = optionBtn.querySelector('.item-title');
+        const title = titleContainer.childNodes[0].textContent.trim();
+        const code = optionBtn.querySelector('.item-details span:nth-child(1)').textContent;
+        const ruc = optionBtn.querySelector('.item-details span:nth-child(2)').textContent;
+        const category = optionBtn.querySelector('.item-tag').textContent;
+        
+        // Poblar la card con la información seleccionada
+        if (selectedUI) {
+          selectedUI.querySelector('#selected-title').textContent = title;
+          selectedUI.querySelector('#selected-code').textContent = code;
+          selectedUI.querySelector('#selected-ruc').textContent = ruc.includes('RUC') ? ruc : `· RUC: ${ruc.replace('·', '').trim()}`;
+          selectedUI.querySelector('#selected-category').textContent = category;
+          
+          // Cambiar de vista
+          searchUI.classList.add('hidden');
+          selectedUI.classList.remove('hidden');
+          
+          // Reinicializar iconos de Lucide si es necesario
+          if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+      }
+      // 3. Manejar botón "Cambiar" para volver a la búsqueda
+      else if (changeBtn) {
+        const section = changeBtn.closest('.search-section');
+        const searchUI = section.querySelector('.relative.group');
+        const selectedUI = section.querySelector('.selected-establishment-card');
+        
+        selectedUI.classList.add('hidden');
+        searchUI.classList.remove('hidden');
+        searchUI.querySelector('.search-input').value = '';
+        searchUI.querySelector('.search-input').focus();
+      }
+      // 4. Cerrar si se hace clic fuera del contenedor de búsqueda actual
+      else {
+        document.querySelectorAll('.search-results').forEach(d => {
+          if (!searchContainer || d !== searchContainer.querySelector('.search-results')) {
+            d.classList.add('hidden');
+          }
+        });
+      }
+    });
+
+    // También abrir al enfocar por teclado para accesibilidad
+    document.addEventListener('focusin', (e) => {
+      if (e.target.classList.contains('search-input')) {
+        const container = e.target.closest('.relative');
+        const dropdown = container?.querySelector('.search-results');
+        if (dropdown) dropdown.classList.remove('hidden');
+      }
+    });
+  },
+
+
+  /**
+   * @section UI Genérica
+   * @component Accordion Group
+   * Lógica para grupos de acordeones que permiten múltiples aperturas simultáneas.
+   */
+  initAccordionGroup() {
+    const toggles = document.querySelectorAll('.accordion-toggle');
+
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const targetId = toggle.getAttribute('data-accordion-target');
+        const content = document.getElementById(targetId);
+        const icon = toggle.querySelector('i[data-lucide], svg');
+
+        if (!content) return;
+
+        const isHidden = content.classList.contains('hidden');
+
+        if (isHidden) {
+          // Abrir
+          content.classList.remove('hidden');
+          toggle.classList.add('bg-[#F8F9FA]');
+          toggle.classList.remove('bg-white');
+          if (icon) {
+            icon.classList.add('rotate-90', 'text-[#00AEB8]');
+            icon.classList.remove('text-[#6C757D]');
+          }
+        } else {
+          // Cerrar
+          content.classList.add('hidden');
+          toggle.classList.remove('bg-[#F8F9FA]');
+          toggle.classList.add('bg-white');
+          if (icon) {
+            icon.classList.remove('rotate-90', 'text-[#00AEB8]');
+            icon.classList.add('text-[#6C757D]');
+          }
+        }
+      });
+    });
+  },
+
+  /**
    * @section Enrutador de Vistas
    * Detecta y ejecuta funcionalidades específicas dependiendo de la pantalla actual.
    */
@@ -725,6 +910,81 @@ const App = {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
       this.setupLoginForm(loginForm);
+    }
+
+    // Pantalla: Admin Portafolio
+    const btnImport = document.getElementById('btn-import-excel');
+    const importSection = document.getElementById('import-excel-section');
+    if (btnImport && importSection) {
+      btnImport.addEventListener('click', () => {
+        const isHidden = importSection.classList.contains('hidden');
+        
+        if (isHidden) {
+          // Mostrar sección y activar botón
+          importSection.classList.remove('hidden');
+          btnImport.classList.remove('bg-white', 'text-[#00AEB8]');
+          btnImport.classList.add('bg-[#00AEB8]', 'text-white');
+        } else {
+          // Ocultar sección y desactivar botón
+          importSection.classList.add('hidden');
+          btnImport.classList.add('bg-white', 'text-[#00AEB8]');
+          btnImport.classList.remove('bg-[#00AEB8]', 'text-white');
+        }
+      });
+
+      // Lógica de drag & drop opcional
+      const dropZone = document.getElementById('drop-zone');
+      const fileInput = document.getElementById('excel-file-input');
+      if (dropZone && fileInput) {
+        dropZone.addEventListener('click', () => fileInput.click());
+      }
+    }
+
+    // Pantalla: Admin Portafolio - Lógica del Modal Nuevo Establecimiento
+    const btnSaveEstablecimiento = document.getElementById('btn-save-establecimiento');
+    if (btnSaveEstablecimiento) {
+      btnSaveEstablecimiento.addEventListener('click', () => {
+        const modal = document.getElementById('modal-nuevo-establecimiento');
+        if (modal) {
+          // Cerrar el modal simulando clic en Cancelar (que tiene el data-modal-hide)
+          const closeBtn = modal.querySelector('[data-modal-hide="modal-nuevo-establecimiento"]');
+          if (closeBtn) closeBtn.click();
+        }
+
+        // Mostrar el toast de éxito
+        this.showToast('Establecimiento guardado', 'El nuevo establecimiento ha sido registrado correctamente', 'success');
+      });
+    }
+
+    // Pantalla: Admin Portafolio - Lógica del Modal Editar Establecimiento
+    const btnUpdateEstablecimiento = document.getElementById('btn-update-establecimiento');
+    if (btnUpdateEstablecimiento) {
+      btnUpdateEstablecimiento.addEventListener('click', () => {
+        const modal = document.getElementById('modal-editar-establecimiento');
+        if (modal) {
+          // Cerrar el modal simulando clic en Cancelar (que tiene el data-modal-hide)
+          const closeBtn = modal.querySelector('[data-modal-hide="modal-editar-establecimiento"]');
+          if (closeBtn) closeBtn.click();
+        }
+
+        // Mostrar el toast de éxito
+        this.showToast('Cambios actualizados', 'La información del establecimiento ha sido actualizada correctamente', 'success');
+      });
+    }
+
+    // Pantalla: Admin Portafolio - Lógica del Modal Eliminar Establecimiento
+    const btnConfirmarEliminarEstablecimiento = document.getElementById('btn-confirmar-eliminar-establecimiento');
+    if (btnConfirmarEliminarEstablecimiento) {
+      btnConfirmarEliminarEstablecimiento.addEventListener('click', () => {
+        const modal = document.getElementById('modal-eliminar-establecimiento');
+        if (modal) {
+          const closeBtn = modal.querySelector('[data-modal-hide="modal-eliminar-establecimiento"]');
+          if (closeBtn) closeBtn.click();
+        }
+
+        // Mostrar el toast de éxito
+        this.showToast('Establecimiento eliminado', 'El establecimiento ha sido removido del catálogo correctamente', 'info');
+      });
     }
   },
 

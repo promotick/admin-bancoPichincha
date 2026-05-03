@@ -208,15 +208,1618 @@
   <!-- Main content -->
   <main class="pt-[64px] md:ml-[256px] min-h-screen">
     <!-- Contenido Principal -->
-    <div class="p-[24px]">
-      <div class="min-h-[400px] flex items-center justify-center">
-        <h2 class="text-[24px] font-bold text-[#6C757D]">Sección: Admin Status</h2>
+    <div class="p-4 md:p-[24px]">
+      <!-- Header de la sección -->
+      <div class="mb-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h1 class="text-[28px] font-bold text-[#212529] mb-[4px]">Admin Status</h1>
+          <div class="flex items-center gap-1">
+            <p class="text-[14px] text-[#6C757D]">Estado de negociacion (0 registros)</p>
+            <p class="text-[14px] text-[#00aeb8]">· 46 en Portafolio</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" id="btn-import-excel"
+            class="w-full lg:w-auto flex items-center justify-center gap-[6px] px-4 py-[10px] bg-white text-[#00AEB8] border border-[#00AEB8] rounded-[8px] text-[14px] font-semibold transition-colors duration-150 cursor-pointer">
+            <i data-lucide="upload" class="w-4 h-4"></i>
+            Importar <span class="hidden sm:inline">Excel</span>
+          </button>
+          <button type="button" data-modal-target="modal-nuevo-establecimiento"
+            class="w-full lg:w-auto flex items-center justify-center gap-[6px] px-4 py-[10px] bg-[#00AEB8] text-white rounded-[8px] text-[14px] font-semibold hover:bg-[#009aa3] transition-colors duration-150 cursor-pointer">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            Nuevo <span class="hidden sm:inline">Registro</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Import Section (Hidden by default) -->
+      <div id="import-excel-section" class="mb-6 p-5 bg-white rounded-[12px] border border-[#DEE2E6] shadow-sm hidden">
+        <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+          <h3 class="text-[16px] font-bold m-0 flex items-center gap-2 text-[#00AEB8]">
+            <i data-lucide="file-spreadsheet" class="w-5 h-5"></i>
+            <span class="text-[#212529]">Importar Status desde Excel</span>
+          </h3>
+          <a href="./pdf/template_portafolio.xlsx" download="template_portafolio.xlsx"
+            class="flex items-center gap-[6px] px-[14px] py-[6px] bg-[#F8F9FA] text-[#6C757D] border border-[#DEE2E6] rounded-[8px] text-[13px] font-semibold hover:bg-[#F1F3F5] transition-colors no-underline cursor-pointer">
+            <i data-lucide="download" class="w-[14px] h-[14px]"></i>
+            Descargar Template
+          </a>
+        </div>
+        <input type="file" id="excel-file-input" accept=".xlsx,.xls" class="hidden">
+        <div id="drop-zone"
+          class="border-2 border-dashed border-[#DEE2E6] rounded-[8px] p-8 text-center cursor-pointer bg-[#F8F9FA] hover:bg-[#F1F3F5] transition-all group">
+          <i data-lucide="upload"
+            class="w-9 h-9 mx-auto mb-2 text-[#00AEB8] transition-transform group-hover:-translate-y-1"></i>
+          <p class="font-semibold text-[15px] mb-1">Arrastra tu Excel aquí o haz clic</p>
+          <p class="text-[13px] text-[#6C757D]">Columnas: codigo, nombre, ruc, categoria, cobertura</p>
+        </div>
+      </div>
+
+      <!-- Barra de búsqueda y acciones -->
+      <div class="flex flex-col lg:flex-row gap-[16px] items-stretch lg:items-center justify-between mb-[24px]">
+        <!-- Buscador -->
+        <div class="flex-1">
+          <div class="relative block w-full">
+            <div
+              class="absolute left-[12px] top-1/2 -translate-y-1/2 text-[#ADB5BD] pointer-events-none flex items-center justify-center">
+              <i data-lucide="search" class="w-[20px] h-[20px]"></i>
+            </div>
+            <input type="text" placeholder="Buscar por código, nombre, RUC..."
+              class="h-[44px] pl-[40px] pr-[16px] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#212529] bg-[#FFFFFF] outline-none focus:border-[#00AEB8] focus:ring-1 focus:ring-[#00AEB8] transition-all w-full">
+          </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="flex gap-[12px] w-full lg:w-auto flex-wrap">
+          <!-- Botón Mis Solicitudes (con toggle JS) -->
+          <div class="flex-1 lg:flex-initial">
+            <button id="btnMisSolicitudes"
+              class="flex items-center justify-center gap-[6px] px-[16px] py-[10px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] font-medium text-[#495057] transition-all duration-200 w-full lg:w-auto">
+              <i data-lucide="star" id="iconMisSolicitudes" class="w-[16px] h-[16px] text-[#9CA3AF]"></i>
+              <span id="textMisSolicitudes" class="whitespace-nowrap">Mis Solicitudes</span>
+              <span id="badgeMisSolicitudes"
+                class="bg-[#F1F3F5] text-[#495057] px-[7px] py-[1px] rounded-[10px] text-[12px] font-bold min-w-[20px] text-center">8</span>
+            </button>
+          </div>
+
+          <!-- Botón Filtros -->
+          <div class="flex-1 lg:flex-initial">
+            <button data-modal-target="modal-filtros"
+              class="flex items-center justify-center gap-[8px] px-[16px] h-[44px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] font-semibold text-[#495057] transition-all duration-200 w-full lg:w-auto hover:bg-[#F8F9FA] hover:border-[#6C757D]">
+              <i data-lucide="funnel" class="w-[16px] h-[16px]"></i>
+              <span>Filtros</span>
+            </button>
+          </div>
+
+          <!-- Botón Descargar (Dropdown) -->
+          <div class="flex-1 lg:flex-initial">
+            <div class="relative w-full lg:w-auto" data-dropdown="download-menu">
+              <button data-dropdown-toggle="download-menu"
+                class="flex items-center justify-center gap-[8px] px-[16px] h-[44px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] font-semibold text-[#495057] transition-all duration-200 w-full hover:bg-[#F8F9FA] hover:border-[#6C757D]">
+                <i data-lucide="download" class="w-[16px] h-[16px]"></i>
+                <span>Descargar</span>
+              </button>
+
+              <!-- Dropdown Menu -->
+              <div data-dropdown-menu="download-menu"
+                class="absolute right-0 mt-2 w-[200px] bg-[#FFFFFF] rounded-[12px] shadow-lg border border-[#DEE2E6] opacity-0 invisible transition-all duration-150 transform translate-y-[-10px] z-[1000] p-[8px]">
+                <a href="#"
+                  class="flex items-center gap-[8px] p-[12px] text-[14px] text-[#212529] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150">
+                  <i data-lucide="file-spreadsheet" class="w-[16px] h-[16px] text-[#10B981]"></i>
+                  <span>Descargar Excel</span>
+                </a>
+                <a href="#"
+                  class="flex items-center gap-[8px] p-[12px] text-[14px] text-[#212529] hover:bg-[#F1F3F5] rounded-[8px] transition-colors duration-150">
+                  <i data-lucide="file-text" class="w-[16px] h-[16px] text-[#EF4444]"></i>
+                  <span>Descargar PDF</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Resultados -->
+      <div id="resultsBar"
+        class="mb-[16px] px-[16px] py-[12px] bg-[#e6f7f8] border-l-[4px] border-[#00AEB8] rounded-[8px] text-[14px] text-[#495057] transition-all duration-300 hidden">
+        Se encontraron <strong class="text-[#212529] font-bold">8</strong> resultados
+      </div>
+
+      <!-- Tabla Desktop -->
+      <div class="hidden md:block">
+        <div class="bg-white rounded-[16px] border border-[#DEE2E6] shadow-sm overflow-hidden mb-[24px]">
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse min-w-[1300px]">
+              <thead>
+                <tr class="bg-[#F8F9FA] border-b-2 border-[#E9ECEF]">
+                  <th
+                    class="p-[12px_16px] text-left text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    Código</th>
+                  <th
+                    class="p-[12px_16px] text-left text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    Nombre / RUC</th>
+                  <th
+                    class="p-[12px_16px] text-left text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    Categoría</th>
+                  <th
+                    class="p-[12px_16px] text-center text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    Prior.</th>
+                  <th
+                    class="p-[12px_16px] text-left text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    Ejecución</th>
+                  <th
+                    class="p-[12px_16px] text-center text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    Aprob.</th>
+                  <th
+                    class="p-[12px_16px] text-center text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    %</th>
+                  <th
+                    class="p-[12px_16px] text-left text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    Beneficio</th>
+                  <th
+                    class="p-[12px_16px] text-left text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    Cobertura</th>
+                  <th
+                    class="p-[12px_16px] text-center text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    Mat. POP</th>
+                  <th
+                    class="p-[12px_16px] text-center text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    Capac.</th>
+                  <th
+                    class="p-[12px_16px] text-center text-[11px] font-bold text-[#495057] uppercase tracking-wider sticky top-0 bg-[#F8F9FA] z-10">
+                    Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+                <!-- Row 1 -->
+                <tr class="border-b border-[#E9ECEF] hover:bg-[#F8F9FA] transition-colors">
+                  <td class="p-[12px_16px] text-[13px] font-semibold text-[#212529] whitespace-nowrap">EST-004</td>
+                  <td class="p-[12px_16px] text-[13px] text-[#212529] min-w-[180px]">
+                    <div class="text-[14px]">AMERICAN DELI</div>
+                    <div class="mt-1">
+                      <span title="Solicitado por el usuario el 10 mar 2026 — &quot;DFGDFG&quot;"
+                        class="inline-flex items-center gap-[4px] px-[8px] py-[2px] bg-[#F59E0B]/10 border border-[#F59E0B]/30 rounded-full text-[10px] font-bold text-[#D97706] cursor-default">
+                        <i data-lucide="star" class="w-[10px] h-[10px] fill-[#F59E0B] text-[#F59E0B]"></i>
+                        <span>Solicitado · 10 mar 2026</span>
+                      </span>
+                    </div>
+                    <div class="text-[11px] text-[#6C757D] mt-1">1792072018001</div>
+                  </td>
+                  <td class="p-[12px_16px]">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#e6f7f8] text-[#00AEB8] rounded-full text-[11px] font-bold whitespace-nowrap">Restaurante</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center text-[13px] font-semibold text-[#212529]">1</td>
+                  <td class="p-[12px_16px] text-[13px] text-[#212529] whitespace-nowrap">Renovación</td>
+                  <td class="p-[12px_16px] text-center">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#ECFDF5] text-[#10B981] rounded-full text-[11px] font-bold whitespace-nowrap">Aprobado</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center text-[13px] font-semibold text-[#212529]">100%</td>
+                  <td class="p-[12px_16px] max-w-[160px]">
+                    <div title="sss" class="truncate text-[13px] text-[#212529]">sss</div>
+                  </td>
+                  <td class="p-[12px_16px] max-w-[160px]">
+                    <div class="flex flex-wrap gap-[4px] items-center">
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Quito</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Guayaquil</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Ibarra</span>
+                      <!-- Ciudades ocultas -->
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Ambato</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Santo Domingo</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Manta</span>
+                      
+                      <button
+                        class="toggle-badges-btn flex items-center gap-[2px] px-[6px] py-[1px] bg-[#e6f7f8] text-[#00AEB8] border border-[#00AEB8] rounded-[4px] text-[10px] font-bold hover:bg-[#00AEB8] hover:text-white transition-all cursor-pointer"
+                        data-count="3">
+                        <span class="btn-text">+3</span>
+                        <i data-lucide="chevron-down" class="w-[10px] h-[10px] transition-transform duration-300"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td class="p-[12px_16px] text-center">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#ECFDF5] text-[#10B981] rounded-full text-[11px] font-bold whitespace-nowrap">Entregado</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#ECFDF5] text-[#10B981] rounded-full text-[11px] font-bold whitespace-nowrap">Capacitado</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center">
+                    <div class="flex justify-center gap-[6px]">
+                      <button title="Editar" data-modal-target="modal-editar-establecimiento"
+                        class="w-[30px] h-[30px] flex items-center justify-center bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] hover:bg-[#00AEB8] hover:text-white transition-all cursor-pointer">
+                        <i data-lucide="pen" class="w-[14px] h-[14px]"></i>
+                      </button>
+                      <button title="Eliminar" data-modal-target="modal-eliminar-establecimiento"
+                        class="w-[30px] h-[30px] flex items-center justify-center bg-[#FEE2E2] text-[#EF4444] rounded-[8px] hover:bg-[#EF4444] hover:text-white transition-all cursor-pointer">
+                        <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 2 -->
+                <tr class="border-b border-[#E9ECEF] hover:bg-[#F8F9FA] transition-colors">
+                  <td class="p-[12px_16px] text-[13px] font-semibold text-[#212529] whitespace-nowrap">EST-002</td>
+                  <td class="p-[12px_16px] text-[13px] text-[#212529] min-w-[180px]">
+                    <div class="text-[14px]">TEXAS CHICKEN</div>
+                    <div class="text-[11px] text-[#6C757D] mt-1">1792997372001</div>
+                  </td>
+                  <td class="p-[12px_16px]">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#e6f7f8] text-[#00AEB8] rounded-full text-[11px] font-bold whitespace-nowrap">Restaurante</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center text-[13px] font-semibold text-[#212529]">1</td>
+                  <td class="p-[12px_16px] text-[13px] text-[#212529] whitespace-nowrap">Renovación</td>
+                  <td class="p-[12px_16px] text-center">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#ECFDF5] text-[#10B981] rounded-full text-[11px] font-bold whitespace-nowrap">Aprobado</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center text-[13px] font-semibold text-[#212529]">100%</td>
+                  <td class="p-[12px_16px] max-w-[160px]">
+                    <div title="ssss" class="truncate text-[13px] text-[#212529]">ssss</div>
+                  </td>
+                  <td class="p-[12px_16px] max-w-[160px]">
+                    <div class="flex flex-wrap gap-[4px] items-center">
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Quito</span>
+                    </div>
+                  </td>
+                  <td class="p-[12px_16px] text-center">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#ECFDF5] text-[#10B981] rounded-full text-[11px] font-bold whitespace-nowrap">Entregado</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#ECFDF5] text-[#10B981] rounded-full text-[11px] font-bold whitespace-nowrap">Capacitado</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center">
+                    <div class="flex justify-center gap-[6px]">
+                      <button title="Editar" data-modal-target="modal-editar-establecimiento"
+                        class="w-[30px] h-[30px] flex items-center justify-center bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] hover:bg-[#00AEB8] hover:text-white transition-all cursor-pointer">
+                        <i data-lucide="pen" class="w-[14px] h-[14px]"></i>
+                      </button>
+                      <button title="Eliminar" data-modal-target="modal-eliminar-establecimiento"
+                        class="w-[30px] h-[30px] flex items-center justify-center bg-[#FEE2E2] text-[#EF4444] rounded-[8px] hover:bg-[#EF4444] hover:text-white transition-all cursor-pointer">
+                        <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 3 -->
+                <tr class="border-b border-[#E9ECEF] hover:bg-[#F8F9FA] transition-colors">
+                  <td class="p-[12px_16px] text-[13px] font-semibold text-[#212529] whitespace-nowrap">EST-017</td>
+                  <td class="p-[12px_16px] text-[13px] text-[#212529] min-w-[180px]">
+                    <div class="text-[14px]">CINNABON</div>
+                    <div class="text-[11px] text-[#6C757D] mt-1">1792072018001</div>
+                  </td>
+                  <td class="p-[12px_16px]">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#e6f7f8] text-[#00AEB8] rounded-full text-[11px] font-bold whitespace-nowrap">Entretenimiento</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center text-[13px] font-semibold text-[#212529]">1</td>
+                  <td class="p-[12px_16px] text-[13px] text-[#212529] whitespace-nowrap">Renovación</td>
+                  <td class="p-[12px_16px] text-center">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#ECFDF5] text-[#10B981] rounded-full text-[11px] font-bold whitespace-nowrap">Aprobado</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center text-[13px] font-semibold text-[#212529]">100%</td>
+                  <td class="p-[12px_16px] max-w-[160px]">
+                    <div title="wwww" class="truncate text-[13px] text-[#212529]">wwww</div>
+                  </td>
+                  <td class="p-[12px_16px] max-w-[160px]">
+                    <div class="flex flex-wrap gap-[4px] items-center">
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Quito</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Guayaquil</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Manta</span>
+                      <!-- Ciudades ocultas -->
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Ambato</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Santo Domingo</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[10px]">Portoviejo</span>
+
+                      <button
+                        class="toggle-badges-btn flex items-center gap-[2px] px-[6px] py-[1px] bg-[#e6f7f8] text-[#00AEB8] border border-[#00AEB8] rounded-[4px] text-[10px] font-bold hover:bg-[#00AEB8] hover:text-white transition-all cursor-pointer"
+                        data-count="3">
+                        <span class="btn-text">+3</span>
+                        <i data-lucide="chevron-down" class="w-[10px] h-[10px] transition-transform duration-300"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td class="p-[12px_16px] text-center">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#ECFDF5] text-[#10B981] rounded-full text-[11px] font-bold whitespace-nowrap">Entregado</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center">
+                    <span
+                      class="inline-block px-[8px] py-[2px] bg-[#ECFDF5] text-[#10B981] rounded-full text-[11px] font-bold whitespace-nowrap">Capacitado</span>
+                  </td>
+                  <td class="p-[12px_16px] text-center">
+                    <div class="flex justify-center gap-[6px]">
+                      <button title="Editar" data-modal-target="modal-editar-establecimiento"
+                        class="w-[30px] h-[30px] flex items-center justify-center bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] hover:bg-[#00AEB8] hover:text-white transition-all cursor-pointer">
+                        <i data-lucide="pen" class="w-[14px] h-[14px]"></i>
+                      </button>
+                      <button title="Eliminar" data-modal-target="modal-eliminar-establecimiento"
+                        class="w-[30px] h-[30px] flex items-center justify-center bg-[#FEE2E2] text-[#EF4444] rounded-[8px] hover:bg-[#EF4444] hover:text-white transition-all cursor-pointer">
+                        <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla Mobile (Cards) -->
+      <div class="md:hidden flex flex-col gap-3 mb-6">
+        <!-- Card 1: AMERICAN DELI -->
+        <div class="bg-white rounded-[12px] border border-[#DEE2E6] p-4 shadow-sm relative">
+          <div class="flex justify-end gap-1.5 mb-3">
+            <button title="Editar" data-modal-target="modal-editar-establecimiento"
+              class="w-9 h-9 flex items-center justify-center bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] border-none cursor-pointer transition-colors hover:bg-[#00AEB8] hover:text-white">
+              <i data-lucide="pen" class="w-4 h-4"></i>
+            </button>
+            <button title="Eliminar" data-modal-target="modal-eliminar-establecimiento"
+              class="w-9 h-9 flex items-center justify-center bg-[#FEE2E2] text-[#EF4444] rounded-[8px] border-none cursor-pointer transition-colors hover:bg-[#EF4444] hover:text-white">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="mb-4">
+            <div class="flex justify-between items-start mb-2">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-bold mb-1 uppercase">AMERICAN DELI</h3>
+                <div class="mb-1">
+                  <span
+                    class="inline-flex items-center gap-[3px] px-2 py-[2px] bg-[#F59E0B]/10 border border-[#F59E0B]/30 rounded-full text-[10px] font-bold text-[#D97706]">
+                    <i data-lucide="star" class="w-[9px] h-[9px] fill-[#F59E0B] text-[#F59E0B]"></i>
+                    Solicitado · 10 mar
+                  </span>
+                </div>
+                <p class="text-[14px] font-bold mb-1 text-[#00AEB8]">EST-004</p>
+                <p class="text-[12px] text-[#6C757D]">1792072018001</p>
+              </div>
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#D4EDDA] text-[#28A745]">
+                Aprobado
+              </span>
+            </div>
+            <div class="flex gap-2 mb-3">
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#e6f7f8] text-[#00AEB8]">
+                Prioridad 1
+              </span>
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#F8F9FA] text-[#212529]">
+                100%
+              </span>
+            </div>
+          </div>
+
+          <div class="grid gap-3">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Categoría</label>
+                <span
+                  class="inline-block px-3 py-1 bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-bold">Restaurante</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Ejecución</label>
+                <p class="text-[14px] font-medium text-[#212529]">Renovación</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Beneficio</label>
+              <p class="text-[14px] text-[#6C757D] italic">Sin beneficio negociado</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Términos y Condiciones</label>
+              <p class="text-[14px] leading-[1.5] text-[#6C757D] italic">Sin términos definidos</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Cobertura</label>
+              <div class="flex flex-wrap gap-[3px] items-center">
+                <span
+                  class="inline-block px-1.5 py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
+                <span
+                  class="inline-block px-1.5 py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Guayaquil</span>
+                <span
+                  class="inline-block px-1.5 py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Ibarra</span>
+                <span
+                  class="inline-block px-1.5 py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Ambato</span>
+                <span class="inline-block px-1.5 py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Santo
+                  Domingo</span>
+                <!-- Ciudad oculta -->
+                <span
+                  class="hidden-badge hidden px-1.5 py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Manta</span>
+
+                <button
+                  class="toggle-badges-btn inline-flex items-center gap-[2px] px-1.5 py-[1px] bg-[#e6f7f8] text-[#00AEB8] border border-[#00AEB8] rounded-[4px] text-[11px] font-bold transition-colors hover:bg-[#00AEB8] hover:text-white"
+                  data-count="1">
+                  <span class="btn-text">+1</span>
+                  <i data-lucide="chevron-down" class="w-2.5 h-2.5 transition-transform duration-300"></i>
+                </button>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Observaciones</label>
+              <p class="text-[14px] text-[#495057]">-</p>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Material POP</label>
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#D4EDDA] text-[#28A745]">Entregado</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#D4EDDA] text-[#28A745]">Capacitado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: TEXAS CHICKEN -->
+        <div class="bg-white rounded-[12px] border border-[#DEE2E6] p-4 shadow-sm relative">
+          <div class="flex justify-end gap-1.5 mb-3">
+            <button title="Editar" data-modal-target="modal-editar-establecimiento"
+              class="w-9 h-9 flex items-center justify-center bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] border-none cursor-pointer transition-colors hover:bg-[#00AEB8] hover:text-white">
+              <i data-lucide="pen" class="w-4 h-4"></i>
+            </button>
+            <button title="Eliminar" data-modal-target="modal-eliminar-establecimiento"
+              class="w-9 h-9 flex items-center justify-center bg-[#FEE2E2] text-[#EF4444] rounded-[8px] border-none cursor-pointer transition-colors hover:bg-[#EF4444] hover:text-white">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="mb-4">
+            <div class="flex justify-between items-start mb-2">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-bold mb-1 uppercase">TEXAS CHICKEN</h3>
+                <p class="text-[14px] font-bold mb-1 text-[#00AEB8]">EST-002</p>
+                <p class="text-[12px] text-[#6C757D]">1792997372001</p>
+              </div>
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#D4EDDA] text-[#28A745]">
+                Aprobado
+              </span>
+            </div>
+            <div class="flex gap-2 mb-3">
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#e6f7f8] text-[#00AEB8]">
+                Prioridad 1
+              </span>
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#F8F9FA] text-[#212529]">
+                100%
+              </span>
+            </div>
+          </div>
+
+          <div class="grid gap-3">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Categoría</label>
+                <span
+                  class="inline-block px-3 py-1 bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-bold">Restaurante</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Ejecución</label>
+                <p class="text-[14px] font-medium text-[#212529]">Renovación</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Beneficio</label>
+              <p class="text-[14px] text-[#6C757D] italic">Sin beneficio negociado</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Términos y Condiciones</label>
+              <p class="text-[14px] leading-[1.5] text-[#6C757D] italic">Sin términos definidos</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Cobertura</label>
+              <div class="flex flex-wrap gap-[3px] items-center">
+                <span
+                  class="inline-block px-1.5 py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Observaciones</label>
+              <p class="text-[14px] text-[#495057]">-</p>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Material POP</label>
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#D4EDDA] text-[#28A745]">Entregado</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#D4EDDA] text-[#28A745]">Capacitado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: RESTAURANTE MAMA CUCHARA -->
+        <div class="bg-white rounded-[12px] border border-[#DEE2E6] p-4 shadow-sm relative">
+          <div class="flex justify-end gap-1.5 mb-3">
+            <button title="Editar" data-modal-target="modal-editar-establecimiento"
+              class="w-9 h-9 flex items-center justify-center bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] border-none cursor-pointer transition-colors hover:bg-[#00AEB8] hover:text-white">
+              <i data-lucide="pen" class="w-4 h-4"></i>
+            </button>
+            <button title="Eliminar" data-modal-target="modal-eliminar-establecimiento"
+              class="w-9 h-9 flex items-center justify-center bg-[#FEE2E2] text-[#EF4444] rounded-[8px] border-none cursor-pointer transition-colors hover:bg-[#EF4444] hover:text-white">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="mb-4">
+            <div class="flex justify-between items-start mb-2">
+              <div class="flex-1">
+                <h3 class="text-[18px] font-bold mb-1 uppercase">RESTAURANTE MAMA CUCHARA</h3>
+                <p class="text-[14px] font-bold mb-1 text-[#00AEB8]">EST-015</p>
+                <p class="text-[12px] text-[#6C757D]">1792487242001</p>
+              </div>
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#D4EDDA] text-[#28A745]">
+                Aprobado
+              </span>
+            </div>
+            <div class="flex gap-2 mb-3">
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#e6f7f8] text-[#00AEB8]">
+                Prioridad 1
+              </span>
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#F8F9FA] text-[#212529]">
+                100%
+              </span>
+            </div>
+          </div>
+
+          <div class="grid gap-3">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Categoría</label>
+                <span
+                  class="inline-block px-3 py-1 bg-[#e6f7f8] text-[#00AEB8] rounded-[8px] text-[12px] font-bold">Restaurante</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Ejecución</label>
+                <p class="text-[14px] font-medium text-[#212529]">Renovación</p>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Beneficio</label>
+              <p class="text-[14px] text-[#6C757D] italic">Sin beneficio negociado</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Términos y Condiciones</label>
+              <p class="text-[14px] leading-[1.5] text-[#6C757D] italic">Sin términos definidos</p>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Cobertura</label>
+              <div class="flex flex-wrap gap-[3px] items-center">
+                <span
+                  class="inline-block px-1.5 py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-[12px] text-[#6C757D] mb-1">Observaciones</label>
+              <p class="text-[14px] text-[#495057]">-</p>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Material POP</label>
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#D4EDDA] text-[#28A745]">Entregado</span>
+              </div>
+              <div>
+                <label class="block text-[12px] text-[#6C757D] mb-1">Capacitación</label>
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#D4EDDA] text-[#28A745]">Capacitado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Paginación -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-[16px] w-full pt-[8px]">
+        <div class="flex items-center w-full sm:w-auto justify-center sm:justify-start">
+          <p class="text-[14px] text-[#495057] m-0 whitespace-nowrap">Mostrando 1-10 de 46</p>
+        </div>
+
+        <div class="flex items-center gap-[12px] justify-center w-full sm:w-auto">
+          <button aria-label="Página anterior" disabled
+            class="flex items-center justify-center w-[36px] h-[36px] border border-[#DEE2E6] rounded-[8px] text-[#495057] bg-[#FFFFFF] opacity-50 cursor-not-allowed transition-all">
+            <i data-lucide="chevron-left" class="w-[16px] h-[16px]"></i>
+          </button>
+
+          <form class="flex items-center gap-[8px]" onsubmit="return false;">
+            <span class="text-[14px] text-[#495057] whitespace-nowrap">Página</span>
+            <input type="number" min="1" max="5" value="1"
+              class="h-[36px] w-[60px] px-[8px] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#212529] bg-[#FFFFFF] text-center outline-none focus:border-[#00AEB8] transition-all">
+            <span class="text-[14px] text-[#495057] whitespace-nowrap">de 5</span>
+          </form>
+
+          <button aria-label="Página siguiente"
+            class="flex items-center justify-center w-[36px] h-[36px] border border-[#DEE2E6] rounded-[8px] text-[#495057] bg-[#FFFFFF] hover:bg-[#F8F9FA] transition-all">
+            <i data-lucide="chevron-right" class="w-[16px] h-[16px]"></i>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-[8px] justify-center sm:justify-end w-full sm:w-auto">
+          <span class="text-[14px] text-[#495057] whitespace-nowrap">Mostrar:</span>
+          <select
+            class="h-[36px] w-[70px] px-[8px] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#212529] bg-[#FFFFFF] outline-none focus:border-[#00AEB8] transition-all cursor-pointer">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
       </div>
     </div>
   </main>
 
-  <!-- Main JS -->
-  <script src="./js/main.js"></script>
+  <!-- Modales -->
+  <!-- Modal de Filtros -->
+  <div id="modal-filtros" tabindex="-1" aria-hidden="true"
+    class="fixed inset-0 z-[9999] hidden flex justify-end bg-[#212529]/50 opacity-0 transition-opacity duration-300">
+    <div
+      class="relative w-full max-w-[400px] h-full bg-[#FFFFFF] shadow-xl flex flex-col transform translate-x-full transition-transform duration-300"
+      id="filtros-panel">
+      <div class="flex items-center justify-between p-[24px] border-b border-[#DEE2E6]">
+        <h3 class="text-[18px] font-bold text-[#212529] m-0">Filtros</h3>
+        <button data-modal-hide="modal-filtros" type="button"
+          class="text-[#6C757D] hover:text-[#212529] rounded-[8px] p-[8px] inline-flex justify-center items-center hover:bg-[#F8F9FA] transition-colors">
+          <i data-lucide="x" class="w-[20px] h-[20px]"></i>
+          <span class="sr-only">Cerrar modal</span>
+        </button>
+      </div>
+      <div class="flex-1 overflow-y-auto p-[24px]">
+        <div class="mb-[24px]">
+          <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Categoría</label>
+          <div class="custom-multi-select relative" data-max-visible="2" data-placeholder="Seleccionar categorías...">
+            <button type="button"
+              class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+              <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                <span class="text-[#495057]">Seleccionar categorías...</span>
+              </div>
+              <i data-lucide="chevron-down"
+                class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+            </button>
+            <div
+              class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+              <label
+                class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                <input type="checkbox" value="Entretenimiento" class="hidden peer">
+                <div
+                  class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                  <i data-lucide="check"
+                    class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                </div>
+                <span class="flex-1 text-[14px]">Entretenimiento</span>
+              </label>
+              <label
+                class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                <input type="checkbox" value="Gastronomía" class="hidden peer">
+                <div
+                  class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                  <i data-lucide="check"
+                    class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                </div>
+                <span class="flex-1 text-[14px]">Gastronomía</span>
+              </label>
+              <label
+                class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                <input type="checkbox" value="Restaurante" class="hidden peer">
+                <div
+                  class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                  <i data-lucide="check"
+                    class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                </div>
+                <span class="flex-1 text-[14px]">Restaurante</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="mb-[24px]">
+          <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Ejecucion</label>
+          <div class="custom-multi-select relative" data-max-visible="2" data-placeholder="Seleccionar ejecucion...">
+            <button type="button"
+              class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+              <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                <span class="text-[#495057]">Seleccionar ejecucion...</span>
+              </div>
+              <i data-lucide="chevron-down"
+                class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+            </button>
+            <div
+              class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+              <label
+                class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                <input type="checkbox" value="opcion-1" class="hidden peer">
+                <div
+                  class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                  <i data-lucide="check"
+                    class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                </div>
+                <span class="flex-1 text-[14px]">Opcion 1</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="mb-[24px]">
+          <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Aprobacion</label>
+          <div class="custom-multi-select relative" data-max-visible="2" data-placeholder="Seleccionar aprobacion...">
+            <button type="button"
+              class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+              <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                <span class="text-[#495057]">Seleccionar aprobacion...</span>
+              </div>
+              <i data-lucide="chevron-down"
+                class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+            </button>
+            <div
+              class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+              <label
+                class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                <input type="checkbox" value="opcion-1" class="hidden peer">
+                <div
+                  class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                  <i data-lucide="check"
+                    class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                </div>
+                <span class="flex-1 text-[14px]">Opcion 1</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="mb-[24px]">
+          <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Material POP</label>
+          <div class="custom-multi-select relative" data-max-visible="2" data-placeholder="Seleccionar material POP...">
+            <button type="button"
+              class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+              <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                <span class="text-[#495057]">Seleccionar material POP...</span>
+              </div>
+              <i data-lucide="chevron-down"
+                class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+            </button>
+            <div
+              class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+              <label
+                class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                <input type="checkbox" value="opcion-1" class="hidden peer">
+                <div
+                  class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                  <i data-lucide="check"
+                    class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                </div>
+                <span class="flex-1 text-[14px]">Opcion 1</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="mb-[24px]">
+          <label class="block mb-[8px] text-[14px] font-semibold text-[#212529]">Capacitacion</label>
+          <div class="custom-multi-select relative" data-max-visible="2" data-placeholder="Seleccionar capacitacion...">
+            <button type="button"
+              class="select-trigger w-full min-h-[44px] px-[12px] py-[8px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] text-[#495057] flex items-center justify-between gap-[8px] hover:border-[#00AEB8] transition-colors focus:outline-none focus:ring-1 focus:ring-[#00AEB8]">
+              <div class="selected-container flex-1 flex flex-wrap gap-[4px] items-center text-left">
+                <span class="text-[#495057]">Seleccionar capacitacion...</span>
+              </div>
+              <i data-lucide="chevron-down"
+                class="w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200"></i>
+            </button>
+            <div
+              class="options-dropdown hidden absolute z-10 w-full mt-[4px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] shadow-lg max-h-[240px] overflow-y-auto py-0">
+              <label
+                class="flex items-center gap-[12px] p-[12px] cursor-pointer transition-colors duration-200 hover:bg-[#F8F9FA] text-[#212529]">
+                <input type="checkbox" value="opcion-1" class="hidden peer">
+                <div
+                  class="w-[18px] h-[18px] border-[2px] border-[#DEE2E6] rounded-[4px] bg-transparent flex items-center justify-center flex-shrink-0 transition-colors duration-200 peer-checked:border-[#00AEB8] peer-checked:bg-[#00AEB8]">
+                  <i data-lucide="check"
+                    class="w-[12px] h-[12px] text-[#FFFFFF] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></i>
+                </div>
+                <span class="flex-1 text-[14px]">Opcion 1</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-[12px] p-[24px] border-t border-[#DEE2E6]">
+        <button data-modal-hide="modal-filtros" type="button"
+          class="flex-1 px-[16px] h-[44px] bg-transparent border border-[#DEE2E6] rounded-[8px] text-[14px] font-semibold text-[#495057] transition-all duration-200 hover:bg-[#F8F9FA]">
+          Limpiar
+        </button>
+        <button data-modal-hide="modal-filtros" type="button"
+          class="flex-1 px-[16px] h-[44px] bg-[#00AEB8] text-[#FFFFFF] border border-[#00AEB8] rounded-[8px] text-[14px] font-semibold transition-all duration-200 hover:bg-[#008f96]">
+          Aplicar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Eliminar Establecimiento -->
+  <div id="modal-eliminar-establecimiento" tabindex="-1" aria-hidden="true"
+    class="fixed inset-0 z-[9999] hidden flex items-center justify-center bg-[#212529]/50 opacity-0 transition-opacity duration-300 p-4">
+    <div id="modal-eliminar-establecimiento-panel"
+      class="relative w-full max-w-[400px] bg-white rounded-[16px] p-[28px] shadow-2xl transform scale-95 transition-transform duration-300 m-4 text-center">
+
+      <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-3">
+        <i data-lucide="trash-2" class="w-6 h-6 text-red-500"></i>
+      </div>
+
+      <h3 class="text-[16px] font-bold text-[#212529] mb-[6px]">Eliminar Establecimiento</h3>
+      <p class="text-[14px] text-[#6C757D] m-0 mb-5">
+        ¿Estás seguro de que deseas eliminar este establecimiento? Esta acción no se puede deshacer.
+      </p>
+
+      <div class="flex gap-[10px]">
+        <button type="button" data-modal-hide="modal-eliminar-establecimiento"
+          class="flex-1 py-[10px] border border-[#DEE2E6] rounded-[8px] bg-white text-[14px] font-medium text-[#495057] cursor-pointer hover:bg-[#F8F9FA] transition-colors">
+          Cancelar
+        </button>
+        <button type="button" id="btn-confirmar-eliminar-establecimiento"
+          class="flex-1 py-[10px] border-none rounded-[8px] bg-red-500 text-white text-[14px] font-semibold cursor-pointer hover:bg-red-600 transition-colors">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Editar Registro de Status -->
+  <div id="modal-editar-establecimiento" tabindex="-1" aria-hidden="true"
+    class="fixed inset-0 z-[9999] hidden flex items-center justify-center bg-[#212529]/50 opacity-0 transition-opacity duration-300 p-4">
+    <div id="modal-editar-establecimiento-panel"
+      class="relative w-full max-w-[680px] max-h-[90vh] bg-white rounded-[16px] shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between p-[20px_24px] border-b border-[#DEE2E6] sticky top-0">
+        <h2 class="text-[18px] font-bold text-[#212529] m-0">Editar Registro de Status</h2>
+        <button data-modal-hide="modal-editar-establecimiento"
+          class="w-[32px] h-[32px] flex items-center justify-center bg-transparent border-none rounded-[8px] text-[#6C757D] hover:bg-[#F8F9FA] hover:text-[#212529] transition-colors cursor-pointer">
+          <i data-lucide="x" class="w-[20px] h-[20px]"></i>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="p-[24px] overflow-y-auto flex-1 flex flex-col gap-[16px]">
+
+        <!-- Sección: Establecimiento -->
+        <div class="search-section flex flex-col gap-[12px] relative z-[50]">
+          <p class="text-[13px] font-bold text-[#6C757D] uppercase tracking-wider flex items-center gap-[8px] m-0">
+            <i data-lucide="building-2" class="w-[14px] h-[14px]"></i>
+            Establecimiento del Portafolio
+          </p>
+
+          <!-- Estado: Buscando (Oculto inicialmente en editar) -->
+          <div class="relative group hidden">
+            <input type="text" placeholder="Buscar establecimiento..."
+              class="search-input w-full h-[42px] pl-[38px] pr-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] focus:ring-1 focus:ring-[#00AEB8] transition-all relative z-10">
+            <i data-lucide="search"
+              class="absolute left-[12px] top-1/2 -translate-y-1/2 text-[#ADB5BD] w-[16px] h-[16px] z-30 pointer-events-none"></i>
+
+            <!-- Resultados de Búsqueda (Dropdown) -->
+            <div class="search-results hidden">
+              <button type="button" class="search-result-item is-solicitado">
+                <div class="item-title">
+                  AMERICAN DELI
+                  <span class="item-badge">
+                    <i data-lucide="star" class="w-[10px] h-[10px] fill-[#F59E0B] text-[#F59E0B]"></i>
+                    Solicitado
+                  </span>
+                </div>
+                <div class="item-details">
+                  <span>EST-004</span><span>· 1792072018001</span><span
+                    class="px-2 py-0.5 bg-[#F1F3F5] rounded-[6px] text-[11px] font-semibold text-[#495057]">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item is-solicitado">
+                <div class="item-title">
+                  JUAN VALDEZ
+                  <span class="item-badge">
+                    <i data-lucide="star" class="w-[10px] h-[10px] fill-[#F59E0B] text-[#F59E0B]"></i>
+                    Solicitado
+                  </span>
+                </div>
+                <div class="item-details">
+                  <span>EST-005</span><span>· 1792141486001</span><span
+                    class="px-2 py-0.5 bg-[#F1F3F5] rounded-[6px] text-[11px] font-semibold text-[#495057]">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item is-solicitado">
+                <div class="item-title">
+                  TABLITA DEL TÁRTARO
+                  <span class="item-badge">
+                    <i data-lucide="star" class="w-[10px] h-[10px] fill-[#F59E0B] text-[#F59E0B]"></i>
+                    Solicitado
+                  </span>
+                </div>
+                <div class="item-details">
+                  <span>EST-006</span><span>· 1791952359001</span><span
+                    class="px-2 py-0.5 bg-[#F1F3F5] rounded-[6px] text-[11px] font-semibold text-[#495057]">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item is-solicitado">
+                <div class="item-title">
+                  ALI´S PARRILLADAS Y PIZZERÍA
+                  <span class="item-badge">
+                    <i data-lucide="star" class="w-[10px] h-[10px] fill-[#F59E0B] text-[#F59E0B]"></i>
+                    Solicitado
+                  </span>
+                </div>
+                <div class="item-details">
+                  <span>EST-007</span><span>· 1891749070001</span><span
+                    class="px-2 py-0.5 bg-[#F1F3F5] rounded-[6px] text-[11px] font-semibold text-[#495057]">Restaurante</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Estado: Seleccionado (Visible por defecto en editar) -->
+          <div
+            class="selected-establishment-card p-4 bg-[#e6f9fa] border-2 border-[#00AEB8] rounded-[8px] flex flex-col">
+            <div class="flex justify-between items-start gap-2">
+              <div class="flex-1 min-w-0">
+                <div class="font-bold text-[15px] text-[#212529]" id="selected-title">AMERICAN DELI</div>
+                <div class="text-[13px] text-[#495057] mt-0.5 flex gap-2 flex-wrap items-center">
+                  <span class="font-bold" id="selected-code">EST-004</span>
+                  <span id="selected-ruc">· RUC: 1792072018001</span>
+                  <span class="px-2 py-0.5 bg-[#F1F3F5] rounded-[6px] text-[11px] font-semibold text-[#495057]"
+                    id="selected-category">Restaurante</span>
+                </div>
+              </div>
+              <button type="button"
+                class="card-btn-change px-3 py-1 bg-white text-[#495057] border border-[#DEE2E6] rounded-[8px] text-[13px] cursor-pointer hover:bg-[#F1F3F5] transition-all shrink-0 font-medium">Cambiar</button>
+            </div>
+            <div class="mt-2 flex flex-wrap gap-1 items-center">
+              <i data-lucide="map-pin" class="w-[12px] h-[12px] text=" #6C757D" shrink-0"></i>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Quito</span>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Guayaquil</span>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Ibarra</span>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Ambato</span>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Santo
+                Domingo</span>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Manta</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-[1px] border-b border-[#DEE2E6] my-[8px]"></div>
+
+        <!-- Sección: Estado de Negociación -->
+        <div class="flex flex-col gap-[12px]">
+          <p class="text-[13px] font-bold text-[#6C757D] uppercase tracking-wider m-0">Estado de Negociación</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+            <!-- Prioridad -->
+            <div>
+              <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Prioridad</label>
+              <select
+                class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <!-- Ejecución -->
+            <div>
+              <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Ejecución</label>
+              <select
+                class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                <option value="Renovación" selected>Renovación</option>
+                <option value="Negociación">Negociación</option>
+                <option value="Seleccionado">Seleccionado</option>
+                <option value="En aprobación beneficio">En aprobación beneficio</option>
+                <option value="En documentación">En documentación</option>
+                <option value="Activo">Activo</option>
+                <option value="No está interesado">No está interesado</option>
+              </select>
+            </div>
+            <!-- Aprobación -->
+            <div>
+              <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Aprobación</label>
+              <select
+                class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                <option value="Aprobado" selected>Aprobado</option>
+                <option value="Negado">Negado</option>
+              </select>
+            </div>
+            <!-- Porcentaje -->
+            <div>
+              <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Porcentaje</label>
+              <select
+                class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                <option value="100%" selected>100%</option>
+                <option value="80%">80%</option>
+                <option value="70%">70%</option>
+                <option value="50%">50%</option>
+                <option value="Gratis">Gratis</option>
+              </select>
+            </div>
+            <!-- Material POP -->
+            <div>
+              <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Material POP</label>
+              <select
+                class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                <option value="Entregado" selected>Entregado</option>
+                <option value="En Gestión">En Gestión</option>
+                <option value="No Aplica">No Aplica</option>
+              </select>
+            </div>
+            <!-- Capacitación -->
+            <div>
+              <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Capacitación</label>
+              <select
+                class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                <option value="Capacitado" selected>Capacitado</option>
+                <option value="En Gestión">En Gestión</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-[1px] border-b border-[#DEE2E6] my-[8px]"></div>
+
+        <!-- Sección: Detalle del Beneficio -->
+        <div class="flex flex-col gap-[16px]">
+          <p class="text-[13px] font-bold text-[#6C757D] uppercase tracking-wider m-0">Detalle del Beneficio</p>
+          <!-- Beneficio -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Beneficio</label>
+            <textarea placeholder="Describe el beneficio negociado"
+              class="w-full h-[80px] p-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] focus:ring-1 focus:ring-[#00AEB8] transition-all resize-none">sss</textarea>
+          </div>
+          <!-- Términos y Condiciones -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Términos y Condiciones</label>
+            <textarea placeholder="Detalla los términos"
+              class="w-full h-[80px] p-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] focus:ring-1 focus:ring-[#00AEB8] transition-all resize-none"></textarea>
+          </div>
+          <!-- Observaciones -->
+          <div>
+            <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Observaciones</label>
+            <textarea placeholder="Notas adicionales"
+              class="w-full h-[80px] p-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] focus:ring-1 focus:ring-[#00AEB8] transition-all resize-none"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="flex justify-end gap-[12px] p-[16px_24px] border-t border-[#DEE2E6] sticky bottom-0 bg-white">
+        <button data-modal-hide="modal-editar-establecimiento"
+          class="px-[20px] py-[10px] bg-white border border-[#DEE2E6] rounded-[8px] text-[14px] font-bold text-[#6C757D] hover:bg-[#F8F9FA] transition-colors cursor-pointer">
+          Cancelar
+        </button>
+        <button
+          class="flex items-center gap-[8px] px-[20px] py-[10px] bg-[#00AEB8] text-white border-none rounded-[8px] text-[14px] font-bold hover:bg-[#008f96] transition-colors cursor-pointer">
+          <i data-lucide="save" class="w-[16px] h-[16px]"></i>
+          Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Nuevo Registro de Status -->
+  <div id="modal-nuevo-establecimiento" tabindex="-1" aria-hidden="true"
+    class="fixed inset-0 z-[9999] hidden flex items-center justify-center bg-[#212529]/50 opacity-0 transition-opacity duration-300 p-4">
+    <div id="modal-nuevo-establecimiento-panel"
+      class="relative w-full max-w-[680px] max-h-[90vh] bg-white rounded-[16px] shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between p-[20px_24px] border-b border-[#DEE2E6] sticky top-0">
+        <h2 class="text-[18px] font-bold text-[#212529] m-0">Nuevo Registro de Status</h2>
+        <button data-modal-hide="modal-nuevo-establecimiento"
+          class="w-[32px] h-[32px] flex items-center justify-center bg-transparent border-none rounded-[8px] text-[#6C757D] hover:bg-[#F8F9FA] hover:text-[#212529] transition-colors cursor-pointer">
+          <i data-lucide="x" class="w-[20px] h-[20px]"></i>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="p-[24px] overflow-y-auto flex-1 flex flex-col gap-[16px]">
+
+        <!-- Sección: Establecimiento -->
+        <div class="search-section flex flex-col gap-[12px] relative z-[50]">
+          <p class="text-[13px] font-bold text-[#6C757D] uppercase tracking-wider flex items-center gap-[8px] m-0">
+            <i data-lucide="building-2" class="w-[14px] h-[14px]"></i>
+            Establecimiento del Portafolio
+          </p>
+          <div class="relative group z-[20]">
+            <input type="text" placeholder="Buscar establecimiento..."
+              class="search-input w-full h-[42px] pl-[38px] pr-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] focus:ring-1 focus:ring-[#00AEB8] transition-all relative z-10">
+            <i data-lucide="search"
+              class="absolute left-[12px] top-1/2 -translate-y-1/2 text-[#ADB5BD] w-[16px] h-[16px] z-30 pointer-events-none"></i>
+
+            <!-- Resultados de Búsqueda (Dropdown) -->
+            <div class="search-results hidden">
+              <button type="button" class="search-result-item is-solicitado">
+                <div class="item-title">
+                  AMERICAN DELI
+                  <span class="item-badge">
+                    <i data-lucide="star" class="w-[10px] h-[10px] fill-[#F59E0B] text-[#F59E0B]"></i>
+                    Solicitado
+                  </span>
+                </div>
+                <div class="item-details">
+                  <span>EST-004</span><span>· 1792072018001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item is-solicitado">
+                <div class="item-title">
+                  JUAN VALDEZ
+                  <span class="item-badge">
+                    <i data-lucide="star" class="w-[10px] h-[10px] fill-[#F59E0B] text-[#F59E0B]"></i>
+                    Solicitado
+                  </span>
+                </div>
+                <div class="item-details">
+                  <span>EST-005</span><span>· 1792141486001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item is-solicitado">
+                <div class="item-title">
+                  TABLITA DEL TÁRTARO
+                  <span class="item-badge">
+                    <i data-lucide="star" class="w-[10px] h-[10px] fill-[#F59E0B] text-[#F59E0B]"></i>
+                    Solicitado
+                  </span>
+                </div>
+                <div class="item-details">
+                  <span>EST-006</span><span>· 1791952359001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item is-solicitado">
+                <div class="item-title">
+                  ALI´S PARRILLADAS Y PIZZERÍA
+                  <span class="item-badge">
+                    <i data-lucide="star" class="w-[10px] h-[10px] fill-[#F59E0B] text-[#F59E0B]"></i>
+                    Solicitado
+                  </span>
+                </div>
+                <div class="item-details">
+                  <span>EST-007</span><span>· 1891749070001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item is-solicitado">
+                <div class="item-title">
+                  CHEF BOSS
+                  <span class="item-badge">
+                    <i data-lucide="star" class="w-[10px] h-[10px] fill-[#F59E0B] text-[#F59E0B]"></i>
+                    Solicitado
+                  </span>
+                </div>
+                <div class="item-details">
+                  <span>EST-008</span><span>· 090224811101</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">TEXAS CHICKEN</div>
+                <div class="item-details">
+                  <span>EST-002</span><span>· 1792997372001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">MACDONALS</div>
+                <div class="item-details">
+                  <span>EST-003</span><span>· 1791308832001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">CH FARINA</div>
+                <div class="item-details">
+                  <span>EST-009</span><span>· 1790527085001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">GO GREEN</div>
+                <div class="item-details">
+                  <span>EST-010</span><span>· 1792374995001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">PROT INN</div>
+                <div class="item-details">
+                  <span>EST-011</span><span>· 993089567001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">TROPIBURGER</div>
+                <div class="item-details">
+                  <span>EST-012</span><span>· 1792072018001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">RESTAURANTE CASA GANGOTENA</div>
+                <div class="item-details">
+                  <span>EST-013</span><span>· 1792163994001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">OSADO</div>
+                <div class="item-details">
+                  <span>EST-014</span><span>· 1792705584001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">RESTAURANTE MAMA CUCHARA</div>
+                <div class="item-details">
+                  <span>EST-015</span><span>· 1792487242001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">BASKIN ROBBINS</div>
+                <div class="item-details">
+                  <span>EST-016</span><span>· 1792072018001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">TACONAZO</div>
+                <div class="item-details">
+                  <span>EST-018</span><span>· 1792573009001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">RESTAURANTE RÍO GUAYAS</div>
+                <div class="item-details">
+                  <span>EST-019</span><span>· 1792573009001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">LITTLE ITALY</div>
+                <div class="item-details">
+                  <span>EST-020</span><span>· 1792776155001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">CAMPERO</div>
+                <div class="item-details">
+                  <span>EST-021</span><span>· 1791997891001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">POLLO GUS</div>
+                <div class="item-details">
+                  <span>EST-022</span><span>· 1791997891001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">SMILES</div>
+                <div class="item-details">
+                  <span>EST-023</span><span>· 1717314585001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">FEDERER</div>
+                <div class="item-details">
+                  <span>EST-024</span><span>· 1792972918001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">RESTAURANTE HOTEL OTAVALO</div>
+                <div class="item-details">
+                  <span>EST-025</span><span>· 1792487242001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">RESTAURANTE HOTEL CRUZ DEL VADO</div>
+                <div class="item-details">
+                  <span>EST-026</span><span>· 1792487242001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">STAV</div>
+                <div class="item-details">
+                  <span>EST-027</span><span>· 1792705339001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">VACO Y VACA</div>
+                <div class="item-details">
+                  <span>EST-028</span><span>· 1792337313001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">PF CHANGS</div>
+                <div class="item-details">
+                  <span>EST-029</span><span>· 1790883795001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">KRISPY KREME</div>
+                <div class="item-details">
+                  <span>EST-030</span><span>· 09933746472001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">INKA BURGER</div>
+                <div class="item-details">
+                  <span>EST-031</span><span>· 1792925150001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">MOMALIA</div>
+                <div class="item-details">
+                  <span>EST-033</span><span>· 1001560489001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">BURGER GARDEN ROCK CITY</div>
+                <div class="item-details">
+                  <span>EST-034</span><span>· 1391938215001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">KOBE</div>
+                <div class="item-details">
+                  <span>EST-035</span><span>· 1792256267001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">STARBUCKS</div>
+                <div class="item-details">
+                  <span>EST-036</span><span>· 1760013560001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">EL PULPO REST</div>
+                <div class="item-details">
+                  <span>EST-038</span><span>· 1718285983</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">AJÍ PANCA TESTING FILES</div>
+                <div class="item-details">
+                  <span>EST-039</span><span>· 1708769128001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">PUCARÁ</div>
+                <div class="item-details">
+                  <span>EST-040</span><span>· 1793212938001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">ROYAL STEAK HOUSE</div>
+                <div class="item-details">
+                  <span>EST-041</span><span>· 1715483135001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">CINNABON</div>
+                <div class="item-details">
+                  <span>EST-017</span><span>· 1792072018001</span><span class="item-tag">Entretenimiento</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">PIZZA HUT</div>
+                <div class="item-details">
+                  <span>EST-001</span><span>· 1792932297001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">MACCHIATA</div>
+                <div class="item-details">
+                  <span>EST-032</span><span>· 1793194242001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">s</div>
+                <div class="item-details">
+                  <span>we</span><span>· s</span><span class="item-tag">Gastronomía</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">sd</div>
+                <div class="item-details">
+                  <span>asd</span><span>· sd</span><span class="item-tag">Gastronomía</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">PRUEBA</div>
+                <div class="item-details">
+                  <span>EST-PRUEBA</span><span>· 14523698745624546</span><span class="item-tag">Tecnología</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">TESTING MEDIOS</div>
+                <div class="item-details">
+                  <span>EST-009</span><span>· 1234124234234234</span><span class="item-tag">Salud</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">TESTING MEDIOS BEH</div>
+                <div class="item-details">
+                  <span>qweasd</span><span>· 123qwe</span><span class="item-tag">Entretenimiento</span>
+                </div>
+              </button>
+              <button type="button" class="search-result-item">
+                <div class="item-title">LAI LAI LAI LAI LAI</div>
+                <div class="item-details">
+                  <span>EST-037</span><span>· 1791321103001</span><span class="item-tag">Restaurante</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Estado: Seleccionado (Visible al elegir una opción) -->
+          <div
+            class="selected-establishment-card hidden p-4 bg-[#e6f9fa] border-2 border-[#00AEB8] rounded-[8px] flex flex-col">
+            <div class="flex justify-between items-start gap-2">
+              <div class="flex-1 min-w-0">
+                <div class="font-bold text-[15px] text-[#212529]" id="selected-title">AMERICAN DELI</div>
+                <div class="text-[13px] text-[#495057] mt-0.5 flex gap-2 flex-wrap items-center">
+                  <span class="font-bold" id="selected-code">EST-004</span>
+                  <span id="selected-ruc">· RUC: 1792072018001</span>
+                  <span class="px-2 py-0.5 bg-[#F1F3F5] rounded-[6px] text-[11px] font-semibold text-[#495057]"
+                    id="selected-category">Restaurante</span>
+                </div>
+              </div>
+              <button type="button"
+                class="card-btn-change px-3 py-1 bg-white text-[#495057] border border-[#DEE2E6] rounded-[8px] text-[13px] cursor-pointer hover:bg-[#F1F3F5] transition-all shrink-0 font-medium">Cambiar</button>
+            </div>
+            <div class="mt-2 flex flex-wrap gap-1 items-center">
+              <i data-lucide="map-pin" class="w-[12px] h-[12px] text-[#6C757D] shrink-0"></i>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Quito</span>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Guayaquil</span>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Ibarra</span>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Ambato</span>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Santo
+                Domingo</span>
+              <span
+                class="inline-block px-2 py-0.5 bg-[rgba(0,174,184,0.12)] text-[#00AEB8] rounded-[10px] text-[11px] font-medium">Manta</span>
+            </div>
+          </div>
+
+          <div class="h-[1px] border-b border-[#DEE2E6] my-[8px]"></div>
+
+          <!-- Sección: Estado de Negociación -->
+          <div class="flex flex-col gap-[12px]">
+            <p class="text-[13px] font-bold text-[#6C757D] uppercase tracking-wider m-0">Estado de Negociación</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+              <!-- Prioridad -->
+              <div>
+                <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Prioridad</label>
+                <select
+                  class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+              <!-- Ejecución -->
+              <div>
+                <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Ejecución</label>
+                <select
+                  class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                  <option value="Renovación">Renovación</option>
+                  <option value="Negociación">Negociación</option>
+                  <option value="Seleccionado">Seleccionado</option>
+                  <option value="En aprobación beneficio">En aprobación beneficio</option>
+                  <option value="En documentación">En documentación</option>
+                  <option value="Activo">Activo</option>
+                  <option value="No está interesado">No está interesado</option>
+                </select>
+              </div>
+              <!-- Aprobación -->
+              <div>
+                <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Aprobación</label>
+                <select
+                  class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                  <option value="Aprobado">Aprobado</option>
+                  <option value="Negado">Negado</option>
+                </select>
+              </div>
+              <!-- Porcentaje -->
+              <div>
+                <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Porcentaje</label>
+                <select
+                  class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                  <option value="100%">100%</option>
+                  <option value="80%">80%</option>
+                  <option value="70%">70%</option>
+                  <option value="50%">50%</option>
+                  <option value="Gratis">Gratis</option>
+                </select>
+              </div>
+              <!-- Material POP -->
+              <div>
+                <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Material POP</label>
+                <select
+                  class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                  <option value="Entregado">Entregado</option>
+                  <option value="En Gestión">En Gestión</option>
+                  <option value="No Aplica">No Aplica</option>
+                </select>
+              </div>
+              <!-- Capacitación -->
+              <div>
+                <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Capacitación</label>
+                <select
+                  class="w-full h-[42px] px-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] cursor-pointer bg-white">
+                  <option value="Capacitado">Capacitado</option>
+                  <option value="En Gestión">En Gestión</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-[1px] border-b border-[#DEE2E6] my-[8px]"></div>
+
+          <!-- Sección: Detalle del Beneficio -->
+          <div class="flex flex-col gap-[16px]">
+            <p class="text-[13px] font-bold text-[#6C757D] uppercase tracking-wider m-0">Detalle del Beneficio</p>
+            <!-- Beneficio -->
+            <div>
+              <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Beneficio</label>
+              <textarea placeholder="Describe el beneficio negociado"
+                class="w-full h-[80px] p-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] focus:ring-1 focus:ring-[#00AEB8] transition-all resize-none"></textarea>
+            </div>
+            <!-- Términos y Condiciones -->
+            <div>
+              <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Términos y Condiciones</label>
+              <textarea placeholder="Detalla los términos"
+                class="w-full h-[80px] p-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] focus:ring-1 focus:ring-[#00AEB8] transition-all resize-none"></textarea>
+            </div>
+            <!-- Observaciones -->
+            <div>
+              <label class="block text-[13px] font-semibold text-[#212529] mb-[6px]">Observaciones</label>
+              <textarea placeholder="Notas adicionales"
+                class="w-full h-[80px] p-[12px] text-[14px] border border-[#DEE2E6] rounded-[8px] outline-none focus:border-[#00AEB8] focus:ring-1 focus:ring-[#00AEB8] transition-all resize-none"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="flex justify-end gap-[12px] p-[16px_24px] border-t border-[#DEE2E6] sticky bottom-0">
+        <button data-modal-hide="modal-nuevo-establecimiento"
+          class="px-[20px] py-[10px] bg-white border border-[#DEE2E6] rounded-[8px] text-[14px] font-bold text-[#6C757D] hover:bg-[#F8F9FA] transition-colors cursor-pointer">
+          Cancelar
+        </button>
+        <button disabled
+          class="flex items-center gap-[8px] px-[20px] py-[10px] bg-[#E9ECEF] text-[#ADB5BD] border-none rounded-[8px] text-[14px] font-bold cursor-not-allowed transition-colors">
+          <i data-lucide="save" class="w-[16px] h-[16px]"></i>
+          Guardar
+        </button>
+      </div>
+    </div>
+
+    <!-- Main JS -->
+    <script src="./js/main.js"></script>
 </body>
 
 </html>

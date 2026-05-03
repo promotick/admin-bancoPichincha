@@ -234,7 +234,7 @@
           <!-- Botón Mis Solicitudes (con toggle JS) -->
           <div class="flex-1 lg:flex-initial">
             <button id="btnMisSolicitudes"
-              class="flex items-center justify-center gap-[6px] px-[16px] py-[10px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] font-medium text-[#495057] transition-all duration-200 w-full lg:w-auto hover:bg-[#F8F9FA] hover:border-[#6C757D]">
+              class="flex items-center justify-center gap-[6px] px-[16px] py-[10px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] font-medium text-[#495057] transition-all duration-200 w-full lg:w-auto">
               <i data-lucide="star" id="iconMisSolicitudes" class="w-[16px] h-[16px] text-[#9CA3AF]"></i>
               <span id="textMisSolicitudes" class="whitespace-nowrap">Mis Solicitudes</span>
               <span id="badgeMisSolicitudes"
@@ -1008,12 +1008,17 @@
                 <circle cx="12" cy="10" r="3"></circle>
               </svg><span>Cobertura</span>
             </div>
-            <div class="flex flex-wrap gap-[8px]"><span
-                class="inline-block py-[8px] px-[12px] bg-[#F1F3F5] text-[#495057] rounded-[8px] text-[14px]">Ambato</span><span
-                class="inline-block py-[8px] px-[12px] bg-[#F1F3F5] text-[#495057] rounded-[8px] text-[14px]">Latacunga</span><span
-                class="inline-block py-[8px] px-[12px] bg-[#F1F3F5] text-[#495057] rounded-[8px] text-[14px]">Quito</span><span
-                class="inline-block py-[8px] px-[12px] bg-[#F1F3F5] text-[#495057] rounded-[8px] text-[14px]">Cumbayá</span><span
-                class="inline-block py-[8px] px-[12px] bg-[#F1F3F5] text-[#495057] rounded-[8px] text-[14px]">Tumbaco</span>
+            <div class="flex flex-wrap gap-[4px] items-center">
+              <span
+                class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Ambato</span>
+              <span
+                class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Latacunga</span>
+              <span
+                class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
+              <span
+                class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Cumbayá</span>
+              <span
+                class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Tumbaco</span>
             </div>
           </div>
         </div>
@@ -1112,8 +1117,9 @@
                 <circle cx="12" cy="10" r="3"></circle>
               </svg><span>Cobertura</span>
             </div>
-            <div class="flex flex-wrap gap-[8px]"><span
-                class="inline-block py-[8px] px-[12px] bg-[#F1F3F5] text-[#495057] rounded-[8px] text-[14px]">Samborondón</span>
+            <div class="flex flex-wrap gap-[4px] items-center">
+              <span
+                class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Samborondón</span>
             </div>
           </div>
         </div>
@@ -1243,32 +1249,23 @@
               <col class="w-auto">
             </colgroup>
             <thead>
-              <tr>
-                <th
-                  class="py-[16px] px-[8px] text-center text-[14px] font-bold text-[#212529] bg-[#F8F9FA] border-b-[2px] border-[#DEE2E6]">
-                  <i data-lucide="star" class="w-[16px] h-[16px] text-[#6C757D] mx-auto"></i>
+              <tr class="bg-[#F8F9FA] border-b-2 border-[#E9ECEF]">
+                <th class="p-[16px] text-center text-[12px] font-bold text-[#495057] uppercase tracking-wider">
+                  <i data-lucide="star" class="w-[14px] h-[14px] text-[#495057] mx-auto"></i>
                 </th>
-                <th
-                  class="py-[16px] px-[16px] text-left text-[14px] font-bold text-[#212529] bg-[#F8F9FA] border-b-[2px] border-[#DEE2E6]">
-                  Codigo</th>
-                <th
-                  class="py-[16px] px-[16px] text-left text-[14px] font-bold text-[#212529] bg-[#F8F9FA] border-b-[2px] border-[#DEE2E6]">
-                  Nombre</th>
-                <th
-                  class="py-[16px] px-[16px] text-left text-[14px] font-bold text-[#212529] bg-[#F8F9FA] border-b-[2px] border-[#DEE2E6]">
-                  RUC</th>
-                <th
-                  class="py-[16px] px-[16px] text-left text-[14px] font-bold text-[#212529] bg-[#F8F9FA] border-b-[2px] border-[#DEE2E6]">
-                  Categoria</th>
-                <th
-                  class="py-[16px] px-[16px] text-left text-[14px] font-bold text-[#212529] bg-[#F8F9FA] border-b-[2px] border-[#DEE2E6]">
-                  Cobertura</th>
+                <th class="p-[16px] text-left text-[12px] font-bold text-[#495057] uppercase tracking-wider">Código</th>
+                <th class="p-[16px] text-left text-[12px] font-bold text-[#495057] uppercase tracking-wider">Nombre</th>
+                <th class="p-[16px] text-left text-[12px] font-bold text-[#495057] uppercase tracking-wider">RUC</th>
+                <th class="p-[16px] text-left text-[12px] font-bold text-[#495057] uppercase tracking-wider">Categoría
+                </th>
+                <th class="p-[16px] text-left text-[12px] font-bold text-[#495057] uppercase tracking-wider">Cobertura
+                </th>
               </tr>
             </thead>
             <tbody>
               <!-- Row 1 -->
               <tr class="transition-colors duration-150 bg-transparent hover:bg-[#F8F9FA]">
-                <td class="py-[12px] px-[8px] border-b border-[#E9ECEF] text-center">
+                <td class="p-[16px] border-b border-[#E9ECEF] text-center">
                   <div class="flex flex-col items-center gap-[2px]">
                     <button title="Solicitar negociacion" data-modal-target="modal-solicitud"
                       class="p-[4px] rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110">
@@ -1280,20 +1277,20 @@
                 </td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">sd</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">sd</td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <span
                     class="inline-block py-[4px] px-[12px] bg-[#E6F7F8] text-[#00AEB8] rounded-[6px] text-[12px] font-semibold">Gastronomía</span>
                 </td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <div class="flex flex-wrap gap-[4px]">
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
                   </div>
                 </td>
               </tr>
               <!-- Row 2 -->
               <tr class="transition-colors duration-150 bg-[#FFFBEB] hover:bg-[#FEF3C7]">
-                <td class="py-[12px] px-[8px] border-b border-[#E9ECEF] text-center">
+                <td class="p-[16px] border-b border-[#E9ECEF] text-center">
                   <div class="flex flex-col items-center gap-[2px]">
                     <button title="Quitar solicitud de negociacion" data-modal-target="modal-quitar"
                       class="p-[4px] rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110">
@@ -1302,32 +1299,39 @@
                     <span class="text-[10px] text-[#D97706] font-bold whitespace-nowrap">Hace 12d</span>
                   </div>
                 </td>
-                <td class="py-[16px] px-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
+                <td class="p-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
                   EST-001</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">PIZZA HUT</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">1792932297001</td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <span
                     class="inline-block py-[4px] px-[12px] bg-[#E6F7F8] text-[#00AEB8] rounded-[6px] text-[12px] font-semibold">Restaurante</span>
                 </td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
-                  <div class="flex flex-wrap gap-[4px]">
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Cuenca</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Riobamba</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Portoviejo</span>
-                  </div>
+                <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <div class="flex flex-wrap gap-[4px] items-center">
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Guayaquil</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Cuenca</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Riobamba</span>
+
+                      <!-- Ciudades ocultas -->
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Portoviejo</span>
+
+                      <button class="toggle-badges-btn inline-flex items-center gap-[2px] px-[6px] py-[1px] bg-[#e6f7f8] text-[#00AEB8] border border-[#00AEB8] rounded-[4px] text-[11px] font-bold hover:bg-[#00AEB8] hover:text-white transition-colors" data-count="1">
+                        <span class="btn-text">+1</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-[10px] h-[10px] transition-transform duration-300"><path d="m6 9 6 6 6-6"></path></svg>
+                      </button>
+                    </div>
                 </td>
               </tr>
               <!-- Row 3 -->
               <tr class="transition-colors duration-150 bg-[#FFFBEB] hover:bg-[#FEF3C7]">
-                <td class="py-[12px] px-[8px] border-b border-[#E9ECEF] text-center">
+                <td class="p-[16px] border-b border-[#E9ECEF] text-center">
                   <div class="flex flex-col items-center gap-[2px]">
                     <button title="Quitar solicitud de negociacion" data-modal-target="modal-quitar"
                       class="p-[4px] rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110">
@@ -1336,24 +1340,24 @@
                     <span class="text-[10px] text-[#D97706] font-bold whitespace-nowrap">05 mar</span>
                   </div>
                 </td>
-                <td class="py-[16px] px-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
+                <td class="p-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
                   EST-002</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">TEXAS CHICKEN</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">1792997372001</td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <span
                     class="inline-block py-[4px] px-[12px] bg-[#E6F7F8] text-[#00AEB8] rounded-[6px] text-[12px] font-semibold">Restaurante</span>
                 </td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <div class="flex flex-wrap gap-[4px]">
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
                   </div>
                 </td>
               </tr>
               <!-- Row 4 -->
               <tr class="transition-colors duration-150 bg-[#FFFBEB] hover:bg-[#FEF3C7]">
-                <td class="py-[12px] px-[8px] border-b border-[#E9ECEF] text-center">
+                <td class="p-[16px] border-b border-[#E9ECEF] text-center">
                   <div class="flex flex-col items-center gap-[2px]">
                     <button title="Quitar solicitud de negociacion" data-modal-target="modal-quitar"
                       class="p-[4px] rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110">
@@ -1362,30 +1366,37 @@
                     <span class="text-[10px] text-[#D97706] font-bold whitespace-nowrap">05 mar</span>
                   </div>
                 </td>
-                <td class="py-[16px] px-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
+                <td class="p-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
                   EST-003</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">MACDONALS</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">1791308832001</td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <span
                     class="inline-block py-[4px] px-[12px] bg-[#E6F7F8] text-[#00AEB8] rounded-[6px] text-[12px] font-semibold">Restaurante</span>
                 </td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
-                  <div class="flex flex-wrap gap-[4px]">
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Cuenca</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Machala</span>
-                  </div>
+                <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <div class="flex flex-wrap gap-[4px] items-center">
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Guayaquil</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Cuenca</span>
+
+                      <!-- Ciudades ocultas -->
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Machala</span>
+
+                      <button class="toggle-badges-btn inline-flex items-center gap-[2px] px-[6px] py-[1px] bg-[#e6f7f8] text-[#00AEB8] border border-[#00AEB8] rounded-[4px] text-[11px] font-bold hover:bg-[#00AEB8] hover:text-white transition-colors" data-count="1">
+                        <span class="btn-text">+1</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-[10px] h-[10px] transition-transform duration-300"><path d="m6 9 6 6 6-6"></path></svg>
+                      </button>
+                    </div>
                 </td>
               </tr>
               <!-- Row 5 -->
               <tr class="transition-colors duration-150 bg-[#FFFBEB] hover:bg-[#FEF3C7]">
-                <td class="py-[12px] px-[8px] border-b border-[#E9ECEF] text-center">
+                <td class="p-[16px] border-b border-[#E9ECEF] text-center">
                   <div class="flex flex-col items-center gap-[2px]">
                     <button title="Quitar solicitud de negociacion" data-modal-target="modal-quitar"
                       class="p-[4px] rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110">
@@ -1394,35 +1405,42 @@
                     <span class="text-[10px] text-[#D97706] font-bold whitespace-nowrap">10 mar</span>
                   </div>
                 </td>
-                <td class="py-[16px] px-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
+                <td class="p-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
                   EST-004</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">AMERICAN DELI</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">1792072018001</td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <span
                     class="inline-block py-[4px] px-[12px] bg-[#E6F7F8] text-[#00AEB8] rounded-[6px] text-[12px] font-semibold">Restaurante</span>
                 </td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
-                  <div class="flex flex-wrap gap-[4px]">
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ibarra</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ambato</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Santo
-                      Domingo</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Manta</span>
-                  </div>
+                <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <div class="flex flex-wrap gap-[4px] items-center">
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Guayaquil</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Ibarra</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Ambato</span>
+
+                      <!-- Ciudades ocultas -->
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Santo
+                        Domingo</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Manta</span>
+
+                      <button class="toggle-badges-btn inline-flex items-center gap-[2px] px-[6px] py-[1px] bg-[#e6f7f8] text-[#00AEB8] border border-[#00AEB8] rounded-[4px] text-[11px] font-bold hover:bg-[#00AEB8] hover:text-white transition-colors" data-count="2">
+                        <span class="btn-text">+2</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-[10px] h-[10px] transition-transform duration-300"><path d="m6 9 6 6 6-6"></path></svg>
+                      </button>
+                    </div>
                 </td>
               </tr>
               <!-- Row 6 (Con botón expandir) -->
               <tr class="transition-colors duration-150 bg-[#FFFBEB] hover:bg-[#FEF3C7]">
-                <td class="py-[12px] px-[8px] border-b border-[#E9ECEF] text-center">
+                <td class="p-[16px] border-b border-[#E9ECEF] text-center">
                   <div class="flex flex-col items-center gap-[2px]">
                     <button title="Quitar solicitud de negociacion" data-modal-target="modal-quitar"
                       class="p-[4px] rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110">
@@ -1431,51 +1449,62 @@
                     <span class="text-[10px] text-[#D97706] font-bold whitespace-nowrap">Hace 22d</span>
                   </div>
                 </td>
-                <td class="py-[16px] px-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
+                <td class="p-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
                   EST-005</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">JUAN VALDEZ</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">1792141486001</td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <span
                     class="inline-block py-[4px] px-[12px] bg-[#E6F7F8] text-[#00AEB8] rounded-[6px] text-[12px] font-semibold">Restaurante</span>
                 </td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
-                  <div class="flex flex-wrap gap-[4px] max-w-[280px]">
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ambato</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Baños</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Riobamba</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ibarra</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Cuenca</span>
+                <td class="p-[16px] border-b border-[#E9ECEF]">
+                    <div class="flex flex-wrap gap-[4px] items-center">
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Ambato</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Baños</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Riobamba</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Ibarra</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Cuenca</span>
 
-                    <!-- Hidden badges (para simular el JS después) -->
-                    <span
-                      class="hidden-badge hidden py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Loja</span>
-                    <span
-                      class="hidden-badge hidden py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Manta</span>
-                    <span
-                      class="hidden-badge hidden py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Latacunga</span>
-                    <span
-                      class="hidden-badge hidden py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Esmeraldas</span>
+                      <!-- Ciudades ocultas -->
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Loja</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Santo
+                        Domingo</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Manta</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Portoviejo</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Guayaquil</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Milagro</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Libertad</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Playas</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Machala</span>
+                      <span
+                        class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Daule</span>
 
-                    <button
-                      class="toggle-badges-btn inline-flex items-center gap-[4px] py-[4px] px-[8px] bg-[#E6F7F8] text-[#00AEB8] rounded-[4px] text-[12px] font-bold border border-[#00AEB8] transition-colors hover:bg-[#00AEB8] hover:text-[#FFFFFF]"
-                      data-count="10">
-                      <span class="btn-text">+10</span>
-                      <i data-lucide="chevron-down" class="w-[12px] h-[12px] transition-transform duration-300"></i>
-                    </button>
-                  </div>
+                      <button class="toggle-badges-btn inline-flex items-center gap-[2px] px-[6px] py-[1px] bg-[#e6f7f8] text-[#00AEB8] border border-[#00AEB8] rounded-[4px] text-[11px] font-bold hover:bg-[#00AEB8] hover:text-white transition-colors" data-count="10">
+                        <span class="btn-text">+10</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-[10px] h-[10px] transition-transform duration-300"><path d="m6 9 6 6 6-6"></path></svg>
+                      </button>
+                    </div>
                 </td>
               </tr>
               <!-- Row 7 -->
               <tr class="transition-colors duration-150 bg-[#FFFBEB] hover:bg-[#FEF3C7]">
-                <td class="py-[12px] px-[8px] border-b border-[#E9ECEF] text-center">
+                <td class="p-[16px] border-b border-[#E9ECEF] text-center">
                   <div class="flex flex-col items-center gap-[2px]">
                     <button title="Quitar solicitud de negociacion" data-modal-target="modal-quitar"
                       class="p-[4px] rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110">
@@ -1484,27 +1513,27 @@
                     <span class="text-[10px] text-[#D97706] font-bold whitespace-nowrap">05 mar</span>
                   </div>
                 </td>
-                <td class="py-[16px] px-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
+                <td class="p-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
                   EST-006</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">TABLITA DEL TÁRTARO
                 </td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">1791952359001</td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <span
                     class="inline-block py-[4px] px-[12px] bg-[#E6F7F8] text-[#00AEB8] rounded-[6px] text-[12px] font-semibold">Restaurante</span>
                 </td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
-                  <div class="flex flex-wrap gap-[4px]">
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
-                    <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Guayaquil</span>
+                <td class="p-[16px] border-b border-[#E9ECEF]">
+                  <div class="flex flex-wrap gap-[4px] items-center">
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
+                      <span
+                        class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Guayaquil</span>
                   </div>
                 </td>
               </tr>
               <!-- Row 8 -->
               <tr class="transition-colors duration-150 bg-[#FFFBEB] hover:bg-[#FEF3C7]">
-                <td class="py-[12px] px-[8px] border-b border-[#E9ECEF] text-center">
+                <td class="p-[16px] border-b border-[#E9ECEF] text-center">
                   <div class="flex flex-col items-center gap-[2px]">
                     <button title="Quitar solicitud de negociacion" data-modal-target="modal-quitar"
                       class="p-[4px] rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110">
@@ -1513,33 +1542,33 @@
                     <span class="text-[10px] text-[#D97706] font-bold whitespace-nowrap">05 mar</span>
                   </div>
                 </td>
-                <td class="py-[16px] px-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
+                <td class="p-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
                   EST-007</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">ALI'S PARRILLADAS Y
                   PIZZERÍA</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">1891749070001</td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <span
                     class="inline-block py-[4px] px-[12px] bg-[#E6F7F8] text-[#00AEB8] rounded-[6px] text-[12px] font-semibold">Restaurante</span>
                 </td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <div class="flex flex-wrap gap-[4px]">
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Ambato</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Ambato</span>
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Latacunga</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Latacunga</span>
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito</span>
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Cumbayá</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Cumbayá</span>
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Tumbaco</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Tumbaco</span>
                   </div>
                 </td>
               </tr>
               <!-- Row 9 -->
               <tr class="transition-colors duration-150 bg-[#FFFBEB] hover:bg-[#FEF3C7]">
-                <td class="py-[12px] px-[8px] border-b border-[#E9ECEF] text-center">
+                <td class="p-[16px] border-b border-[#E9ECEF] text-center">
                   <div class="flex flex-col items-center gap-[2px]">
                     <button title="Quitar solicitud de negociacion" data-modal-target="modal-quitar"
                       class="p-[4px] rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110">
@@ -1548,24 +1577,24 @@
                     <span class="text-[10px] text-[#D97706] font-bold whitespace-nowrap">10 mar</span>
                   </div>
                 </td>
-                <td class="py-[16px] px-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
+                <td class="p-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
                   EST-008</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">CHEF BOSS</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">090224811101</td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <span
                     class="inline-block py-[4px] px-[12px] bg-[#E6F7F8] text-[#00AEB8] rounded-[6px] text-[12px] font-semibold">Restaurante</span>
                 </td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <div class="flex flex-wrap gap-[4px]">
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Samborondón</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Samborondón</span>
                   </div>
                 </td>
               </tr>
               <!-- Row 10 -->
               <tr class="transition-colors duration-150 bg-transparent hover:bg-[#F8F9FA]">
-                <td class="py-[12px] px-[8px] border-b border-[#E9ECEF] text-center">
+                <td class="p-[16px] border-b border-[#E9ECEF] text-center">
                   <div class="flex flex-col items-center gap-[2px]">
                     <button title="Solicitar negociacion" data-modal-target="modal-solicitud"
                       class="p-[4px] rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110">
@@ -1573,43 +1602,36 @@
                     </button>
                   </div>
                 </td>
-                <td class="py-[16px] px-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
+                <td class="p-[16px] text-[14px] font-semibold text-[#212529] border-b border-[#E9ECEF]">
                   EST-009</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">CH FARINA</td>
                 <td class="py-[16px] px-[16px] text-[14px] text-[#495057] border-b border-[#E9ECEF]">1790527085001</td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
                   <span
                     class="inline-block py-[4px] px-[12px] bg-[#E6F7F8] text-[#00AEB8] rounded-[6px] text-[12px] font-semibold">Restaurante</span>
                 </td>
-                <td class="py-[16px] px-[16px] border-b border-[#E9ECEF]">
-                  <div class="flex flex-wrap gap-[4px] max-w-[280px]">
+                <td class="p-[16px] border-b border-[#E9ECEF]">
+                  <div class="flex flex-wrap gap-[4px] items-center">
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quito
-                      Condado</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quito Condado</span>
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Quicentro
-                      Sur</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Quicentro Sur</span>
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">El
-                      Bosque</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">El Bosque</span>
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">El
-                      Portal</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">El Portal</span>
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Gaspar
-                      de Villarroel</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Gaspar de Villarroel</span>
                     <span
-                      class="inline-block py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Villaflora</span>
+                      class="inline-block px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Villaflora</span>
 
                     <!-- Hidden badges -->
                     <span
-                      class="hidden-badge hidden py-[4px] px-[8px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[12px]">Cumbayá</span>
+                      class="hidden-badge hidden px-[6px] py-[1px] bg-[#F1F3F5] text-[#495057] rounded-[4px] text-[11px]">Cumbayá</span>
 
-                    <button
-                      class="toggle-badges-btn inline-flex items-center gap-[4px] py-[4px] px-[8px] bg-[#E6F7F8] text-[#00AEB8] rounded-[4px] text-[12px] font-bold border border-[#00AEB8] transition-colors hover:bg-[#00AEB8] hover:text-[#FFFFFF]"
-                      data-count="1">
+                    <button class="toggle-badges-btn inline-flex items-center gap-[2px] px-[6px] py-[1px] bg-[#e6f7f8] text-[#00AEB8] border border-[#00AEB8] rounded-[4px] text-[11px] font-bold hover:bg-[#00AEB8] hover:text-white transition-colors" data-count="1">
                       <span class="btn-text">+1</span>
-                      <i data-lucide="chevron-down" class="w-[12px] h-[12px] transition-transform duration-300"></i>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-[10px] h-[10px] transition-transform duration-300"><path d="m6 9 6 6 6-6"></path></svg>
                     </button>
                   </div>
                 </td>
@@ -1918,44 +1940,8 @@
   <script src="./js/main.js"></script>
 
   <script>
-    // Lógica específica para Portafolio (Toggle Mis Solicitudes)
+    // Lógica específica para Portafolio
     document.addEventListener('DOMContentLoaded', () => {
-      const btn = document.getElementById('btnMisSolicitudes');
-      const icon = document.getElementById('iconMisSolicitudes');
-      const badge = document.getElementById('badgeMisSolicitudes');
-      const resultsBar = document.getElementById('resultsBar');
-
-      let isActive = false;
-
-      btn.addEventListener('click', () => {
-        isActive = !isActive;
-
-        // Buscar el ícono dentro del botón dinámicamente porque Lucide reemplaza el <i> por un <svg>
-        const currentIcon = btn.querySelector('svg') || btn.querySelector('i');
-
-        if (isActive) {
-          // Estado Activo (Borde amarillo/naranja claro)
-          btn.className = "flex items-center justify-center gap-[6px] px-[16px] py-[10px] bg-[#F59E0B]/10 border-[2px] border-[#F59E0B] rounded-[8px] text-[14px] font-bold text-[#D97706] transition-all duration-200 w-full lg:w-auto";
-          if (currentIcon) {
-            currentIcon.setAttribute('class', 'lucide lucide-star w-[16px] h-[16px] text-[#F59E0B]');
-            currentIcon.style.fill = "#F59E0B";
-          }
-          badge.className = "bg-[#F59E0B] text-[#FFFFFF] px-[7px] py-[1px] rounded-[10px] text-[12px] font-bold min-w-[20px] text-center";
-          resultsBar.classList.remove('hidden');
-        } else {
-          // Estado por defecto
-          btn.className = "flex items-center justify-center gap-[6px] px-[16px] py-[10px] bg-[#FFFFFF] border border-[#DEE2E6] rounded-[8px] text-[14px] font-medium text-[#495057] transition-all duration-200 w-full lg:w-auto hover:bg-[#F8F9FA] hover:border-[#6C757D]";
-          if (currentIcon) {
-            currentIcon.setAttribute('class', 'lucide lucide-star w-[16px] h-[16px] text-[#9CA3AF]');
-            currentIcon.style.fill = "none";
-          }
-          badge.className = "bg-[#F1F3F5] text-[#495057] px-[7px] py-[1px] rounded-[10px] text-[12px] font-bold min-w-[20px] text-center";
-          resultsBar.classList.add('hidden');
-        }
-      });
-
-
-
       // Lógica del botón "Solicitar"
       const btnSolicitarSubmit = document.getElementById('btn-solicitar-submit');
       if (btnSolicitarSubmit) {
